@@ -10,7 +10,7 @@ export default function FaqPage() {
   return (
     <main className="min-h-screen bg-[#f6f7fb] text-[#17211f]">
       <SiteHeader />
-      <div className="mx-auto max-w-5xl px-6 pb-20 pt-10">
+      <div className="mx-auto max-w-7xl px-6 pb-20 pt-10">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
           {t("faq.eyebrow")}
         </p>
