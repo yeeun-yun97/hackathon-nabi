@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
+import { useLanguage } from "@/components/language-provider";
 import {
   cities,
   type AgeGroup,
@@ -20,68 +21,46 @@ import { defaultProfile, writeStoredProfile } from "@/lib/profile";
 
 const languages = ["English", "Korean", "Chinese", "Vietnamese", "Japanese", "Thai"];
 
-const ageGroups: Array<{ id: AgeGroup; label: string }> = [
-  { id: "under-18", label: "Under 18" },
-  { id: "18-24", label: "18-24" },
-  { id: "25-34", label: "25-34" },
-  { id: "35-49", label: "35-49" },
-  { id: "50-plus", label: "50+" },
+const ageGroups: AgeGroup[] = ["under-18", "18-24", "25-34", "35-49", "50-plus"];
+const genders: Gender[] = ["female", "male", "non-binary", "prefer-not-to-say"];
+const residencyStatuses: ResidencyStatus[] = [
+  "new-arrival",
+  "short-term",
+  "long-term",
+  "permanent",
+  "considering-immigration",
 ];
-
-const genders: Array<{ id: Gender; label: string }> = [
-  { id: "female", label: "Female" },
-  { id: "male", label: "Male" },
-  { id: "non-binary", label: "Non-binary" },
-  { id: "prefer-not-to-say", label: "Prefer not to say" },
+const housingStatuses: HousingStatus[] = [
+  "renting",
+  "owning",
+  "dormitory",
+  "with-family",
+  "looking",
 ];
-
-const residencyStatuses: Array<{ id: ResidencyStatus; label: string }> = [
-  { id: "new-arrival", label: "New arrival" },
-  { id: "short-term", label: "Short-term" },
-  { id: "long-term", label: "Long-term" },
-  { id: "permanent", label: "Permanent resident" },
-  { id: "considering-immigration", label: "Considering immigration" },
+const maritalStatuses: MaritalStatus[] = [
+  "single",
+  "partnered",
+  "married",
+  "divorced",
+  "widowed",
 ];
-
-const housingStatuses: Array<{ id: HousingStatus; label: string }> = [
-  { id: "renting", label: "Renting" },
-  { id: "owning", label: "Owning" },
-  { id: "dormitory", label: "Dormitory" },
-  { id: "with-family", label: "With family" },
-  { id: "looking", label: "Looking for housing" },
+const employmentStatuses: EmploymentStatus[] = [
+  "student",
+  "employed-full-time",
+  "employed-part-time",
+  "self-employed",
+  "job-seeking",
+  "homemaker",
+  "retired",
 ];
-
-const maritalStatuses: Array<{ id: MaritalStatus; label: string }> = [
-  { id: "single", label: "Single" },
-  { id: "partnered", label: "Partnered" },
-  { id: "married", label: "Married" },
-  { id: "divorced", label: "Divorced" },
-  { id: "widowed", label: "Widowed" },
+const familyStatuses: FamilyStatus[] = [
+  "single-household",
+  "couple",
+  "with-children",
+  "multicultural-family",
+  "extended-family",
 ];
-
-const employmentStatuses: Array<{ id: EmploymentStatus; label: string }> = [
-  { id: "student", label: "Student" },
-  { id: "employed-full-time", label: "Full-time employed" },
-  { id: "employed-part-time", label: "Part-time employed" },
-  { id: "self-employed", label: "Self-employed" },
-  { id: "job-seeking", label: "Job-seeking" },
-  { id: "homemaker", label: "Homemaker" },
-  { id: "retired", label: "Retired" },
-];
-
-const familyStatuses: Array<{ id: FamilyStatus; label: string }> = [
-  { id: "single-household", label: "Single household" },
-  { id: "couple", label: "Couple" },
-  { id: "with-children", label: "With children" },
-  { id: "multicultural-family", label: "Multicultural family" },
-  { id: "extended-family", label: "Extended family" },
-];
-
-const yesNoUnsureOptions: Array<{ id: YesNoUnsure; label: string }> = [
-  { id: "yes", label: "Yes" },
-  { id: "no", label: "No" },
-  { id: "unsure", label: "Not sure" },
-];
+const yesNoUnsureOptions: YesNoUnsure[] = ["yes", "no", "unsure"];
 
 const cityCoordinates: Record<City, { latitude: number; longitude: number }> = {
   서울시: { latitude: 37.5665, longitude: 126.978 },
@@ -99,7 +78,12 @@ type SelectFieldProps<TValue extends string> = {
   onChange: (value: TValue) => void;
 };
 
-function SelectField<TValue extends string>({ label, value, options, onChange }: SelectFieldProps<TValue>) {
+function SelectField<TValue extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: SelectFieldProps<TValue>) {
   return (
     <label className="grid gap-2 text-sm font-black">
       {label}
@@ -120,9 +104,10 @@ function SelectField<TValue extends string>({ label, value, options, onChange }:
 
 export function OnboardingForm() {
   const router = useRouter();
+  const { t, tCity, tLanguage } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
   const [locationStatus, setLocationStatus] = useState(
-    "Choose your city manually, or use your current location to estimate it.",
+    t("onboarding.locationStatus.initial"),
   );
 
   function updateProfile(nextProfile: Partial<UserProfile>) {
@@ -131,7 +116,9 @@ export function OnboardingForm() {
 
   function updateCity(city: City) {
     updateProfile({ city });
-    setLocationStatus(`${city} 기준으로 정보를 추천합니다.`);
+    setLocationStatus(
+      t("onboarding.locationStatus.updated", { city: tCity(city) }),
+    );
   }
 
   function distanceFromCity(latitude: number, longitude: number, city: City) {
@@ -153,11 +140,11 @@ export function OnboardingForm() {
 
   function detectLocation() {
     if (!navigator.geolocation) {
-      setLocationStatus("이 브라우저에서는 현재 위치를 사용할 수 없어요.");
+      setLocationStatus(t("onboarding.locationStatus.unsupported"));
       return;
     }
 
-    setLocationStatus("현재 위치를 확인하는 중입니다...");
+    setLocationStatus(t("onboarding.locationStatus.checking"));
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const nearestCity = inferNearestCity(
@@ -166,11 +153,11 @@ export function OnboardingForm() {
         );
         updateProfile({ city: nearestCity });
         setLocationStatus(
-          `현재 위치를 참고해 ${nearestCity}로 추정했습니다. 필요하면 직접 다른 도시를 선택할 수 있어요.`,
+          t("onboarding.locationStatus.inferred", { city: tCity(nearestCity) }),
         );
       },
       () => {
-        setLocationStatus("위치 권한을 받을 수 없어요. 도시를 직접 선택해주세요.");
+        setLocationStatus(t("onboarding.locationStatus.denied"));
       },
       { enableHighAccuracy: true, timeout: 10000 },
     );
@@ -186,10 +173,11 @@ export function OnboardingForm() {
     <form className="grid gap-8" onSubmit={handleSubmit}>
       <section className="grid gap-6 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5 lg:grid-cols-[1fr_0.8fr]">
         <div>
-          <h2 className="text-2xl font-black tracking-[-0.03em]">Which city are you in?</h2>
+          <h2 className="text-2xl font-black tracking-[-0.03em]">
+            {t("onboarding.cityTitle")}
+          </h2>
           <p className="mt-2 text-sm leading-6 text-[#52615b]">
-            도시를 기준으로 가까운 공공기관, 의료서비스, 교육 프로그램, 커뮤니티
-            정보를 먼저 보여드립니다.
+            {t("onboarding.cityDescription")}
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {cities.map((city) => (
@@ -203,7 +191,7 @@ export function OnboardingForm() {
                 onClick={() => updateCity(city)}
                 type="button"
               >
-                {city}
+                {tCity(city)}
               </button>
             ))}
           </div>
@@ -212,83 +200,84 @@ export function OnboardingForm() {
             onClick={detectLocation}
             type="button"
           >
-            Use my current location
+            {t("onboarding.cityUseLocation")}
           </button>
           <p className="mt-3 text-sm leading-6 text-[#52615b]">{locationStatus}</p>
         </div>
 
         <div className="rounded-3xl bg-[#fffaf0] p-6 ring-1 ring-black/5">
-          <p className="text-sm font-black text-[#ed9805]">Selected city</p>
-          <h3 className="mt-2 text-4xl font-black tracking-[-0.05em]">{profile.city}</h3>
+          <p className="text-sm font-black text-[#ed9805]">
+            {t("onboarding.selectedCityLabel")}
+          </p>
+          <h3 className="mt-2 text-4xl font-black tracking-[-0.05em]">{tCity(profile.city)}</h3>
           <p className="mt-4 text-sm leading-6 text-[#52615b]">
-            위치 권한은 도시 추정에만 사용됩니다. 정확한 좌표는 저장하지 않고,
-            선택된 도시를 기준으로 공공기관과 생활 정보를 필터링합니다.
+            {t("onboarding.selectedCityNote")}
           </p>
         </div>
       </section>
 
       <section className="grid gap-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5">
-        <h2 className="text-2xl font-black tracking-[-0.03em]">About you</h2>
-        <p className="text-sm leading-6 text-[#52615b]">
-          이 정보는 어떤 카테고리(이민, 의료, 노동, 교육 등)가 더 중요한지를
-          판단해 추천 우선순위를 정하는 데에만 사용됩니다.
-        </p>
+        <h2 className="text-2xl font-black tracking-[-0.03em]">{t("onboarding.aboutTitle")}</h2>
+        <p className="text-sm leading-6 text-[#52615b]">{t("onboarding.aboutDescription")}</p>
         <div className="grid gap-5 md:grid-cols-2">
           <SelectField
-            label="Preferred language"
+            label={t("onboarding.field.preferredLanguage")}
             onChange={(value) => updateProfile({ preferredLanguage: value })}
-            options={languages.map((language) => ({ id: language, label: language }))}
+            options={languages.map((language) => ({ id: language, label: tLanguage(language) }))}
             value={profile.preferredLanguage}
           />
           <label className="grid gap-2 text-sm font-black">
-            Nationality
+            {t("onboarding.field.nationality")}
             <input
               className="rounded-2xl bg-[#fffaf0] px-4 py-3 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
               onChange={(event) => updateProfile({ nationality: event.target.value })}
-              placeholder="e.g. Vietnam, USA"
+              placeholder={t("onboarding.field.nationalityPlaceholder")}
               value={profile.nationality}
             />
           </label>
           <SelectField
-            label="Age group"
+            label={t("onboarding.field.ageGroup")}
             onChange={(value) => updateProfile({ ageGroup: value })}
-            options={ageGroups}
+            options={ageGroups.map((id) => ({ id, label: t(`option.age.${id}`) }))}
             value={profile.ageGroup}
           />
           <SelectField
-            label="Gender"
+            label={t("onboarding.field.gender")}
             onChange={(value) => updateProfile({ gender: value })}
-            options={genders}
+            options={genders.map((id) => ({ id, label: t(`option.gender.${id}`) }))}
             value={profile.gender}
           />
           <SelectField
-            label="Residency status"
+            label={t("onboarding.field.residency")}
             onChange={(value) => updateProfile({ residencyStatus: value })}
-            options={residencyStatuses}
+            options={residencyStatuses.map((id) => ({ id, label: t(`option.residency.${id}`) }))}
             value={profile.residencyStatus}
           />
           <SelectField
-            label="Housing"
+            label={t("onboarding.field.housing")}
             onChange={(value) => updateProfile({ housingStatus: value })}
-            options={housingStatuses}
+            options={housingStatuses.map((id) => ({ id, label: t(`option.housing.${id}`) }))}
             value={profile.housingStatus}
           />
           <SelectField
-            label="Marital status"
+            label={t("onboarding.field.maritalStatus")}
             onChange={(value) => updateProfile({ maritalStatus: value })}
-            options={maritalStatuses}
+            options={maritalStatuses.map((id) => ({ id, label: t(`option.marital.${id}`) }))}
             value={profile.maritalStatus}
           />
           <SelectField
-            label="Employment"
+            label={t("onboarding.field.employment")}
             onChange={(value) => updateProfile({ employmentStatus: value })}
-            options={employmentStatuses}
+            options={employmentStatuses.map((id) => ({
+              id,
+              label: t(`option.employment.${id}`),
+            }))}
             value={profile.employmentStatus}
           />
           <SelectField
-            label="Family"
+            label={t("onboarding.field.family")}
             onChange={(value) => updateProfile({ familyStatus: value })}
-            options={familyStatuses}
+            options={familyStatuses.map((id) => ({ id, label: t(`option.family.${id}`) }))}
             value={profile.familyStatus}
           />
         </div>
@@ -296,47 +285,47 @@ export function OnboardingForm() {
 
       <section className="grid gap-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5 md:grid-cols-3">
         <div>
-          <p className="text-sm font-black">Do you currently have a visa?</p>
+          <p className="text-sm font-black">{t("onboarding.field.hasVisa")}</p>
           <div className="mt-3 grid gap-2">
             {yesNoUnsureOptions.map((option) => (
               <button
                 className={`rounded-2xl px-4 py-3 text-left text-sm font-black ${
-                  profile.hasVisa === option.id
+                  profile.hasVisa === option
                     ? "bg-[#17211f] text-white"
                     : "bg-[#fffaf0] text-[#17211f] ring-1 ring-black/5"
                 }`}
-                key={option.id}
-                onClick={() => updateProfile({ hasVisa: option.id })}
+                key={option}
+                onClick={() => updateProfile({ hasVisa: option })}
                 type="button"
               >
-                {option.label}
+                {t(`option.yesNo.${option}`)}
               </button>
             ))}
           </div>
         </div>
 
         <div>
-          <p className="text-sm font-black">Multicultural family?</p>
+          <p className="text-sm font-black">{t("onboarding.field.multicultural")}</p>
           <div className="mt-3 grid gap-2">
             {yesNoUnsureOptions.map((option) => (
               <button
                 className={`rounded-2xl px-4 py-3 text-left text-sm font-black ${
-                  profile.multiculturalFamily === option.id
+                  profile.multiculturalFamily === option
                     ? "bg-[#17211f] text-white"
                     : "bg-[#fffaf0] text-[#17211f] ring-1 ring-black/5"
                 }`}
-                key={option.id}
-                onClick={() => updateProfile({ multiculturalFamily: option.id })}
+                key={option}
+                onClick={() => updateProfile({ multiculturalFamily: option })}
                 type="button"
               >
-                {option.label}
+                {t(`option.yesNo.${option}`)}
               </button>
             ))}
           </div>
         </div>
 
         <label className="grid h-fit gap-2 text-sm font-black">
-          Visa expiry date
+          {t("onboarding.field.visaExpiry")}
           <input
             className="rounded-2xl bg-[#fffaf0] px-4 py-3 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
             onChange={(event) => updateProfile({ visaExpiryDate: event.target.value })}
@@ -344,7 +333,7 @@ export function OnboardingForm() {
             value={profile.visaExpiryDate}
           />
           <span className="text-xs font-medium leading-5 text-[#52615b]">
-            비자가 없거나 확실하지 않으면 비워두어도 됩니다.
+            {t("onboarding.field.visaExpiryNote")}
           </span>
         </label>
       </section>
@@ -353,7 +342,7 @@ export function OnboardingForm() {
         className="rounded-full bg-[#ed9805] px-7 py-4 text-base font-black text-white shadow-xl shadow-orange-200 transition hover:-translate-y-0.5"
         type="submit"
       >
-        Save and find recommendations
+        {t("onboarding.submit")}
       </button>
     </form>
   );

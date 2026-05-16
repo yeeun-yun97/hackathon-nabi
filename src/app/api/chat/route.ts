@@ -1,12 +1,28 @@
 import OpenAI from "openai";
 
 import { getCategoryLabel, recommendedCategoryIds, type UserProfile } from "@/lib/data";
+import {
+  aiResponseLanguageInstruction,
+  defaultLocale,
+  supportedLocales,
+  translate,
+  type Locale,
+} from "@/lib/i18n";
+
+function isSupportedLocale(value: unknown): value is Locale {
+  return (
+    typeof value === "string" && (supportedLocales as readonly string[]).includes(value)
+  );
+}
 
 export async function POST(request: Request) {
-  const { message, profile } = (await request.json()) as {
+  const { message, profile, locale: rawLocale } = (await request.json()) as {
     message?: string;
     profile?: UserProfile;
+    locale?: string;
   };
+
+  const locale: Locale = isSupportedLocale(rawLocale) ? rawLocale : defaultLocale;
 
   if (!message?.trim()) {
     return Response.json({ error: "message is required" }, { status: 400 });
@@ -15,8 +31,7 @@ export async function POST(request: Request) {
   if (!process.env.OPENAI_API_KEY) {
     return Response.json(
       {
-        reply:
-          "OPENAI_API_KEY가 아직 설정되지 않았어요. Vercel 또는 .env.local에 키를 추가하면 AI 상담을 사용할 수 있습니다.",
+        reply: translate(locale, "chat.missingApiKey"),
       },
       { status: 200 },
     );
@@ -38,16 +53,20 @@ export async function POST(request: Request) {
         `hasVisa=${profile.hasVisa}`,
         `multiculturalFamily=${profile.multiculturalFamily}`,
         `visaExpiryDate=${profile.visaExpiryDate || "not provided"}`,
-        `recommendedCategories=${recommendedCategoryIds(profile, 4).map(getCategoryLabel).join(", ")}`,
+        `recommendedCategories=${recommendedCategoryIds(profile, 4)
+          .map(getCategoryLabel)
+          .join(", ")}`,
       ].join(", ")
     : "No user profile was provided.";
+
+  const languageInstruction = aiResponseLanguageInstruction[locale];
 
   const completion = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
       {
         role: "system",
-        content: `You are Nari, a friendly multilingual guide for foreigners living in Korea. Provide practical, low-risk information about public services, healthcare, housing, immigration, education, culture, transport, finances, labour, and legal support. Use the user's profile (city, nationality, age, residency, housing, marital status, employment, family, visa, expiry) and the recommended categories to prioritize the most relevant guidance. Remind users to verify urgent legal, medical, or visa matters with official institutions. User profile: ${profileContext}`,
+        content: `You are Nari, a friendly multilingual guide for foreigners living in Korea. Provide practical, low-risk information about public services, healthcare, housing, immigration, education, culture, transport, finances, labour, and legal support. Use the user's profile (city, nationality, age, residency, housing, marital status, employment, family, visa, expiry) and the recommended categories to prioritize the most relevant guidance. Remind users to verify urgent legal, medical, or visa matters with official institutions.\n\nLanguage instruction: ${languageInstruction} If the user writes in a different language, still answer in the instructed language. Keep proper nouns (names, addresses, hotline numbers, organization names) in their original form.\n\nUser profile: ${profileContext}`,
       },
       {
         role: "user",
@@ -58,7 +77,6 @@ export async function POST(request: Request) {
 
   return Response.json({
     reply:
-      completion.choices[0]?.message.content ??
-      "답변을 만들지 못했어요. 질문을 조금 더 구체적으로 적어주세요.",
+      completion.choices[0]?.message.content ?? translate(locale, "chat.unanswered"),
   });
 }

@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+import { useLanguage } from "@/components/language-provider";
 import {
   cities,
-  getCategoryLabel,
   matchesCity,
   recommendedCategoryIds,
   scoreCategoriesForProfile,
@@ -24,6 +24,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function DiscoverClient() {
+  const { t, tCity, tCategory } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
   const [selectedCity, setSelectedCity] = useState<City>(defaultProfile.city);
   const [selectedCategories, setSelectedCategories] = useState<ServiceCategory[]>([]);
@@ -65,23 +66,25 @@ export function DiscoverClient() {
   return (
     <div className="grid gap-8 lg:grid-cols-[320px_1fr]">
       <aside className="h-fit rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5">
-        <p className="text-sm font-black text-[#ed9805]">Filters</p>
+        <p className="text-sm font-black text-[#ed9805]">{t("discover.filtersLabel")}</p>
         <label className="mt-5 grid gap-2 text-sm font-black">
-          City
+          {t("discover.cityFieldLabel")}
           <select
             className="rounded-2xl bg-[#fffaf0] px-4 py-3 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
             onChange={(event) => setSelectedCity(event.target.value as City)}
             value={selectedCity}
           >
             {cities.map((city) => (
-              <option key={city}>{city}</option>
+              <option key={city} value={city}>
+                {tCity(city)}
+              </option>
             ))}
           </select>
         </label>
         <div className="mt-6">
-          <p className="text-sm font-black">Categories</p>
+          <p className="text-sm font-black">{t("discover.categoriesFieldLabel")}</p>
           <p className="mt-1 text-xs leading-5 text-[#52615b]">
-            추천 카테고리는 별표로 표시됩니다.
+            {t("discover.categoriesFieldDescription")}
           </p>
           <div className="mt-3 grid gap-2">
             {serviceCategories.map((category) => {
@@ -101,14 +104,14 @@ export function DiscoverClient() {
                   }
                   type="button"
                 >
-                  <span>{category.label}</span>
+                  <span>{tCategory(category.id)}</span>
                   {isRecommended ? (
                     <span
                       className={`rounded-full px-2 py-0.5 text-[10px] font-black ${
                         isActive ? "bg-white text-[#0b8d79]" : "bg-[#10c4a9]/15 text-[#0b8d79]"
                       }`}
                     >
-                      For you
+                      {t("discover.recommendedBadge")}
                     </span>
                   ) : null}
                 </button>
@@ -121,14 +124,15 @@ export function DiscoverClient() {
       <section>
         <div className="mb-6 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-black text-[#ed9805]">Recommended for your profile</p>
+            <p className="text-sm font-black text-[#ed9805]">
+              {t("discover.recommendedTitle")}
+            </p>
             <Link className="text-sm font-black text-[#0b8d79]" href="/onboarding">
-              Update profile
+              {t("discover.updateProfile")}
             </Link>
           </div>
           <p className="mt-2 text-sm leading-6 text-[#52615b]">
-            아래 카테고리는 비자, 가족, 거주, 고용, 연령 같은 프로필 정보를 기반으로
-            추천됩니다.
+            {t("discover.recommendedDescription")}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {recommendedCategories.map((category) => (
@@ -136,18 +140,18 @@ export function DiscoverClient() {
                 className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]"
                 key={category}
               >
-                {getCategoryLabel(category)}
+                {tCategory(category)}
               </span>
             ))}
           </div>
           <details className="mt-4">
             <summary className="cursor-pointer text-xs font-black text-[#52615b]">
-              Why these categories?
+              {t("discover.whyTheseCategories")}
             </summary>
             <ul className="mt-3 grid gap-2 text-sm leading-6 text-[#52615b]">
               {categoryScores.slice(0, 4).map((entry) => (
                 <li key={entry.category}>
-                  <span className="font-black text-[#17211f]">{getCategoryLabel(entry.category)}</span>
+                  <span className="font-black text-[#17211f]">{tCategory(entry.category)}</span>
                   <span className="ml-2">{entry.reasons.slice(-3).join(" · ")}</span>
                 </li>
               ))}
@@ -157,7 +161,10 @@ export function DiscoverClient() {
 
         <div className="mb-5 flex items-center justify-between gap-4">
           <p className="text-sm font-black text-[#52615b]">
-            {filteredPrograms.length} results for {selectedCity}
+            {t("common.results", {
+              count: filteredPrograms.length,
+              city: tCity(selectedCity),
+            })}
           </p>
         </div>
         <div className="grid gap-5">
@@ -169,11 +176,11 @@ export function DiscoverClient() {
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]">
-                  {getCategoryLabel(program.category)}
+                  {tCategory(program.category)}
                 </span>
                 {recommendedCategories.includes(program.category) ? (
                   <span className="rounded-full bg-[#ed9805]/15 px-3 py-1 text-xs font-black text-[#b66f00]">
-                    For you
+                    {t("discover.recommendedBadge")}
                   </span>
                 ) : null}
                 <span className="rounded-full bg-[#ed9805]/15 px-3 py-1 text-xs font-black text-[#b66f00]">
@@ -196,11 +203,8 @@ export function DiscoverClient() {
           ))}
           {filteredPrograms.length === 0 ? (
             <div className="rounded-[2rem] bg-white p-8 text-center ring-1 ring-black/5">
-              <p className="text-xl font-black">No matching programs yet</p>
-              <p className="mt-3 text-[#52615b]">
-                Try fewer categories or update your city profile. Supabase data can add more local
-                services later.
-              </p>
+              <p className="text-xl font-black">{t("discover.noMatchingTitle")}</p>
+              <p className="mt-3 text-[#52615b]">{t("discover.noMatchingHint")}</p>
             </div>
           ) : null}
         </div>

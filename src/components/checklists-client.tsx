@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { useLanguage } from "@/components/language-provider";
 import {
   checklists,
-  getCategoryLabel,
   matchesCity,
   serviceCategories,
   type City,
@@ -19,6 +19,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function ChecklistsClient() {
+  const { t, tCategory } = useLanguage();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
 
@@ -54,7 +55,7 @@ export function ChecklistsClient() {
               onClick={() => setCategories((current) => toggleCategory(current, category.id))}
               type="button"
             >
-              {category.label}
+              {tCategory(category.id)}
             </button>
           );
         })}
@@ -63,7 +64,7 @@ export function ChecklistsClient() {
         {filteredChecklists.map((checklist) => (
           <article className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5" key={checklist.id}>
             <span className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]">
-              {getCategoryLabel(checklist.category)}
+              {tCategory(checklist.category)}
             </span>
             <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">{checklist.title}</h2>
             <p className="mt-3 leading-7 text-[#52615b]">{checklist.description}</p>
@@ -82,7 +83,7 @@ export function ChecklistsClient() {
       </div>
       {filteredChecklists.length === 0 ? (
         <div className="rounded-[2rem] bg-white p-8 text-center ring-1 ring-black/5">
-          <p className="font-black">No checklist for this filter yet</p>
+          <p className="font-black">{t("checklists.empty")}</p>
         </div>
       ) : null}
     </div>

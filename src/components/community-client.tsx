@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+import { useLanguage } from "@/components/language-provider";
 import {
   communityPosts,
-  getCategoryLabel,
   serviceCategories,
   type City,
   type ServiceCategory,
@@ -19,6 +19,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function CommunityClient() {
+  const { t, tCity, tCategory } = useLanguage();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
 
@@ -44,8 +45,8 @@ export function CommunityClient() {
   return (
     <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
       <aside className="h-fit rounded-[2rem] bg-white p-6 ring-1 ring-black/5">
-        <p className="text-sm font-black text-[#ed9805]">Your community filters</p>
-        <p className="mt-3 text-2xl font-black">{city}</p>
+        <p className="text-sm font-black text-[#ed9805]">{t("community.filtersLabel")}</p>
+        <p className="mt-3 text-2xl font-black">{tCity(city)}</p>
         <div className="mt-5 grid gap-2">
           {serviceCategories.map((category) => {
             const isActive = categories.includes(category.id);
@@ -59,7 +60,7 @@ export function CommunityClient() {
                 onClick={() => setCategories((current) => toggleCategory(current, category.id))}
                 type="button"
               >
-                {category.label}
+                {tCategory(category.id)}
               </button>
             );
           })}
@@ -68,8 +69,8 @@ export function CommunityClient() {
       <section className="grid gap-5">
         {filteredPosts.length === 0 ? (
           <div className="rounded-[2rem] bg-white p-6 ring-1 ring-black/5">
-            <p className="font-black">No exact local match yet</p>
-            <p className="mt-2 text-[#52615b]">Showing sample posts from other cities.</p>
+            <p className="font-black">{t("community.noLocalMatch")}</p>
+            <p className="mt-2 text-[#52615b]">{t("community.noLocalMatchHint")}</p>
           </div>
         ) : null}
         {visiblePosts.map((post) => (
@@ -80,15 +81,17 @@ export function CommunityClient() {
           >
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]">
-                {getCategoryLabel(post.category)}
+                {tCategory(post.category)}
               </span>
               <span className="rounded-full bg-[#17211f]/10 px-3 py-1 text-xs font-black text-[#52615b]">
-                {post.city}
+                {tCity(post.city)}
               </span>
             </div>
             <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">{post.title}</h2>
             <p className="mt-3 leading-7 text-[#52615b]">{post.excerpt}</p>
-            <p className="mt-4 text-sm font-black text-[#ed9805]">By {post.author}</p>
+            <p className="mt-4 text-sm font-black text-[#ed9805]">
+              {t("community.byAuthor", { name: post.author })}
+            </p>
           </Link>
         ))}
       </section>

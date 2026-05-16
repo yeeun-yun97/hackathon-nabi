@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { useLanguage } from "@/components/language-provider";
 import {
   faqItems,
-  getCategoryLabel,
   matchesCity,
   serviceCategories,
   type City,
@@ -19,6 +19,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function FaqClient() {
+  const { t, tCategory } = useLanguage();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
@@ -50,7 +51,7 @@ export function FaqClient() {
       <input
         className="rounded-full bg-white px-6 py-4 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
         onChange={(event) => setQuery(event.target.value)}
-        placeholder="Search FAQ..."
+        placeholder={t("faq.searchPlaceholder")}
         value={query}
       />
       <div className="flex flex-wrap gap-2">
@@ -66,7 +67,7 @@ export function FaqClient() {
               onClick={() => setCategories((current) => toggleCategory(current, category.id))}
               type="button"
             >
-              {category.label}
+              {tCategory(category.id)}
             </button>
           );
         })}
@@ -76,7 +77,7 @@ export function FaqClient() {
           <details className="rounded-[1.5rem] bg-white p-6 ring-1 ring-black/5" key={faq.id}>
             <summary className="cursor-pointer text-lg font-black">{faq.question}</summary>
             <p className="mt-4 leading-7 text-[#52615b]">{faq.answer}</p>
-            <p className="mt-4 text-xs font-black text-[#0b8d79]">{getCategoryLabel(faq.category)}</p>
+            <p className="mt-4 text-xs font-black text-[#0b8d79]">{tCategory(faq.category)}</p>
           </details>
         ))}
       </div>
