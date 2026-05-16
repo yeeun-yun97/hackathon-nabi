@@ -93,11 +93,15 @@ export type UserProfile = {
   familyStatus: FamilyStatus;
   hasVisa: YesNoUnsure;
   multiculturalFamily: YesNoUnsure;
+  /** ISO date of the user's current Korean visa issuance (required when hasVisa === "yes"). */
+  visaIssueDate: string;
   visaExpiryDate: string;
   degreeLevel: DegreeLevel;
   topikLevel: TopikLevel;
   kiipStage: KiipStage;
   currentVisaSubtype: VisaSubtype;
+  /** Visa subtype the user wants to move toward. Independent of `hasVisa`. */
+  targetVisaSubtype: VisaSubtype;
   district: SeoulDistrict | "";
   /** Health & Recreation facility slugs saved to the local profile. */
   savedFacilities: string[];

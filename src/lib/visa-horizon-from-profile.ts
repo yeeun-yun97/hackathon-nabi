@@ -16,7 +16,27 @@ import type {
 import { lt } from "@/lib/i18n";
 import { daysUntilVisaExpiry } from "@/lib/profile";
 
-export const VISA_HORIZON_TARGET_VISA = "F-2-7" as const satisfies VisaSubtype;
+/**
+ * Illustrative next-step visa suggestion from the saved current subtype.
+ * F-5 and "other" are intentionally left at the same subtype because there is no obvious
+ * single next step inside the demo's supported subtype list.
+ */
+export function pickHorizonTargetVisa(currentVisa: VisaSubtype): VisaSubtype {
+  switch (currentVisa) {
+    case "D-2":
+    case "D-10":
+    case "E-7":
+      return "F-2-7";
+    case "F-2-7":
+      return "F-5";
+    case "F-5":
+      return "F-5";
+    case "other":
+    case "unsure":
+    default:
+      return "F-2-7";
+  }
+}
 
 const ILLUSTRATIVE_TARGET_POINTS = 80;
 
@@ -300,7 +320,7 @@ export function buildVisaHorizonFromProfile(profile: UserProfile): VisaTrack {
 
   return {
     currentVisa: profile.currentVisaSubtype,
-    targetVisa: VISA_HORIZON_TARGET_VISA,
+    targetVisa: profile.targetVisaSubtype ?? pickHorizonTargetVisa(profile.currentVisaSubtype),
     currentPoints,
     targetPoints: ILLUSTRATIVE_TARGET_POINTS,
     unlockEtaDays,

@@ -367,18 +367,32 @@ export function OnboardingForm({
           </div>
         </div>
 
-        <label className="grid h-fit gap-2 text-sm font-semibold">
-          {t("onboarding.field.visaExpiry")}
-          <input
-            className={inputClass}
-            onChange={(event) => updateProfile({ visaExpiryDate: event.target.value })}
-            type="date"
-            value={profile.visaExpiryDate}
-          />
-          <span className="text-xs font-normal leading-5 text-[#52615b]">
-            {t("onboarding.field.visaExpiryNote")}
-          </span>
-        </label>
+        <div className="grid h-fit gap-4">
+          <label className="grid gap-2 text-sm font-semibold">
+            {t("onboarding.field.visaIssue")}
+            <input
+              className={inputClass}
+              onChange={(event) => updateProfile({ visaIssueDate: event.target.value })}
+              type="date"
+              value={profile.visaIssueDate}
+            />
+            <span className="text-xs font-normal leading-5 text-[#52615b]">
+              {t("onboarding.field.visaIssueNote")}
+            </span>
+          </label>
+          <label className="grid gap-2 text-sm font-semibold">
+            {t("onboarding.field.visaExpiry")}
+            <input
+              className={inputClass}
+              onChange={(event) => updateProfile({ visaExpiryDate: event.target.value })}
+              type="date"
+              value={profile.visaExpiryDate}
+            />
+            <span className="text-xs font-normal leading-5 text-[#52615b]">
+              {t("onboarding.field.visaExpiryNote")}
+            </span>
+          </label>
+        </div>
       </section>
 
       <section className={`${cardClass} grid gap-5`}>
@@ -441,6 +455,14 @@ export function OnboardingForm({
               label: tOption("visaSubtype", id),
             }))}
             value={profile.currentVisaSubtype}
+          />
+          <SelectField
+            label={t("onboarding.field.targetVisaSubtype")}
+            onChange={(value) => updateProfile({ targetVisaSubtype: value })}
+            options={visaSubtypes
+              .filter((id) => id !== "unsure")
+              .map((id) => ({ id, label: tOption("visaSubtype", id) }))}
+            value={profile.targetVisaSubtype}
           />
           <SelectField
             label={t("onboarding.field.district")}

@@ -57,6 +57,8 @@ export async function POST(request: Request) {
         `kiipStage=${profile.kiipStage}`,
         `volunteerHoursLogged=${profile.volunteerHoursLogged ?? 0}`,
         `currentVisaSubtype=${profile.currentVisaSubtype}`,
+        `targetVisaSubtype=${profile.targetVisaSubtype}`,
+        `visaIssueDate=${profile.visaIssueDate || "not provided"}`,
         `visaExpiryDate=${profile.visaExpiryDate || "not provided"}`,
         `recommendedCategories=${recommendedCategoryIds(profile, 4)
           .map(getCategoryLabel)

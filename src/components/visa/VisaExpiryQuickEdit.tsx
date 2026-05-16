@@ -15,6 +15,7 @@ import type {
 import { readStoredProfile, writeStoredProfile } from "@/lib/profile";
 
 const visaSubtypes: VisaSubtype[] = ["D-2", "D-10", "E-7", "F-2-7", "F-5", "other", "unsure"];
+const targetVisaSubtypes: VisaSubtype[] = ["D-2", "D-10", "E-7", "F-2-7", "F-5", "other"];
 const degreeLevels: DegreeLevel[] = ["none", "high-school", "bachelor", "master", "phd"];
 const topikLevels: TopikLevel[] = ["none", "1", "2", "3", "4", "5", "6"];
 const kiipStages: KiipStage[] = ["none", "0", "1", "2", "3", "4", "5"];
@@ -76,8 +77,10 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
   const [possession, setPossession] = useState<VisaPossessionAnswer>(() =>
     possessionFromStored(profile.hasVisa),
   );
-  const [value, setValue] = useState(profile.visaExpiryDate);
+  const [issueDate, setIssueDate] = useState(profile.visaIssueDate);
+  const [expiryDate, setExpiryDate] = useState(profile.visaExpiryDate);
   const [visaSubtype, setVisaSubtype] = useState(profile.currentVisaSubtype);
+  const [targetVisa, setTargetVisa] = useState<VisaSubtype>(profile.targetVisaSubtype);
   const [degreeLevel, setDegreeLevel] = useState(profile.degreeLevel);
   const [topikLevel, setTopikLevel] = useState(profile.topikLevel);
   const [kiipStage, setKiipStage] = useState(profile.kiipStage);
@@ -85,12 +88,15 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
     String(profile.volunteerHoursLogged ?? 0),
   );
   const [justSaved, setJustSaved] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   useEffect(() => {
     queueMicrotask(() => {
       setPossession(possessionFromStored(profile.hasVisa));
-      setValue(profile.visaExpiryDate);
+      setIssueDate(profile.visaIssueDate);
+      setExpiryDate(profile.visaExpiryDate);
       setVisaSubtype(profile.currentVisaSubtype);
+      setTargetVisa(profile.targetVisaSubtype);
       setDegreeLevel(profile.degreeLevel);
       setTopikLevel(profile.topikLevel);
       setKiipStage(profile.kiipStage);
@@ -98,8 +104,10 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
     });
   }, [
     profile.hasVisa,
+    profile.visaIssueDate,
     profile.visaExpiryDate,
     profile.currentVisaSubtype,
+    profile.targetVisaSubtype,
     profile.degreeLevel,
     profile.topikLevel,
     profile.kiipStage,
@@ -107,18 +115,35 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
   ]);
 
   function handleSave() {
+    const visaHold = possession === "yes";
+    if (visaHold) {
+      if (!issueDate) {
+        setValidationError(t("visa.edit.error.issueDateRequired"));
+        return;
+      }
+      if (!expiryDate) {
+        setValidationError(t("visa.edit.error.expiryDateRequired"));
+        return;
+      }
+      if (new Date(issueDate).getTime() > new Date(expiryDate).getTime()) {
+        setValidationError(t("visa.edit.error.issueAfterExpiry"));
+        return;
+      }
+    }
+    setValidationError(null);
     const parsed = Number.parseInt(volunteerHours, 10);
     const volunteerHoursLogged = Number.isFinite(parsed)
       ? Math.min(500, Math.max(0, parsed))
       : 0;
     const existing = readStoredProfile();
     const hasVisaStored = storedFromPossession(possession);
-    const visaHold = possession === "yes";
     const next: UserProfile = {
       ...existing,
       hasVisa: hasVisaStored,
-      visaExpiryDate: visaHold ? value : "",
+      visaIssueDate: visaHold ? issueDate : "",
+      visaExpiryDate: visaHold ? expiryDate : "",
       currentVisaSubtype: visaHold ? visaSubtype : "unsure",
+      targetVisaSubtype: targetVisa,
       degreeLevel,
       topikLevel,
       kiipStage,
@@ -180,8 +205,8 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
               {t("visa.edit.noVisaState")}
             </p>
           ) : (
-            <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end">
-              <label className="grid flex-1 gap-2 text-sm font-semibold text-[#17211f]">
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              <label className="grid gap-2 text-sm font-semibold text-[#17211f]">
                 {t("onboarding.field.currentVisaSubtype")}
                 <select
                   className={inputClass}
@@ -195,13 +220,27 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
                   ))}
                 </select>
               </label>
-              <label className="grid flex-1 gap-2 text-sm font-semibold text-[#17211f]">
-                {t("onboarding.field.visaExpiry")}
+              <label className="grid gap-2 text-sm font-semibold text-[#17211f]">
+                {t("onboarding.field.visaIssue")} <span className="text-[#E0445B]">*</span>
                 <input
                   className={inputClass}
-                  onChange={(event) => setValue(event.target.value)}
+                  onChange={(event) => setIssueDate(event.target.value)}
+                  required
                   type="date"
-                  value={value}
+                  value={issueDate}
+                />
+                <span className="text-xs font-normal leading-5 text-[#52615b]">
+                  {t("onboarding.field.visaIssueNote")}
+                </span>
+              </label>
+              <label className="grid gap-2 text-sm font-semibold text-[#17211f] md:col-span-2">
+                {t("onboarding.field.visaExpiry")} <span className="text-[#E0445B]">*</span>
+                <input
+                  className={inputClass}
+                  onChange={(event) => setExpiryDate(event.target.value)}
+                  required
+                  type="date"
+                  value={expiryDate}
                 />
                 <span className="text-xs font-normal leading-5 text-[#52615b]">
                   {t("onboarding.field.visaExpiryNote")}
@@ -209,6 +248,22 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
               </label>
             </div>
           )}
+        </div>
+
+        <div className={sectionDividerClass}>
+          <h3 className="text-lg font-bold tracking-[-0.02em] text-[#17211f]">
+            {t("visa.edit.section.targetTitle")}
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("visa.edit.section.targetDescription")}</p>
+
+          <div className="mt-5">
+            <SelectField
+              label={t("onboarding.field.targetVisaSubtype")}
+              onChange={setTargetVisa}
+              options={targetVisaSubtypes.map((id) => ({ id, label: tOption("visaSubtype", id) }))}
+              value={targetVisa}
+            />
+          </div>
         </div>
 
         <div className={sectionDividerClass}>
@@ -263,6 +318,11 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
         >
           {t("visa.quickEdit.save")}
         </button>
+        {validationError ? (
+          <p className="mt-3 text-sm font-semibold text-[#E0445B]" role="alert">
+            {validationError}
+          </p>
+        ) : null}
       </div>
 
       {justSaved ? (

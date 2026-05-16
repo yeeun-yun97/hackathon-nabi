@@ -176,22 +176,40 @@ const en = {
   "visa.edit.section.visaTitle": "Visa",
   "visa.edit.section.visaDescription":
     "Choose Yes only if you want to store visa type and expiry. Otherwise pick No / Not sure — those details stay empty.",
+  "visa.edit.section.targetTitle": "Target visa",
+  "visa.edit.section.targetDescription":
+    "Pick the visa you want to move toward. We use it to label the Discover horizon — it works even if you do not currently hold a visa.",
   "visa.edit.section.extraTitle": "Additional details",
   "visa.edit.section.extraDescription":
     "TOPIK, KIIP, highest degree, and volunteer hours (same fields as onboarding).",
   "visa.edit.noVisaState":
-    "You chose No / Not sure — visa type and expiry are not saved (you can switch to Yes anytime).",
+    "You chose No / Not sure — visa type, issue date, and expiry are not saved (you can switch to Yes anytime).",
   "visa.edit.hasVisaYes": "Yes",
   "visa.edit.hasVisaNoOrUnsure": "No / Not sure",
+  "visa.edit.error.issueDateRequired": "Please enter your visa issue date.",
+  "visa.edit.error.expiryDateRequired": "Please enter your visa expiry date.",
+  "visa.edit.error.issueAfterExpiry": "Issue date must be on or before the expiry date.",
   "visa.profileSummary.title": "Saved visa details",
   "visa.profileSummary.description":
     "Visa type, expiry, TOPIK/KIIP/degree from onboarding, and volunteer hours you log here feed the Discover visa horizon preview (illustrative only; not an official score).",
   "visa.profileSummary.volunteerLine": "{hours} hours logged",
   "visa.profileSummary.visaNotDeclared": "Not on file",
+  "visa.profileSummary.targetLabel": "Target visa",
+  "visa.profileSummary.issueLabel": "Visa issue date",
+  "visa.noVisa.eyebrow": "No visa on file",
+  "visa.noVisa.title": "Save a visa first to unlock the horizon view.",
+  "visa.noVisa.description":
+    "The renewal checklist and the illustrative F-2-7 / F-5 horizon assume you already hold a Korean visa. Once you set your current visa, this page shows a tailored next-step target.",
+  "visa.noVisa.editCta": "Update visa details",
+  "visa.noVisa.discoverCta": "Find visa & residency programs",
   "visa.horizonTrack": "Horizon track",
   "visa.fromTo": "{current} to {target}",
   "visa.horizonDescription":
     "Illustrative tiles and strategies use your saved education fields plus logged volunteer hours. They are a planning aid only.",
+  "visa.horizonGoalOnly": "Goal: {target}",
+  "visa.horizonAtCeiling": "{current} is the top tier in this demo",
+  "visa.horizonAtCeilingDescription":
+    "This planner does not model further upgrades. Keep documents current and verify any new program with official sources.",
   "visa.horizonDisclaimer":
     "Not a HiKorea or embassy score. Official eligibility depends on the law, your documents, and immigration officer review.",
   "visa.daysUntilCheckpoint": "{days} days until renewal checkpoint",
@@ -415,9 +433,13 @@ const en = {
   "onboarding.field.family": "Family",
   "onboarding.field.hasVisa": "Do you currently have a visa?",
   "onboarding.field.multicultural": "Multicultural family?",
+  "onboarding.field.visaIssue": "Visa issue date",
+  "onboarding.field.visaIssueNote":
+    "Date your current visa was issued by Korean immigration. Leave blank if you have no visa.",
   "onboarding.field.visaExpiry": "Visa expiry date",
   "onboarding.field.visaExpiryNote":
     "Leave blank if you have no visa or are not sure.",
+  "onboarding.field.targetVisaSubtype": "Target visa (next step)",
   "onboarding.field.degreeLevel": "Degree level",
   "onboarding.field.topikLevel": "TOPIK level",
   "onboarding.field.kiipStage": "KIIP stage",
@@ -991,22 +1013,40 @@ const ko = {
   "visa.edit.section.visaTitle": "비자",
   "visa.edit.section.visaDescription":
     "「예」일 때만 비자 종류·만료일을 저장합니다. 「아니오·잘 모르겠어요」면 해당 칸은 비워 둡니다.",
+  "visa.edit.section.targetTitle": "목표 비자",
+  "visa.edit.section.targetDescription":
+    "다음에 받고 싶은 비자를 선택하세요. 디스커버 호라이즌의 목표 라벨로 쓰이고, 비자가 아직 없어도 선택할 수 있어요.",
   "visa.edit.section.extraTitle": "비자 추가 정보",
   "visa.edit.section.extraDescription":
     "TOPIK, KIIP, 최종 학위, 봉사 시간(온보딩과 같은 항목)입니다.",
   "visa.edit.noVisaState":
-    "아니오·잘 모르겠어요 선택 시 종류·만료일은 저장되지 않습니다. 언제든 「예」로 바꿀 수 있어요.",
+    "아니오·잘 모르겠어요 선택 시 종류·발급일·만료일은 저장되지 않습니다. 언제든 「예」로 바꿀 수 있어요.",
   "visa.edit.hasVisaYes": "예",
   "visa.edit.hasVisaNoOrUnsure": "아니오 · 잘 모르겠어요",
+  "visa.edit.error.issueDateRequired": "비자 발급일을 입력해 주세요.",
+  "visa.edit.error.expiryDateRequired": "비자 만료일을 입력해 주세요.",
+  "visa.edit.error.issueAfterExpiry": "발급일은 만료일 이전이어야 합니다.",
   "visa.profileSummary.title": "저장된 비자 정보",
   "visa.profileSummary.description":
     "비자 종류·만료일, 온보딩의 TOPIK·KIIP·학력, 그리고 여기서 적는 봉사 시간이 디스커버 비자 호라이즌 미리보기에 반영돼요(참고용이며 출입국 공식 점수가 아닙니다).",
   "visa.profileSummary.volunteerLine": "봉사 {hours}시간 기록",
   "visa.profileSummary.visaNotDeclared": "미기재",
+  "visa.profileSummary.targetLabel": "목표 비자",
+  "visa.profileSummary.issueLabel": "비자 발급일",
+  "visa.noVisa.eyebrow": "비자 미등록",
+  "visa.noVisa.title": "비자를 먼저 저장하면 호라이즌이 열려요.",
+  "visa.noVisa.description":
+    "갱신 체크리스트와 F-2-7·F-5 호라이즌은 현재 비자가 있다는 가정으로 만들어졌어요. 비자 종류를 저장하면 그에 맞는 다음 단계 목표를 보여드립니다.",
+  "visa.noVisa.editCta": "비자 정보 수정",
+  "visa.noVisa.discoverCta": "비자·체류 관련 프로그램 찾기",
   "visa.horizonTrack": "호라이즌 트랙",
   "visa.fromTo": "{current} → {target}",
   "visa.horizonDescription":
     "저장된 교육·봉사 필드를 바탕으로 한 참고용 타일과 전략입니다. 실제 심사와는 별개예요.",
+  "visa.horizonGoalOnly": "목표: {target}",
+  "visa.horizonAtCeiling": "이미 {current} — 데모상 최상위 단계예요",
+  "visa.horizonAtCeilingDescription":
+    "이 플래너는 추가 상향 경로를 모델링하지 않습니다. 서류는 늘 최신으로 유지하고, 새 프로그램은 공식 안내로 확인하세요.",
   "visa.horizonDisclaimer":
     "하이코리아·대사관 점수가 아닙니다. 최종 자격은 법령, 서류, 심사관 판단에 따릅니다.",
   "visa.daysUntilCheckpoint": "갱신 체크포인트까지 {days}일",
@@ -1225,9 +1265,13 @@ const ko = {
   "onboarding.field.family": "가족 형태",
   "onboarding.field.hasVisa": "현재 비자가 있나요?",
   "onboarding.field.multicultural": "다문화 가족인가요?",
+  "onboarding.field.visaIssue": "비자 발급일",
+  "onboarding.field.visaIssueNote":
+    "현재 비자가 출입국에서 발급된 날짜를 입력하세요. 비자가 없으면 비워 두어도 됩니다.",
   "onboarding.field.visaExpiry": "비자 만료일",
   "onboarding.field.visaExpiryNote":
     "비자가 없거나 확실하지 않으면 비워두어도 됩니다.",
+  "onboarding.field.targetVisaSubtype": "목표 비자(다음 단계)",
   "onboarding.field.degreeLevel": "학위 수준",
   "onboarding.field.topikLevel": "TOPIK 급수",
   "onboarding.field.kiipStage": "KIIP 단계",
@@ -1769,22 +1813,40 @@ const zh = {
   "visa.edit.section.visaTitle": "签证",
   "visa.edit.section.visaDescription":
     "仅在选「是」时保存签证类型与到期日；选「否 / 不确定」则不保存这两项。",
+  "visa.edit.section.targetTitle": "目标签证",
+  "visa.edit.section.targetDescription":
+    "选择您下一步想拿到的签证。即使目前没有签证也可选择，Discover Horizon 会以此为目标标签。",
   "visa.edit.section.extraTitle": "签证补充信息",
   "visa.edit.section.extraDescription":
     "TOPIK、KIIP、最高学历与志愿时长（与入门设置相同字段）。",
   "visa.edit.noVisaState":
-    "已选「否 / 不确定」— 不保存类型与到期日。可随时改回「是」。",
+    "已选「否 / 不确定」— 不保存类型、签发日与到期日。可随时改回「是」。",
   "visa.edit.hasVisaYes": "是",
   "visa.edit.hasVisaNoOrUnsure": "否 / 不确定",
+  "visa.edit.error.issueDateRequired": "请输入签证签发日。",
+  "visa.edit.error.expiryDateRequired": "请输入签证到期日。",
+  "visa.edit.error.issueAfterExpiry": "签发日必须早于或等于到期日。",
   "visa.profileSummary.title": "已保存的签证信息",
   "visa.profileSummary.description":
     "签证类型、到期日、入门中的 TOPIK/KIIP/学历，以及在此记录的志愿时长会参与 Discover 签证 Horizon 预览（仅为演示，不是官方评分）。",
   "visa.profileSummary.volunteerLine": "已记录 {hours} 小时志愿",
   "visa.profileSummary.visaNotDeclared": "未填写",
+  "visa.profileSummary.targetLabel": "目标签证",
+  "visa.profileSummary.issueLabel": "签证签发日",
+  "visa.noVisa.eyebrow": "尚未保存签证",
+  "visa.noVisa.title": "保存签证后即可解锁 Horizon 视图。",
+  "visa.noVisa.description":
+    "续签清单与 F-2-7 / F-5 演示性 Horizon 默认您已持有韩国签证。保存当前签证后，将会显示对应的下一步目标。",
+  "visa.noVisa.editCta": "修改签证信息",
+  "visa.noVisa.discoverCta": "查找签证与居留相关项目",
   "visa.horizonTrack": "Horizon 轨道",
   "visa.fromTo": "{current} 到 {target}",
   "visa.horizonDescription":
     "根据已保存的学业与志愿字段生成的演示性卡片与策略，仅供参考。",
+  "visa.horizonGoalOnly": "目标：{target}",
+  "visa.horizonAtCeiling": "已是 {current} — 演示中的最高档",
+  "visa.horizonAtCeilingDescription":
+    "本规划器不再建模更高档位。请保持材料最新，并以官方渠道为准核实任何新政。",
   "visa.horizonDisclaimer":
     "并非 HiKorea 或使领馆评分。最终资格以法规、材料与移民官审查为准。",
   "visa.daysUntilCheckpoint": "距续签节点还有 {days} 天",
@@ -1993,8 +2055,12 @@ const zh = {
   "onboarding.field.family": "家庭情况",
   "onboarding.field.hasVisa": "您目前是否持有签证？",
   "onboarding.field.multicultural": "是否为多文化家庭？",
+  "onboarding.field.visaIssue": "签证签发日",
+  "onboarding.field.visaIssueNote":
+    "韩国出入境签发当前签证的日期。无签证可留空。",
   "onboarding.field.visaExpiry": "签证到期日",
   "onboarding.field.visaExpiryNote": "若没有签证或不确定，可以留空。",
+  "onboarding.field.targetVisaSubtype": "目标签证（下一步）",
   "onboarding.field.degreeLevel": "学历",
   "onboarding.field.topikLevel": "TOPIK 等级",
   "onboarding.field.kiipStage": "KIIP 阶段",

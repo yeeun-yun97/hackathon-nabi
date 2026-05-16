@@ -32,12 +32,30 @@ export function VisaProfileSummaryCard({ profile }: VisaProfileSummaryCardProps)
         </div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-[#52615b]">
+            {t("visa.profileSummary.issueLabel")}
+          </dt>
+          <dd className="mt-1 text-base font-semibold text-[#17211f]">
+            {visaDeclared
+              ? profile.visaIssueDate || t("common.notProvided")
+              : t("visa.profileSummary.visaNotDeclared")}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-[#52615b]">
             {t("onboarding.field.visaExpiry")}
           </dt>
           <dd className="mt-1 text-base font-semibold text-[#17211f]">
             {visaDeclared
               ? profile.visaExpiryDate || t("common.notProvided")
               : t("visa.profileSummary.visaNotDeclared")}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-[#52615b]">
+            {t("visa.profileSummary.targetLabel")}
+          </dt>
+          <dd className="mt-1 text-base font-semibold text-[#17211f]">
+            {tOption("visaSubtype", profile.targetVisaSubtype)}
           </dd>
         </div>
         <div>

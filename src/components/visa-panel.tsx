@@ -26,6 +26,8 @@ export function VisaPanel() {
   const currentVisaLabel = tOption("visaSubtype", profile.currentVisaSubtype);
   const targetVisaLabel = tOption("visaSubtype", horizon.targetVisa);
   const pointsGap = Math.max(0, horizon.targetPoints - horizon.currentPoints);
+  const hasVisa = profile.hasVisa === "yes";
+  const horizonAtCeiling = hasVisa && horizon.currentVisa === horizon.targetVisa;
 
   return (
     <div>
@@ -51,7 +53,35 @@ export function VisaPanel() {
 
       <div className="grid gap-6">
         <VisaProfileSummaryCard profile={profile} />
-        <RenewVisaChecklistCard currentVisaLabel={currentVisaLabel} profile={profile} />
+        {profile.hasVisa === "yes" ? (
+          <RenewVisaChecklistCard currentVisaLabel={currentVisaLabel} profile={profile} />
+        ) : (
+          <section className="rounded-3xl border border-[#13C3A8]/30 bg-[#13C3A8]/[0.06] p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0E9D86]">
+              {t("visa.noVisa.eyebrow")}
+            </p>
+            <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em]">
+              {t("visa.noVisa.title")}
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#52615b]">
+              {t("visa.noVisa.description")}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                className="rounded-full bg-[#13C3A8] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0fa08a]"
+                href="/visa/edit"
+              >
+                {t("visa.noVisa.editCta")}
+              </Link>
+              <Link
+                className="rounded-full border border-black/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#17211f] transition hover:border-[#13C3A8]/40 hover:text-[#0E9D86]"
+                href="/discover"
+              >
+                {t("visa.noVisa.discoverCta")}
+              </Link>
+            </div>
+          </section>
+        )}
 
         <section className="rounded-3xl border border-black/[0.06] bg-white p-6 md:p-8">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -60,10 +90,16 @@ export function VisaPanel() {
                 {t("visa.horizonTrack")}
               </p>
               <h2 className="mt-3 text-3xl font-bold tracking-[-0.03em]">
-                {t("visa.fromTo", { current: currentVisaLabel, target: targetVisaLabel })}
+                {horizonAtCeiling
+                  ? t("visa.horizonAtCeiling", { current: currentVisaLabel })
+                  : hasVisa
+                    ? t("visa.fromTo", { current: currentVisaLabel, target: targetVisaLabel })
+                    : t("visa.horizonGoalOnly", { target: targetVisaLabel })}
               </h2>
               <p className="mt-3 max-w-2xl leading-7 text-[#52615b]">
-                {t("visa.horizonDescription")}
+                {horizonAtCeiling
+                  ? t("visa.horizonAtCeilingDescription")
+                  : t("visa.horizonDescription")}
               </p>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-[#52615b]">
                 {t("visa.horizonDisclaimer")}
