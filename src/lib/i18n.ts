@@ -164,25 +164,44 @@ const en = {
   "visa.quickEdit.eyebrow": "Your profile",
   "visa.quickEdit.title": "Visa type & expiry",
   "visa.quickEdit.description":
-    "Same fields as onboarding. Your visa type feeds the dashboard copy; the expiry date drives home alerts and the renewal day count.",
+    "Same fields as onboarding, plus self‑reported volunteer hours for the illustrative horizon. Visa type feeds dashboard copy; expiry drives home alerts and the renewal day count.",
   "visa.quickEdit.save": "Save",
   "visa.quickEdit.saved": "Saved. Reload the home page or notification mock to see updated copy.",
   "visa.quickEdit.fullProfile": "Open full onboarding for city, TOPIK, and district →",
   "visa.edit.back": "Back to Discover (Visa tab)",
   "visa.edit.open": "Update visa details",
+  "visa.edit.pageHeading": "Visa profile",
+  "visa.edit.pageIntro":
+    "Update whether you hold a visa, then education and volunteer fields used for the Discover horizon preview.",
+  "visa.edit.section.visaTitle": "Visa",
+  "visa.edit.section.visaDescription":
+    "Choose Yes only if you want to store visa type and expiry. Otherwise pick No / Not sure — those details stay empty.",
+  "visa.edit.section.extraTitle": "Additional details",
+  "visa.edit.section.extraDescription":
+    "TOPIK, KIIP, highest degree, and volunteer hours (same fields as onboarding).",
+  "visa.edit.noVisaState":
+    "You chose No / Not sure — visa type and expiry are not saved (you can switch to Yes anytime).",
+  "visa.edit.hasVisaYes": "Yes",
+  "visa.edit.hasVisaNoOrUnsure": "No / Not sure",
   "visa.profileSummary.title": "Saved visa details",
   "visa.profileSummary.description":
-    "Review what nabi uses for renewal countdowns and visa dashboard copy. Edit on the next screen.",
+    "Visa type, expiry, TOPIK/KIIP/degree from onboarding, and volunteer hours you log here feed the Discover visa horizon preview (illustrative only; not an official score).",
+  "visa.profileSummary.volunteerLine": "{hours} hours logged",
+  "visa.profileSummary.visaNotDeclared": "Not on file",
   "visa.horizonTrack": "Horizon track",
   "visa.fromTo": "{current} to {target}",
   "visa.horizonDescription":
-    "Your mock F-2-7 score is close. These options show practical ways to close the remaining point gap.",
+    "Illustrative tiles and strategies use your saved education fields plus logged volunteer hours. They are a planning aid only.",
+  "visa.horizonDisclaimer":
+    "Not a HiKorea or embassy score. Official eligibility depends on the law, your documents, and immigration officer review.",
   "visa.daysUntilCheckpoint": "{days} days until renewal checkpoint",
   "visa.estimatedUnlock": "Estimated unlock",
   "visa.daysShort": "{days} days",
   "visa.ofPoints": "of {target} pts",
   "visa.bridgeHeadline":
-    "Horizon view: you need {points} more points in the next {days} days—if you earn them, you can unlock full F-2-7 eligibility on your current academic track.",
+    "Horizon view: you need {points} more illustrative points before the next {days}-day checkpoint in this demo planner.",
+  "visa.bridgeHeadline.complete":
+    "You have reached or exceeded the illustrative 80-point demo bar—still verify every requirement with official sources before you file anything.",
   "visa.renewal.eyebrow": "Renewal track",
   "visa.renewal.title": "Keep your {current} status ready before the deadline.",
   "visa.renewal.description":
@@ -402,6 +421,9 @@ const en = {
   "onboarding.field.degreeLevel": "Degree level",
   "onboarding.field.topikLevel": "TOPIK level",
   "onboarding.field.kiipStage": "KIIP stage",
+  "onboarding.field.volunteerHoursLogged": "Verified volunteer hours (self-reported)",
+  "onboarding.field.volunteerHoursLoggedNote":
+    "Example: cumulative hours from the 1365 portal. Used only for the illustrative visa horizon on Discover (0–500).",
   "onboarding.field.currentVisaSubtype": "Current visa type",
   "onboarding.field.district": "Seoul district",
   "onboarding.submit": "Save and find recommendations",
@@ -957,25 +979,44 @@ const ko = {
   "visa.quickEdit.eyebrow": "내 프로필",
   "visa.quickEdit.title": "비자 종류·만료일",
   "visa.quickEdit.description":
-    "온보딩과 같은 항목입니다. 비자 종류는 대시보드 문구에, 만료일은 홈 알림·갱신 카드의 남은 일수에 반영됩니다.",
+    "온보딩과 같은 항목에 더해, 참고용 호라이즌에 쓰는 봉사 시간을 적을 수 있어요. 비자 종류는 대시보드 문구에, 만료일은 홈 알림·갱신 카드의 남은 일수에 반영됩니다.",
   "visa.quickEdit.save": "저장",
   "visa.quickEdit.saved": "저장했어요. 홈이나 잠금화면 미리보기를 새로 열면 문구가 갱신됩니다.",
   "visa.quickEdit.fullProfile": "도시·TOPIK·구 등 전체 설정은 온보딩으로 →",
   "visa.edit.back": "디스커버 비자 탭으로",
   "visa.edit.open": "비자 정보 수정",
+  "visa.edit.pageHeading": "비자 프로필",
+  "visa.edit.pageIntro":
+    "비자 보유 여부·만료일과 디스커버 호라이즌에 쓰이는 학력·봉사 정보를 함께 저장합니다.",
+  "visa.edit.section.visaTitle": "비자",
+  "visa.edit.section.visaDescription":
+    "「예」일 때만 비자 종류·만료일을 저장합니다. 「아니오·잘 모르겠어요」면 해당 칸은 비워 둡니다.",
+  "visa.edit.section.extraTitle": "비자 추가 정보",
+  "visa.edit.section.extraDescription":
+    "TOPIK, KIIP, 최종 학위, 봉사 시간(온보딩과 같은 항목)입니다.",
+  "visa.edit.noVisaState":
+    "아니오·잘 모르겠어요 선택 시 종류·만료일은 저장되지 않습니다. 언제든 「예」로 바꿀 수 있어요.",
+  "visa.edit.hasVisaYes": "예",
+  "visa.edit.hasVisaNoOrUnsure": "아니오 · 잘 모르겠어요",
   "visa.profileSummary.title": "저장된 비자 정보",
   "visa.profileSummary.description":
-    "갱신 카운트다운·비자 대시보드 문구에 쓰이는 값이에요. 다음 화면에서 바꿀 수 있어요.",
+    "비자 종류·만료일, 온보딩의 TOPIK·KIIP·학력, 그리고 여기서 적는 봉사 시간이 디스커버 비자 호라이즌 미리보기에 반영돼요(참고용이며 출입국 공식 점수가 아닙니다).",
+  "visa.profileSummary.volunteerLine": "봉사 {hours}시간 기록",
+  "visa.profileSummary.visaNotDeclared": "미기재",
   "visa.horizonTrack": "호라이즌 트랙",
   "visa.fromTo": "{current} → {target}",
   "visa.horizonDescription":
-    "F-2-7 모의 점수가 거의 다 왔어요. 남은 점수를 채울 실질적인 방법들을 모았습니다.",
+    "저장된 교육·봉사 필드를 바탕으로 한 참고용 타일과 전략입니다. 실제 심사와는 별개예요.",
+  "visa.horizonDisclaimer":
+    "하이코리아·대사관 점수가 아닙니다. 최종 자격은 법령, 서류, 심사관 판단에 따릅니다.",
   "visa.daysUntilCheckpoint": "갱신 체크포인트까지 {days}일",
   "visa.estimatedUnlock": "예상 달성 시점",
   "visa.daysShort": "{days}일",
   "visa.ofPoints": "/ {target}점",
   "visa.bridgeHeadline":
-    "호라이즌: 지금 학업 트랙으로는 앞으로 {days}일 안에 {points}점만 더 모으면 F-2-7 전체 요건에 도달할 수 있어요.",
+    "호라이즌(참고): 이 데모 플래너에서 다음 {days}일 체크포인트까지 아직 {points}점이 더 필요해 보여요.",
+  "visa.bridgeHeadline.complete":
+    "참고용 80점 데모 바는 이미 넘겼거나 같아요. 실제 제출 전에는 반드시 공식 안내·상담으로 다시 확인하세요.",
 
   // 갱신 체크리스트
   "visa.renewal.eyebrow": "갱신 트랙",
@@ -1190,6 +1231,9 @@ const ko = {
   "onboarding.field.degreeLevel": "학위 수준",
   "onboarding.field.topikLevel": "TOPIK 급수",
   "onboarding.field.kiipStage": "KIIP 단계",
+  "onboarding.field.volunteerHoursLogged": "봉사시간(직접 기록)",
+  "onboarding.field.volunteerHoursLoggedNote":
+    "예: 1365 포털 기준 인증 봉사 누적 시간. 디스커버 비자 호라이즌 참고용(0~500시간).",
   "onboarding.field.currentVisaSubtype": "현재 비자 종류",
   "onboarding.field.district": "서울 자치구",
   "onboarding.submit": "저장하고 추천 받기",
@@ -1713,25 +1757,44 @@ const zh = {
   "visa.quickEdit.eyebrow": "个人档案",
   "visa.quickEdit.title": "签证类型与到期日",
   "visa.quickEdit.description":
-    "与入门设置中的字段相同。签证类型用于仪表盘文案，到期日用于首页提醒与续签卡片的剩余天数。",
+    "与入门设置一致，并可填写用于演示性 Horizon 的志愿时长。签证类型用于仪表盘文案，到期日用于首页提醒与续签卡片剩余天数。",
   "visa.quickEdit.save": "保存",
   "visa.quickEdit.saved": "已保存。重新打开首页或锁屏预览即可看到更新后的文案。",
   "visa.quickEdit.fullProfile": "前往完整入门设置（城市、TOPIK、区等）→",
   "visa.edit.back": "返回 Discover（签证标签）",
   "visa.edit.open": "修改签证信息",
+  "visa.edit.pageHeading": "签证档案",
+  "visa.edit.pageIntro":
+    "保存是否持签与到期日，以及用于 Discover Horizon 预览的学历与志愿相关信息。",
+  "visa.edit.section.visaTitle": "签证",
+  "visa.edit.section.visaDescription":
+    "仅在选「是」时保存签证类型与到期日；选「否 / 不确定」则不保存这两项。",
+  "visa.edit.section.extraTitle": "签证补充信息",
+  "visa.edit.section.extraDescription":
+    "TOPIK、KIIP、最高学历与志愿时长（与入门设置相同字段）。",
+  "visa.edit.noVisaState":
+    "已选「否 / 不确定」— 不保存类型与到期日。可随时改回「是」。",
+  "visa.edit.hasVisaYes": "是",
+  "visa.edit.hasVisaNoOrUnsure": "否 / 不确定",
   "visa.profileSummary.title": "已保存的签证信息",
   "visa.profileSummary.description":
-    "这些信息用于续签倒计时与签证仪表盘文案。可在下一页编辑。",
+    "签证类型、到期日、入门中的 TOPIK/KIIP/学历，以及在此记录的志愿时长会参与 Discover 签证 Horizon 预览（仅为演示，不是官方评分）。",
+  "visa.profileSummary.volunteerLine": "已记录 {hours} 小时志愿",
+  "visa.profileSummary.visaNotDeclared": "未填写",
   "visa.horizonTrack": "Horizon 轨道",
   "visa.fromTo": "{current} 到 {target}",
   "visa.horizonDescription":
-    "您的 F-2-7 模拟分数已经接近。这些方案帮助您补足剩余分数。",
+    "根据已保存的学业与志愿字段生成的演示性卡片与策略，仅供参考。",
+  "visa.horizonDisclaimer":
+    "并非 HiKorea 或使领馆评分。最终资格以法规、材料与移民官审查为准。",
   "visa.daysUntilCheckpoint": "距续签节点还有 {days} 天",
   "visa.estimatedUnlock": "预计达成时间",
   "visa.daysShort": "{days} 天",
   "visa.ofPoints": "/ {target} 分",
   "visa.bridgeHeadline":
-    "Horizon：按您当前的学业路径，若在未来 {days} 天内再获得 {points} 分，就有望达到 F-2-7 的完整资格线。",
+    "Horizon（演示）：在本规划器中，距下一 {days} 天检查点仍需约 {points} 个示例积分。",
+  "visa.bridgeHeadline.complete":
+    "已达到或超过演示性 80 分参考线。正式递件前仍须以官方渠道逐项核实。",
 
   // 续签清单
   "visa.renewal.eyebrow": "续签轨道",
@@ -1935,6 +1998,9 @@ const zh = {
   "onboarding.field.degreeLevel": "学历",
   "onboarding.field.topikLevel": "TOPIK 等级",
   "onboarding.field.kiipStage": "KIIP 阶段",
+  "onboarding.field.volunteerHoursLogged": "志愿时长（自行填写）",
+  "onboarding.field.volunteerHoursLoggedNote":
+    "例如 1365 平台的认证时长累计。仅用于 Discover 签证 Horizon 演示（0–500）。",
   "onboarding.field.currentVisaSubtype": "当前签证类型",
   "onboarding.field.district": "首尔区",
   "onboarding.submit": "保存并查看推荐",

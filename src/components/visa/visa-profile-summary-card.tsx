@@ -11,6 +11,7 @@ type VisaProfileSummaryCardProps = {
 
 export function VisaProfileSummaryCard({ profile }: VisaProfileSummaryCardProps) {
   const { t, tOption } = useLanguage();
+  const visaDeclared = profile.hasVisa === "yes";
 
   return (
     <section className="rounded-3xl border border-black/[0.06] bg-white p-6 md:p-8">
@@ -26,7 +27,7 @@ export function VisaProfileSummaryCard({ profile }: VisaProfileSummaryCardProps)
             {t("onboarding.field.currentVisaSubtype")}
           </dt>
           <dd className="mt-1 text-base font-semibold text-[#17211f]">
-            {tOption("visaSubtype", profile.currentVisaSubtype)}
+            {visaDeclared ? tOption("visaSubtype", profile.currentVisaSubtype) : t("visa.profileSummary.visaNotDeclared")}
           </dd>
         </div>
         <div>
@@ -34,7 +35,41 @@ export function VisaProfileSummaryCard({ profile }: VisaProfileSummaryCardProps)
             {t("onboarding.field.visaExpiry")}
           </dt>
           <dd className="mt-1 text-base font-semibold text-[#17211f]">
-            {profile.visaExpiryDate || t("common.notProvided")}
+            {visaDeclared
+              ? profile.visaExpiryDate || t("common.notProvided")
+              : t("visa.profileSummary.visaNotDeclared")}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-[#52615b]">
+            {t("onboarding.field.topikLevel")}
+          </dt>
+          <dd className="mt-1 text-base font-semibold text-[#17211f]">
+            {tOption("topik", profile.topikLevel)}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-[#52615b]">
+            {t("onboarding.field.kiipStage")}
+          </dt>
+          <dd className="mt-1 text-base font-semibold text-[#17211f]">
+            {tOption("kiip", profile.kiipStage)}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-[#52615b]">
+            {t("onboarding.field.degreeLevel")}
+          </dt>
+          <dd className="mt-1 text-base font-semibold text-[#17211f]">
+            {tOption("degree", profile.degreeLevel)}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-[#52615b]">
+            {t("onboarding.field.volunteerHoursLogged")}
+          </dt>
+          <dd className="mt-1 text-base font-semibold text-[#17211f]">
+            {t("visa.profileSummary.volunteerLine", { hours: profile.volunteerHoursLogged ?? 0 })}
           </dd>
         </div>
       </dl>

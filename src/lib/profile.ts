@@ -22,6 +22,7 @@ export const defaultProfile: UserProfile = {
   currentVisaSubtype: "D-2",
   district: "마포구",
   savedFacilities: [],
+  volunteerHoursLogged: 0,
 };
 
 /** Full calendar days from today until the visa expiry date (0 if missing or invalid). */

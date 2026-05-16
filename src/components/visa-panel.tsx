@@ -8,7 +8,8 @@ import { HorizonProgressArc } from "@/components/visa/HorizonProgressArc";
 import { RenewVisaChecklistCard } from "@/components/visa/RenewVisaChecklistCard";
 import { StrategyOptions } from "@/components/visa/StrategyOptions";
 import { VisaProfileSummaryCard } from "@/components/visa/visa-profile-summary-card";
-import { mockF27Track, type UserProfile } from "@/lib/data";
+import type { UserProfile } from "@/lib/data";
+import { buildVisaHorizonFromProfile } from "@/lib/visa-horizon-from-profile";
 import { defaultProfile, readStoredProfile } from "@/lib/profile";
 
 export function VisaPanel() {
@@ -21,8 +22,10 @@ export function VisaPanel() {
     });
   }, []);
 
+  const horizon = buildVisaHorizonFromProfile(profile);
   const currentVisaLabel = tOption("visaSubtype", profile.currentVisaSubtype);
-  const targetVisaLabel = tOption("visaSubtype", mockF27Track.targetVisa);
+  const targetVisaLabel = tOption("visaSubtype", horizon.targetVisa);
+  const pointsGap = Math.max(0, horizon.targetPoints - horizon.currentPoints);
 
   return (
     <div>
@@ -62,21 +65,24 @@ export function VisaPanel() {
               <p className="mt-3 max-w-2xl leading-7 text-[#52615b]">
                 {t("visa.horizonDescription")}
               </p>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[#52615b]">
+                {t("visa.horizonDisclaimer")}
+              </p>
             </div>
             <div className="rounded-full border border-[#13C3A8]/30 bg-[#13C3A8]/10 px-4 py-2 text-sm font-semibold text-[#0E9D86]">
-              {t("visa.daysUntilCheckpoint", { days: mockF27Track.expiresInDays })}
+              {t("visa.daysUntilCheckpoint", { days: horizon.expiresInDays })}
             </div>
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-[320px_1fr]">
             <HorizonProgressArc
-              currentPoints={mockF27Track.currentPoints}
-              targetPoints={mockF27Track.targetPoints}
-              unlockEtaDays={mockF27Track.unlockEtaDays}
+              currentPoints={horizon.currentPoints}
+              targetPoints={horizon.targetPoints}
+              unlockEtaDays={horizon.unlockEtaDays}
             />
             <div>
-              <div className="mb-4 grid gap-3 sm:grid-cols-3">
-                {mockF27Track.earned.map((item) => (
+              <div className="mb-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {horizon.earned.map((item) => (
                   <div
                     className="rounded-2xl border border-black/[0.06] bg-[#f6f7fb] p-4"
                     key={item.id}
@@ -90,13 +96,19 @@ export function VisaPanel() {
                   </div>
                 ))}
               </div>
-              <p className="mb-4 text-base font-bold leading-7 text-[#17211f]">
-                {t("visa.bridgeHeadline", {
-                  points: mockF27Track.targetPoints - mockF27Track.currentPoints,
-                  days: mockF27Track.unlockEtaDays,
-                })}
-              </p>
-              <StrategyOptions locale={locale} strategies={mockF27Track.strategies} />
+              {pointsGap > 0 ? (
+                <p className="mb-4 text-base font-bold leading-7 text-[#17211f]">
+                  {t("visa.bridgeHeadline", {
+                    points: pointsGap,
+                    days: horizon.unlockEtaDays,
+                  })}
+                </p>
+              ) : (
+                <p className="mb-4 text-base font-bold leading-7 text-[#17211f]">
+                  {t("visa.bridgeHeadline.complete")}
+                </p>
+              )}
+              <StrategyOptions locale={locale} strategies={horizon.strategies} />
             </div>
           </div>
         </section>

@@ -4,13 +4,67 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
-import type { UserProfile, VisaSubtype } from "@/lib/data";
+import type {
+  DegreeLevel,
+  KiipStage,
+  TopikLevel,
+  UserProfile,
+  VisaSubtype,
+  YesNoUnsure,
+} from "@/lib/data";
 import { readStoredProfile, writeStoredProfile } from "@/lib/profile";
 
 const visaSubtypes: VisaSubtype[] = ["D-2", "D-10", "E-7", "F-2-7", "F-5", "other", "unsure"];
+const degreeLevels: DegreeLevel[] = ["none", "high-school", "bachelor", "master", "phd"];
+const topikLevels: TopikLevel[] = ["none", "1", "2", "3", "4", "5", "6"];
+const kiipStages: KiipStage[] = ["none", "0", "1", "2", "3", "4", "5"];
+
+/** Two-button UI: "yes" vs merged "no / not sure" — stored as yes / unsure (see handleSave). */
+type VisaPossessionAnswer = "yes" | "notYes";
+
+function possessionFromStored(hasVisa: YesNoUnsure): VisaPossessionAnswer {
+  return hasVisa === "yes" ? "yes" : "notYes";
+}
+
+function storedFromPossession(answer: VisaPossessionAnswer): YesNoUnsure {
+  return answer === "yes" ? "yes" : "unsure";
+}
 
 const inputClass =
   "rounded-2xl border border-black/[0.06] bg-[#f6f7fb] px-4 py-3 font-medium outline-none transition focus:border-[#13C3A8] focus:ring-2 focus:ring-[#13C3A8]/20";
+
+const sectionDividerClass = "border-t border-black/[0.08] pt-8";
+
+type SelectFieldProps<TValue extends string> = {
+  label: string;
+  value: TValue;
+  options: Array<{ id: TValue; label: string }>;
+  onChange: (value: TValue) => void;
+};
+
+function SelectField<TValue extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: SelectFieldProps<TValue>) {
+  return (
+    <label className="grid gap-2 text-sm font-semibold text-[#17211f]">
+      {label}
+      <select
+        className={inputClass}
+        onChange={(event) => onChange(event.target.value as TValue)}
+        value={value}
+      >
+        {options.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
 
 type VisaExpiryQuickEditProps = {
   profile: UserProfile;
@@ -19,23 +73,56 @@ type VisaExpiryQuickEditProps = {
 
 export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditProps) {
   const { t, tOption } = useLanguage();
+  const [possession, setPossession] = useState<VisaPossessionAnswer>(() =>
+    possessionFromStored(profile.hasVisa),
+  );
   const [value, setValue] = useState(profile.visaExpiryDate);
   const [visaSubtype, setVisaSubtype] = useState(profile.currentVisaSubtype);
+  const [degreeLevel, setDegreeLevel] = useState(profile.degreeLevel);
+  const [topikLevel, setTopikLevel] = useState(profile.topikLevel);
+  const [kiipStage, setKiipStage] = useState(profile.kiipStage);
+  const [volunteerHours, setVolunteerHours] = useState(() =>
+    String(profile.volunteerHoursLogged ?? 0),
+  );
   const [justSaved, setJustSaved] = useState(false);
 
   useEffect(() => {
     queueMicrotask(() => {
+      setPossession(possessionFromStored(profile.hasVisa));
       setValue(profile.visaExpiryDate);
       setVisaSubtype(profile.currentVisaSubtype);
+      setDegreeLevel(profile.degreeLevel);
+      setTopikLevel(profile.topikLevel);
+      setKiipStage(profile.kiipStage);
+      setVolunteerHours(String(profile.volunteerHoursLogged ?? 0));
     });
-  }, [profile.visaExpiryDate, profile.currentVisaSubtype]);
+  }, [
+    profile.hasVisa,
+    profile.visaExpiryDate,
+    profile.currentVisaSubtype,
+    profile.degreeLevel,
+    profile.topikLevel,
+    profile.kiipStage,
+    profile.volunteerHoursLogged,
+  ]);
 
   function handleSave() {
+    const parsed = Number.parseInt(volunteerHours, 10);
+    const volunteerHoursLogged = Number.isFinite(parsed)
+      ? Math.min(500, Math.max(0, parsed))
+      : 0;
     const existing = readStoredProfile();
+    const hasVisaStored = storedFromPossession(possession);
+    const visaHold = possession === "yes";
     const next: UserProfile = {
       ...existing,
-      visaExpiryDate: value,
-      currentVisaSubtype: visaSubtype,
+      hasVisa: hasVisaStored,
+      visaExpiryDate: visaHold ? value : "",
+      currentVisaSubtype: visaHold ? visaSubtype : "unsure",
+      degreeLevel,
+      topikLevel,
+      kiipStage,
+      volunteerHoursLogged,
     };
     writeStoredProfile(next);
     onSaved(next);
@@ -50,45 +137,134 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#13C3A8]">
         {t("visa.quickEdit.eyebrow")}
       </p>
-      <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em]">{t("visa.quickEdit.title")}</h2>
-      <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("visa.quickEdit.description")}</p>
-      <div className="mt-5 flex flex-col gap-4">
-        <label className="grid gap-2 text-sm font-semibold text-[#17211f]">
-          {t("onboarding.field.currentVisaSubtype")}
-          <select
-            className={inputClass}
-            onChange={(event) => setVisaSubtype(event.target.value as VisaSubtype)}
-            value={visaSubtype}
-          >
-            {visaSubtypes.map((id) => (
-              <option key={id} value={id}>
-                {tOption("visaSubtype", id)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-          <label className="grid flex-1 gap-2 text-sm font-semibold text-[#17211f]">
-            {t("onboarding.field.visaExpiry")}
-            <input
-              className={inputClass}
-              onChange={(event) => setValue(event.target.value)}
-              type="date"
-              value={value}
+      <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em]">{t("visa.edit.pageHeading")}</h2>
+      <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("visa.edit.pageIntro")}</p>
+
+      <div className="mt-8 space-y-8">
+        <div>
+          <h3 className="text-lg font-bold tracking-[-0.02em] text-[#17211f]">
+            {t("visa.edit.section.visaTitle")}
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("visa.edit.section.visaDescription")}</p>
+
+          <div className="mt-4">
+            <p className="text-sm font-semibold text-[#17211f]">{t("onboarding.field.hasVisa")}</p>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <button
+                className={`rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
+                  possession === "yes"
+                    ? "bg-[#13C3A8] text-white"
+                    : "border border-black/[0.06] bg-[#f6f7fb] text-[#17211f] hover:border-[#13C3A8]/40"
+                }`}
+                onClick={() => setPossession("yes")}
+                type="button"
+              >
+                {t("visa.edit.hasVisaYes")}
+              </button>
+              <button
+                className={`rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
+                  possession === "notYes"
+                    ? "bg-[#13C3A8] text-white"
+                    : "border border-black/[0.06] bg-[#f6f7fb] text-[#17211f] hover:border-[#13C3A8]/40"
+                }`}
+                onClick={() => setPossession("notYes")}
+                type="button"
+              >
+                {t("visa.edit.hasVisaNoOrUnsure")}
+              </button>
+            </div>
+          </div>
+
+          {possession === "notYes" ? (
+            <p className="mt-5 rounded-2xl border border-black/[0.06] bg-[#f6f7fb] px-4 py-3 text-sm font-medium text-[#52615b]">
+              {t("visa.edit.noVisaState")}
+            </p>
+          ) : (
+            <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end">
+              <label className="grid flex-1 gap-2 text-sm font-semibold text-[#17211f]">
+                {t("onboarding.field.currentVisaSubtype")}
+                <select
+                  className={inputClass}
+                  onChange={(event) => setVisaSubtype(event.target.value as VisaSubtype)}
+                  value={visaSubtype}
+                >
+                  {visaSubtypes.map((id) => (
+                    <option key={id} value={id}>
+                      {tOption("visaSubtype", id)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="grid flex-1 gap-2 text-sm font-semibold text-[#17211f]">
+                {t("onboarding.field.visaExpiry")}
+                <input
+                  className={inputClass}
+                  onChange={(event) => setValue(event.target.value)}
+                  type="date"
+                  value={value}
+                />
+                <span className="text-xs font-normal leading-5 text-[#52615b]">
+                  {t("onboarding.field.visaExpiryNote")}
+                </span>
+              </label>
+            </div>
+          )}
+        </div>
+
+        <div className={sectionDividerClass}>
+          <h3 className="text-lg font-bold tracking-[-0.02em] text-[#17211f]">
+            {t("visa.edit.section.extraTitle")}
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("visa.edit.section.extraDescription")}</p>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <SelectField
+              label={t("onboarding.field.degreeLevel")}
+              onChange={setDegreeLevel}
+              options={degreeLevels.map((id) => ({ id, label: tOption("degree", id) }))}
+              value={degreeLevel}
             />
-            <span className="text-xs font-normal leading-5 text-[#52615b]">
-              {t("onboarding.field.visaExpiryNote")}
-            </span>
-          </label>
-          <button
-            className="rounded-full bg-[#13C3A8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0fa08a]"
-            onClick={handleSave}
-            type="button"
-          >
-            {t("visa.quickEdit.save")}
-          </button>
+            <SelectField
+              label={t("onboarding.field.topikLevel")}
+              onChange={setTopikLevel}
+              options={topikLevels.map((id) => ({ id, label: tOption("topik", id) }))}
+              value={topikLevel}
+            />
+            <SelectField
+              label={t("onboarding.field.kiipStage")}
+              onChange={setKiipStage}
+              options={kiipStages.map((id) => ({ id, label: tOption("kiip", id) }))}
+              value={kiipStage}
+            />
+            <label className="grid gap-2 text-sm font-semibold text-[#17211f] md:col-span-2">
+              {t("onboarding.field.volunteerHoursLogged")}
+              <input
+                className={inputClass}
+                inputMode="numeric"
+                max={500}
+                min={0}
+                onChange={(event) => setVolunteerHours(event.target.value)}
+                type="number"
+                value={volunteerHours}
+              />
+              <span className="text-xs font-normal leading-5 text-[#52615b]">
+                {t("onboarding.field.volunteerHoursLoggedNote")}
+              </span>
+            </label>
+          </div>
         </div>
       </div>
+
+      <div className={`mt-8 ${sectionDividerClass}`}>
+        <button
+          className="rounded-full bg-[#13C3A8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0fa08a]"
+          onClick={handleSave}
+          type="button"
+        >
+          {t("visa.quickEdit.save")}
+        </button>
+      </div>
+
       {justSaved ? (
         <p className="mt-4 text-sm font-semibold text-[#0E9D86]" role="status">
           {t("visa.quickEdit.saved")}

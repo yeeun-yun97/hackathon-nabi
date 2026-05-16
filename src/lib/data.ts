@@ -101,6 +101,10 @@ export type UserProfile = {
   district: SeoulDistrict | "";
   /** Health & Recreation facility slugs saved to the local profile. */
   savedFacilities: string[];
+  /**
+   * Self-reported verified volunteer hours (e.g. 1365 portal). Used only for the illustrative visa horizon on Discover.
+   */
+  volunteerHoursLogged: number;
 };
 
 export type SupportProgram = {
@@ -212,113 +216,6 @@ export const districtCoordinates: Record<SeoulDistrict, { lat: number; lng: numb
   종로구: { lat: 37.5735, lng: 126.979 },
   용산구: { lat: 37.5326, lng: 126.9905 },
   기타: { lat: 37.5665, lng: 126.978 },
-};
-
-export const mockF27Track: VisaTrack = {
-  currentVisa: "D-2",
-  targetVisa: "F-2-7",
-  currentPoints: 69,
-  targetPoints: 80,
-  unlockEtaDays: 365,
-  expiresInDays: 180,
-  earned: [
-    {
-      id: "topik-4",
-      label: lt("TOPIK Level 4", "TOPIK 4급", "TOPIK 4级"),
-      points: 20,
-      status: "earned",
-      action: lt(
-        "Language score already reflected in your current total.",
-        "현재 점수에 이미 언어 점수가 반영되어 있습니다.",
-        "语言分数已计入当前总分。",
-      ),
-    },
-    {
-      id: "kiip-5",
-      label: lt("KIIP Stage 5 completion", "사회통합프로그램 5단계 이수", "社会统合项目第5阶段完成"),
-      points: 10,
-      status: "earned",
-      action: lt(
-        "Keep your KIIP certificate ready for application review.",
-        "신청 심사를 위해 KIIP 이수증을 준비해 두세요.",
-        "请准备好 KIIP 完成证明以备审查。",
-      ),
-    },
-    {
-      id: "masters-track",
-      label: lt("Domestic master's track", "국내 석사 과정", "韩国硕士课程"),
-      points: 39,
-      status: "earned",
-      action: lt(
-        "Your active graduate program anchors the current excellence-talent score.",
-        "재학 중인 대학원 과정이 현재 우수인재 점수의 기반입니다.",
-        "您在读的研究生课程是当前优秀人才评分的基础。",
-      ),
-    },
-  ],
-  strategies: [
-    {
-      id: "topik-upgrade",
-      label: lt(
-        "Option A: TOPIK ladder upgrade",
-        "옵션 A: TOPIK 단계 상향",
-        "选项 A：TOPIK 等级提升",
-      ),
-      points: 15,
-      status: "available",
-      action: lt(
-        "Move from TOPIK Level 4 to Level 5 or 6 so language points reflect the higher band (KIIP Stage 5 is already on file).",
-        "KIIP 5단계는 이미 반영되어 있으니 TOPIK 4급에서 5·6급으로 올려 언어 구간 점수를 끌어올리세요.",
-        "KIIP 第 5 阶段已计入分数，请将 TOPIK 从 4 级提升到 5 或 6 级以获得更高语言档积分。",
-      ),
-      locality: {
-        label: lt(
-          "Next national TOPIK round near Seoul plus a weekly study rhythm that avoids thesis crunch weeks.",
-          "서울 인근 국가 정기 시험 일정을 잡고, 논문 마감 주간을 피한 주간 학습 리듬을 세우세요.",
-          "锁定首尔附近的下一次全国考试，并安排避开论文截止周的每周学习节奏。",
-        ),
-        nextIntake: "2026-06-15",
-        url: "https://www.topik.go.kr",
-      },
-    },
-    {
-      id: "volunteer-hours",
-      label: lt("Option B: Community service", "옵션 B: 봉사활동", "选项 B：社区服务"),
-      points: 5,
-      status: "available",
-      action: lt(
-        "Log 50 verified hours through the 1365 volunteer portal over the next year.",
-        "향후 1년 동안 1365 자원봉사포털에서 인증 봉사 50시간을 기록하세요.",
-        "未来一年通过 1365 志愿服务平台记录 50 小时认证服务。",
-      ),
-      locality: {
-        label: lt(
-          "Mapo Volunteer Center posts weekend roles that fit student schedules.",
-          "마포구 자원봉사센터에는 학생 일정에 맞는 주말 활동이 올라옵니다.",
-          "麻浦志愿者中心会发布适合学生时间的周末活动。",
-        ),
-        url: "https://www.1365.go.kr",
-      },
-    },
-    {
-      id: "graduation-milestone",
-      label: lt("Option C: Academic milestone", "옵션 C: 학업 마일스톤", "选项 C：学业节点"),
-      points: 7,
-      status: "locked",
-      action: lt(
-        "Clear your upcoming domestic master's graduation milestone next year.",
-        "내년에 예정된 국내 석사 졸업 요건을 공식적으로 완료하세요.",
-        "明年正式完成韩国硕士毕业节点。",
-      ),
-      locality: {
-        label: lt(
-          "Ask your university international office for the graduation certificate timeline.",
-          "대학 국제처에 졸업증명서 발급 일정을 확인하세요.",
-          "请向学校国际处确认毕业证明开具时间。",
-        ),
-      },
-    },
-  ],
 };
 
 export const mockFacilities: Facility[] = [

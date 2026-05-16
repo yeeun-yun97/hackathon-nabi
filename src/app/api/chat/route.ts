@@ -52,6 +52,11 @@ export async function POST(request: Request) {
         `familyStatus=${profile.familyStatus}`,
         `hasVisa=${profile.hasVisa}`,
         `multiculturalFamily=${profile.multiculturalFamily}`,
+        `degreeLevel=${profile.degreeLevel}`,
+        `topikLevel=${profile.topikLevel}`,
+        `kiipStage=${profile.kiipStage}`,
+        `volunteerHoursLogged=${profile.volunteerHoursLogged ?? 0}`,
+        `currentVisaSubtype=${profile.currentVisaSubtype}`,
         `visaExpiryDate=${profile.visaExpiryDate || "not provided"}`,
         `recommendedCategories=${recommendedCategoryIds(profile, 4)
           .map(getCategoryLabel)

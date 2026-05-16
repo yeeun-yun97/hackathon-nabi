@@ -11,11 +11,13 @@ import { defaultProfile, readStoredProfile } from "@/lib/profile";
 export function VisaEditPageClient() {
   const { t } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
+  const [profileReady, setProfileReady] = useState(false);
 
   useEffect(() => {
-    queueMicrotask(() => {
-      setProfile(readStoredProfile());
-    });
+    const stored = readStoredProfile();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage only after mount; deferring form mount avoids resetting "No / Not sure" from stale defaultProfile.
+    setProfile(stored);
+    setProfileReady(true);
   }, []);
 
   return (
@@ -27,7 +29,16 @@ export function VisaEditPageClient() {
         {t("visa.edit.back")}
       </Link>
       <div className="mt-8">
-        <VisaExpiryQuickEdit onSaved={setProfile} profile={profile} />
+        {profileReady ? (
+          <VisaExpiryQuickEdit onSaved={setProfile} profile={profile} />
+        ) : (
+          <div
+            aria-busy="true"
+            className="rounded-3xl border border-black/[0.06] bg-white p-10 text-center text-sm text-[#52615b]"
+          >
+            {t("common.loading")}
+          </div>
+        )}
       </div>
     </div>
   );

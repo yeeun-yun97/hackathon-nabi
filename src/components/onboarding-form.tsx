@@ -409,6 +409,30 @@ export function OnboardingForm({
             options={kiipStages.map((id) => ({ id, label: tOption("kiip", id) }))}
             value={profile.kiipStage}
           />
+          <label className="grid gap-2 text-sm font-semibold md:col-span-2">
+            {t("onboarding.field.volunteerHoursLogged")}
+            <input
+              className={inputClass}
+              max={500}
+              min={0}
+              onChange={(event) => {
+                const raw = event.target.value;
+                if (raw === "") {
+                  updateProfile({ volunteerHoursLogged: 0 });
+                  return;
+                }
+                const v = Number.parseInt(raw, 10);
+                if (Number.isFinite(v)) {
+                  updateProfile({ volunteerHoursLogged: Math.min(500, Math.max(0, v)) });
+                }
+              }}
+              type="number"
+              value={profile.volunteerHoursLogged}
+            />
+            <span className="text-xs font-normal leading-5 text-[#52615b]">
+              {t("onboarding.field.volunteerHoursLoggedNote")}
+            </span>
+          </label>
           <SelectField
             label={t("onboarding.field.currentVisaSubtype")}
             onChange={(value) => updateProfile({ currentVisaSubtype: value })}
