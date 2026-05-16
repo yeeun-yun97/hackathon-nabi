@@ -31,7 +31,7 @@ import {
   type TranslationKey,
 } from "@/lib/i18n";
 
-export const localeStorageKey = "nari:locale";
+export const localeStorageKey = "nabi:locale";
 
 type TranslateValues = Record<string, string | number>;
 
@@ -83,6 +83,21 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       return;
     }
     document.documentElement.lang = locale;
+    document.title = translate(locale, "seo.title");
+
+    const description = translate(locale, "seo.description");
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", description);
+    document
+      .querySelector('meta[property="og:title"]')
+      ?.setAttribute("content", translate(locale, "seo.title"));
+    document
+      .querySelector('meta[property="og:description"]')
+      ?.setAttribute("content", description);
+    document
+      .querySelector('meta[property="og:locale"]')
+      ?.setAttribute("content", locale === "ko" ? "ko_KR" : locale === "zh" ? "zh_CN" : "en_US");
   }, [locale]);
 
   const setLocale = useCallback((next: Locale) => {

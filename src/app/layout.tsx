@@ -15,9 +15,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nari | Friendly local support for foreigners",
+  title: "nabi: for foreigners in korea",
   description:
-    "Find government support, healthcare, housing, education, immigration guidance, community posts, and AI help for living in Korea.",
+    "nabi helps foreign residents in Korea navigate visas, local services, healthcare, recreation, community information, and practical daily-life support.",
+  applicationName: "nabi",
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/favicon.png", type: "image/png" }],
+  },
+  keywords: [
+    "nabi",
+    "foreigners in Korea",
+    "Korea immigration",
+    "visa tracker",
+    "local services Korea",
+    "health and recreation Korea",
+  ],
+  openGraph: {
+    title: "nabi: for foreigners in korea",
+    description:
+      "Personalized visa, local service, healthcare, recreation, and community guidance for foreign residents in Korea.",
+    siteName: "nabi",
+    images: [{ url: "/logo.png", width: 1294, height: 390, alt: "nabi logo" }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "nabi: for foreigners in korea",
+    description:
+      "Personalized visa, local service, healthcare, recreation, and community guidance for foreign residents in Korea.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({

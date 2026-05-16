@@ -40,7 +40,7 @@ export function RenewVisaChecklistCard({
             Keep your {currentVisaLabel} status ready before the deadline.
           </h1>
           <p className="mt-5 max-w-2xl leading-7 text-white/70">
-            Nari turns your stored visa, district, and education profile into a practical
+            nabi turns your stored visa, district, and education profile into a practical
             immigration visit checklist.
           </p>
           <ol className="mt-7 grid gap-3">

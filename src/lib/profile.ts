@@ -1,6 +1,6 @@
 import type { UserProfile } from "@/lib/data";
 
-export const profileStorageKey = "nari:user-profile";
+export const profileStorageKey = "nabi:user-profile";
 
 export const defaultProfile: UserProfile = {
   city: "서울시",

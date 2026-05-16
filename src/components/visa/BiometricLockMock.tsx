@@ -7,7 +7,7 @@ export function BiometricLockMock({ statusText = "Confirming identity" }: Biomet
     <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,#24413c_0%,#17211f_48%,#07100e_100%)] px-6 text-white">
       <section className="w-full max-w-sm rounded-[2.5rem] bg-white/8 p-8 text-center shadow-2xl shadow-black/30 ring-1 ring-white/15 backdrop-blur">
         <p className="text-xs font-black uppercase tracking-[0.35em] text-[#10c4a9]">
-          Nari secure pass
+          nabi secure pass
         </p>
         <div className="mx-auto mt-8 flex size-44 items-center justify-center rounded-full bg-[#10c4a9]/10 ring-1 ring-[#10c4a9]/30">
           <div className="relative flex size-32 items-center justify-center rounded-full bg-[#17211f] shadow-2xl shadow-[#10c4a9]/20">

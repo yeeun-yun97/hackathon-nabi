@@ -10,7 +10,7 @@ type VisaNotificationCardProps = {
 export function VisaNotificationCard({
   href = "/visa/biometric",
   title = "Visa renewal window opens soon",
-  body = "Nari prepared your renewal checklist and F-2-7 horizon options.",
+  body = "nabi prepared your renewal checklist and F-2-7 horizon options.",
   timestamp = "now",
 }: VisaNotificationCardProps) {
   return (
@@ -21,11 +21,11 @@ export function VisaNotificationCard({
     >
       <div className="flex items-start gap-4">
         <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#10c4a9] font-black text-white">
-          N
+          nb
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-black">Nari Visa Horizon</p>
+            <p className="text-sm font-black">nabi Visa Horizon</p>
             <p className="shrink-0 text-xs font-bold text-[#52615b]">{timestamp}</p>
           </div>
           <h2 className="mt-1 text-xl font-black tracking-[-0.03em]">{title}</h2>

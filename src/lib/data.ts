@@ -1092,7 +1092,7 @@ export const communityPosts: CommunityPost[] = [
     ),
     replies: [
       {
-        author: "Nari team",
+        author: "nabi team",
         body: lt(
           "Good reminder: always verify with official sources for visa matters.",
           "좋은 팁이에요. 비자 관련 사항은 항상 공식 자료로 확인해 주세요.",

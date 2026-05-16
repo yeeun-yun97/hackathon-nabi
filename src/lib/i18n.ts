@@ -58,13 +58,18 @@ const en = {
   "header.cta.setProfile": "Set profile",
   "header.language.label": "Language",
 
+  // seo
+  "seo.title": "nabi: for foreigners in korea",
+  "seo.description":
+    "nabi helps foreign residents in Korea navigate visas, local services, healthcare, recreation, community information, and practical daily-life support.",
+
   // common
   "common.notProvided": "Not provided",
   "common.update": "Update",
   "common.back": "Back",
   "common.loading": "Loading...",
   "common.asking": "Asking...",
-  "common.askNari": "Ask Nari",
+  "common.askNari": "Ask nabi",
   "common.answer": "Answer",
   "common.results": "{count} results for {city}",
 
@@ -72,7 +77,7 @@ const en = {
   "home.heroBadge": "For foreigners building a life in Korea",
   "home.heroTitle": "Find the right help before life gets confusing.",
   "home.heroSubtitle":
-    "Nari helps foreigners in Korea find government support, healthcare, housing, education, and visa procedures matched to their situation and city.",
+    "nabi helps foreigners in Korea find government support, healthcare, housing, education, and visa procedures matched to their situation and city.",
   "home.heroPrimaryCta": "Start finding support",
   "home.heroSecondaryCta": "Ask AI guide",
 
@@ -139,16 +144,16 @@ const en = {
     "No matching examples for these filters. Try fewer filters or check back when more Supabase data is added.",
 
   // ai chat preview (home)
-  "chatPreview.label": "Nari AI",
+  "chatPreview.label": "nabi AI",
   "chatPreview.defaultMessage":
     "I live in Seoul and need help with healthcare and visa renewal.",
   "chatPreview.defaultReply":
     "I can help you prepare a visit checklist, find nearby public offices, compare free support programs, and explain what to verify with official institutions.",
-  "chatPreview.button": "Ask Nari",
+  "chatPreview.button": "Ask nabi",
 
   // onboarding page
   "onboarding.eyebrow": "Personal setup",
-  "onboarding.title": "Tell Nari where you are and what you need.",
+  "onboarding.title": "Tell nabi where you are and what you need.",
   "onboarding.subtitle":
     "The city, visa status, multicultural family info, age group, and visa expiry you share are used as context for search, checklists, community, and AI answers.",
 
@@ -361,11 +366,11 @@ const en = {
   "chat.field.visa": "Visa",
   "chat.field.visaExpiry": "Visa expiry",
   "chat.recommendedCategories": "Recommended categories",
-  "chat.askLabel": "Ask Nari",
+  "chat.askLabel": "Ask nabi",
   "chat.button": "Ask with my profile",
   "chat.defaultMessage": "I need help finding support near me.",
   "chat.defaultReply":
-    "Ask Nari about your city, visa timeline, healthcare, housing, employment, or family support.",
+    "Ask nabi about your city, visa timeline, healthcare, housing, employment, or family support.",
   "chat.networkError":
     "A network error occurred. Please try again in a moment.",
   "chat.unanswered": "Could not generate an answer. Please rephrase your question.",
@@ -427,13 +432,17 @@ const ko = {
   "header.cta.setProfile": "프로필 설정",
   "header.language.label": "언어",
 
+  "seo.title": "nabi: 대한민국의 외국인 거주자를 위한 서비스",
+  "seo.description":
+    "nabi는 한국에 거주하는 외국인이 비자, 지역 서비스, 의료, 여가, 커뮤니티 정보와 실용적인 생활 지원을 쉽게 찾도록 돕습니다.",
+
   // common
   "common.notProvided": "입력되지 않음",
   "common.update": "업데이트",
   "common.back": "뒤로",
   "common.loading": "불러오는 중...",
   "common.asking": "질문 중...",
-  "common.askNari": "Nari에게 물어보기",
+  "common.askNari": "nabi에게 물어보기",
   "common.answer": "답변",
   "common.results": "{city} 기준 {count}개 결과",
 
@@ -441,7 +450,7 @@ const ko = {
   "home.heroBadge": "한국에서 생활을 시작하는 외국인을 위해",
   "home.heroTitle": "삶이 복잡해지기 전에 필요한 도움을 찾아보세요.",
   "home.heroSubtitle":
-    "Nari는 외국인이 한국에서 필요한 정부지원, 의료, 주거, 교육, 체류 절차를 상황과 위치에 맞게 찾도록 돕는 정보 플랫폼입니다.",
+    "nabi는 외국인이 한국에서 필요한 정부지원, 의료, 주거, 교육, 체류 절차를 상황과 위치에 맞게 찾도록 돕는 정보 플랫폼입니다.",
   "home.heroPrimaryCta": "지원 정보 찾기 시작",
   "home.heroSecondaryCta": "AI 가이드에게 묻기",
 
@@ -506,12 +515,12 @@ const ko = {
     "조건에 맞는 예시가 없어요. 필터를 줄이거나 Supabase 데이터가 추가되면 더 많은 결과를 볼 수 있습니다.",
 
   // ai chat preview
-  "chatPreview.label": "Nari AI",
+  "chatPreview.label": "nabi AI",
   "chatPreview.defaultMessage":
     "서울에 살고 있어요. 의료 서비스와 비자 갱신 도움이 필요해요.",
   "chatPreview.defaultReply":
     "방문 체크리스트 준비, 가까운 공공기관 찾기, 무료 지원 프로그램 비교, 공식 기관에 꼭 확인해야 할 사항까지 안내해드릴 수 있어요.",
-  "chatPreview.button": "Nari에게 묻기",
+  "chatPreview.button": "nabi에게 묻기",
 
   // onboarding
   "onboarding.eyebrow": "개인 설정",
@@ -716,11 +725,11 @@ const ko = {
   "chat.field.visa": "비자",
   "chat.field.visaExpiry": "비자 만료일",
   "chat.recommendedCategories": "추천 카테고리",
-  "chat.askLabel": "Nari에게 묻기",
+  "chat.askLabel": "nabi에게 묻기",
   "chat.button": "내 프로필로 질문하기",
   "chat.defaultMessage": "주변에서 받을 수 있는 도움을 찾고 싶어요.",
   "chat.defaultReply":
-    "도시, 비자 일정, 의료, 주거, 고용, 가족 지원에 대해 Nari에게 물어보세요.",
+    "도시, 비자 일정, 의료, 주거, 고용, 가족 지원에 대해 nabi에게 물어보세요.",
   "chat.networkError": "네트워크 오류가 발생했어요. 잠시 후 다시 시도해주세요.",
   "chat.unanswered": "답변을 만들지 못했어요. 질문을 조금 더 구체적으로 적어주세요.",
   "chat.missingApiKey":
@@ -774,19 +783,23 @@ const zh = {
   "header.cta.setProfile": "设置个人资料",
   "header.language.label": "语言",
 
+  "seo.title": "nabi：为在韩国的外国居民服务",
+  "seo.description":
+    "nabi 帮助在韩外国居民查找签证、本地服务、医疗、休闲、社区信息和实用生活支持。",
+
   "common.notProvided": "未填写",
   "common.update": "更新",
   "common.back": "返回",
   "common.loading": "加载中...",
   "common.asking": "正在询问...",
-  "common.askNari": "向 Nari 提问",
+  "common.askNari": "向 nabi 提问",
   "common.answer": "回答",
   "common.results": "{city} 的 {count} 条结果",
 
   "home.heroBadge": "为在韩国生活的外国人而设",
   "home.heroTitle": "在生活变得复杂之前找到对的帮助。",
   "home.heroSubtitle":
-    "Nari 是一个帮助在韩外国人根据所在城市与个人状况，找到政府支持、医疗、住房、教育与签证手续信息的平台。",
+    "nabi 是一个帮助在韩外国人根据所在城市与个人状况，找到政府支持、医疗、住房、教育与签证手续信息的平台。",
   "home.heroPrimaryCta": "开始查找支持",
   "home.heroSecondaryCta": "向 AI 顾问提问",
 
@@ -848,14 +861,14 @@ const zh = {
   "explorer.empty":
     "暂无符合条件的示例。请减少筛选条件，或等待 Supabase 添加更多数据。",
 
-  "chatPreview.label": "Nari AI",
+  "chatPreview.label": "nabi AI",
   "chatPreview.defaultMessage": "我住在首尔，需要医疗与签证延期方面的帮助。",
   "chatPreview.defaultReply":
     "我可以帮您准备走访清单，找到附近的公共机构，比较免费支持项目，并指出向官方机构需要确认的事项。",
-  "chatPreview.button": "向 Nari 提问",
+  "chatPreview.button": "向 nabi 提问",
 
   "onboarding.eyebrow": "个人设置",
-  "onboarding.title": "请告诉 Nari 您的所在地与所需帮助。",
+  "onboarding.title": "请告诉 nabi 您的所在地与所需帮助。",
   "onboarding.subtitle":
     "您填写的城市、签证状态、是否多文化家庭、年龄段及签证到期日，将作为搜索、清单、社区与 AI 回答的基本上下文。",
   "onboarding.cityTitle": "您在哪个城市？",
@@ -1049,11 +1062,11 @@ const zh = {
   "chat.field.visa": "签证",
   "chat.field.visaExpiry": "签证到期日",
   "chat.recommendedCategories": "推荐类别",
-  "chat.askLabel": "向 Nari 提问",
+  "chat.askLabel": "向 nabi 提问",
   "chat.button": "结合我的资料提问",
   "chat.defaultMessage": "我想找一找附近可以获得的支持。",
   "chat.defaultReply":
-    "向 Nari 询问您的城市、签证时间、医疗、住房、就业或家庭支援。",
+    "向 nabi 询问您的城市、签证时间、医疗、住房、就业或家庭支援。",
   "chat.networkError": "出现网络错误，请稍后重试。",
   "chat.unanswered": "未能生成回答，请尝试更具体地描述您的问题。",
   "chat.missingApiKey":

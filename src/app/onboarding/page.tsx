@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { OnboardingForm } from "@/components/onboarding-form";
@@ -11,8 +12,15 @@ export default function OnboardingPage() {
   return (
     <main className="min-h-screen bg-[#fffaf0] px-6 py-10 text-[#17211f]">
       <div className="mx-auto max-w-5xl">
-        <Link className="text-sm font-black text-[#0b8d79]" href="/">
-          Nari
+        <Link className="inline-flex" href="/">
+          <Image
+            alt="nabi"
+            className="h-auto w-24"
+            height={390}
+            priority
+            src="/logo.png"
+            width={1294}
+          />
         </Link>
         <div className="mb-10 mt-12">
           <p className="font-black text-[#ed9805]">{t("onboarding.eyebrow")}</p>
