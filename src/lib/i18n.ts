@@ -261,12 +261,6 @@ const en = {
     "Visa status update: add your expiry date to your profile to unlock the personalized countdown and next steps.",
   "visa.notification.timestamp": "now",
 
-  // biometric
-  "visa.biometric.brand": "nabi secure pass",
-  "visa.biometric.status": "Confirming identity",
-  "visa.biometric.note":
-    "Unlocking your visa dashboard with stored profile context.",
-
   // health page
   "health.eyebrow": "Health & Recreation",
   "health.title": "Find public gyms and pools that are easier to join.",
@@ -1099,11 +1093,6 @@ const ko = {
     "비자 상태 업데이트: 프로필에 만료일을 입력하면 맞춤 카운트다운과 다음 단계를 열 수 있어요.",
   "visa.notification.timestamp": "지금",
 
-  // 생체 인증
-  "visa.biometric.brand": "nabi 시큐어 패스",
-  "visa.biometric.status": "본인 확인 중",
-  "visa.biometric.note": "저장된 프로필로 비자 대시보드를 여는 중이에요.",
-
   // 건강 & 여가 페이지
   "health.eyebrow": "건강 & 여가",
   "health.title": "외국인이 더 쉽게 등록할 수 있는 공공 체육시설을 찾아보세요.",
@@ -1896,11 +1885,6 @@ const zh = {
   "visa.notification.bodyFallback":
     "签证状态更新：请在档案中填写到期日以解锁个性化倒计时与后续步骤。",
   "visa.notification.timestamp": "刚刚",
-
-  // 生物识别
-  "visa.biometric.brand": "nabi 安全通行",
-  "visa.biometric.status": "正在确认身份",
-  "visa.biometric.note": "正在使用保存的档案为您打开签证仪表盘。",
 
   // 健康与休闲页面
   "health.eyebrow": "健康与休闲",

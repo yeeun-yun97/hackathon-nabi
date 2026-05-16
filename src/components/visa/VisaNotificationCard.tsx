@@ -11,7 +11,7 @@ type VisaNotificationCardProps = {
   href?: string;
 };
 
-export function VisaNotificationCard({ href = "/visa/biometric" }: VisaNotificationCardProps) {
+export function VisaNotificationCard({ href = "/visa" }: VisaNotificationCardProps) {
   const { t } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
 
