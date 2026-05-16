@@ -7,7 +7,7 @@ import { recommendedCategoryIds, type UserProfile } from "@/lib/data";
 import { defaultProfile, readStoredProfile } from "@/lib/profile";
 
 export function ChatClient() {
-  const { t, tCategory, tCity, locale } = useLanguage();
+  const { t, tCategory, tCity, tOption, locale } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
   const [customMessage, setCustomMessage] = useState<string | null>(null);
   const [customReply, setCustomReply] = useState<string | null>(null);
@@ -63,33 +63,31 @@ export function ChatClient() {
           </div>
           <div>
             <dt className="font-black">{t("chat.field.ageGroup")}</dt>
-            <dd className="mt-1 text-[#52615b]">{t(`option.age.${profile.ageGroup}`)}</dd>
+            <dd className="mt-1 text-[#52615b]">{tOption("age", profile.ageGroup)}</dd>
           </div>
           <div>
             <dt className="font-black">{t("chat.field.residency")}</dt>
             <dd className="mt-1 text-[#52615b]">
-              {t(`option.residency.${profile.residencyStatus}`)}
+              {tOption("residency", profile.residencyStatus)}
             </dd>
           </div>
           <div>
             <dt className="font-black">{t("chat.field.housing")}</dt>
-            <dd className="mt-1 text-[#52615b]">
-              {t(`option.housing.${profile.housingStatus}`)}
-            </dd>
+            <dd className="mt-1 text-[#52615b]">{tOption("housing", profile.housingStatus)}</dd>
           </div>
           <div>
             <dt className="font-black">{t("chat.field.employment")}</dt>
             <dd className="mt-1 text-[#52615b]">
-              {t(`option.employment.${profile.employmentStatus}`)}
+              {tOption("employment", profile.employmentStatus)}
             </dd>
           </div>
           <div>
             <dt className="font-black">{t("chat.field.family")}</dt>
-            <dd className="mt-1 text-[#52615b]">{t(`option.family.${profile.familyStatus}`)}</dd>
+            <dd className="mt-1 text-[#52615b]">{tOption("family", profile.familyStatus)}</dd>
           </div>
           <div>
             <dt className="font-black">{t("chat.field.visa")}</dt>
-            <dd className="mt-1 text-[#52615b]">{t(`option.yesNo.${profile.hasVisa}`)}</dd>
+            <dd className="mt-1 text-[#52615b]">{tOption("yesNo", profile.hasVisa)}</dd>
           </div>
           <div>
             <dt className="font-black">{t("chat.field.visaExpiry")}</dt>

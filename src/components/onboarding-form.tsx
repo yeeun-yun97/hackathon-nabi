@@ -104,7 +104,7 @@ function SelectField<TValue extends string>({
 
 export function OnboardingForm() {
   const router = useRouter();
-  const { t, tCity, tLanguage } = useLanguage();
+  const { t, tCity, tLanguage, tOption } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
   const [locationStatus, setLocationStatus] = useState(
     t("onboarding.locationStatus.initial"),
@@ -238,31 +238,31 @@ export function OnboardingForm() {
           <SelectField
             label={t("onboarding.field.ageGroup")}
             onChange={(value) => updateProfile({ ageGroup: value })}
-            options={ageGroups.map((id) => ({ id, label: t(`option.age.${id}`) }))}
+            options={ageGroups.map((id) => ({ id, label: tOption("age", id) }))}
             value={profile.ageGroup}
           />
           <SelectField
             label={t("onboarding.field.gender")}
             onChange={(value) => updateProfile({ gender: value })}
-            options={genders.map((id) => ({ id, label: t(`option.gender.${id}`) }))}
+            options={genders.map((id) => ({ id, label: tOption("gender", id) }))}
             value={profile.gender}
           />
           <SelectField
             label={t("onboarding.field.residency")}
             onChange={(value) => updateProfile({ residencyStatus: value })}
-            options={residencyStatuses.map((id) => ({ id, label: t(`option.residency.${id}`) }))}
+            options={residencyStatuses.map((id) => ({ id, label: tOption("residency", id) }))}
             value={profile.residencyStatus}
           />
           <SelectField
             label={t("onboarding.field.housing")}
             onChange={(value) => updateProfile({ housingStatus: value })}
-            options={housingStatuses.map((id) => ({ id, label: t(`option.housing.${id}`) }))}
+            options={housingStatuses.map((id) => ({ id, label: tOption("housing", id) }))}
             value={profile.housingStatus}
           />
           <SelectField
             label={t("onboarding.field.maritalStatus")}
             onChange={(value) => updateProfile({ maritalStatus: value })}
-            options={maritalStatuses.map((id) => ({ id, label: t(`option.marital.${id}`) }))}
+            options={maritalStatuses.map((id) => ({ id, label: tOption("marital", id) }))}
             value={profile.maritalStatus}
           />
           <SelectField
@@ -270,14 +270,14 @@ export function OnboardingForm() {
             onChange={(value) => updateProfile({ employmentStatus: value })}
             options={employmentStatuses.map((id) => ({
               id,
-              label: t(`option.employment.${id}`),
+              label: tOption("employment", id),
             }))}
             value={profile.employmentStatus}
           />
           <SelectField
             label={t("onboarding.field.family")}
             onChange={(value) => updateProfile({ familyStatus: value })}
-            options={familyStatuses.map((id) => ({ id, label: t(`option.family.${id}`) }))}
+            options={familyStatuses.map((id) => ({ id, label: tOption("family", id) }))}
             value={profile.familyStatus}
           />
         </div>
@@ -298,7 +298,7 @@ export function OnboardingForm() {
                 onClick={() => updateProfile({ hasVisa: option })}
                 type="button"
               >
-                {t(`option.yesNo.${option}`)}
+                {tOption("yesNo", option)}
               </button>
             ))}
           </div>
@@ -318,7 +318,7 @@ export function OnboardingForm() {
                 onClick={() => updateProfile({ multiculturalFamily: option })}
                 type="button"
               >
-                {t(`option.yesNo.${option}`)}
+                {tOption("yesNo", option)}
               </button>
             ))}
           </div>

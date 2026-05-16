@@ -6,7 +6,7 @@ import { useLanguage } from "@/components/language-provider";
 import type { CommunityPost } from "@/lib/data";
 
 export function CommunityDetail({ post }: { post: CommunityPost }) {
-  const { t, tCategory, tCity } = useLanguage();
+  const { t, tCategory, tCity, tLocalized } = useLanguage();
 
   return (
     <article className="mx-auto max-w-4xl px-6 pb-20 pt-10">
@@ -22,14 +22,14 @@ export function CommunityDetail({ post }: { post: CommunityPost }) {
             {tCity(post.city)}
           </span>
         </div>
-        <h1 className="mt-5 text-5xl font-black tracking-[-0.05em]">{post.title}</h1>
+        <h1 className="mt-5 text-5xl font-black tracking-[-0.05em]">{tLocalized(post.title)}</h1>
         <p className="mt-3 text-sm font-black text-[#ed9805]">
           {t("community.detail.byAuthorUpdated", {
             name: post.author,
             date: post.updatedAt,
           })}
         </p>
-        <p className="mt-8 text-lg leading-8 text-[#52615b]">{post.body}</p>
+        <p className="mt-8 text-lg leading-8 text-[#52615b]">{tLocalized(post.body)}</p>
         <div className="mt-8 rounded-3xl bg-[#fffaf0] p-5">
           <p className="font-black">{t("community.detail.safetyNote")}</p>
           <p className="mt-2 leading-7 text-[#52615b]">
@@ -42,10 +42,10 @@ export function CommunityDetail({ post }: { post: CommunityPost }) {
         {post.replies.map((reply) => (
           <div
             className="rounded-3xl bg-white p-6 ring-1 ring-black/5"
-            key={`${reply.author}-${reply.body}`}
+            key={`${reply.author}-${reply.body.en}`}
           >
             <p className="font-black">{reply.author}</p>
-            <p className="mt-3 leading-7 text-[#52615b]">{reply.body}</p>
+            <p className="mt-3 leading-7 text-[#52615b]">{tLocalized(reply.body)}</p>
           </div>
         ))}
       </section>

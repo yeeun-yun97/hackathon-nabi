@@ -7,7 +7,7 @@ import { useLanguage } from "@/components/language-provider";
 import type { SupportProgram } from "@/lib/data";
 
 export function SupportDetail({ program }: { program: SupportProgram }) {
-  const { t, tCategory } = useLanguage();
+  const { t, tCategory, tCost, tLanguage, tLocalized } = useLanguage();
 
   return (
     <article className="mx-auto max-w-5xl px-6 pb-20 pt-10">
@@ -20,21 +20,21 @@ export function SupportDetail({ program }: { program: SupportProgram }) {
             {tCategory(program.category)}
           </span>
           <span className="rounded-full bg-[#ed9805]/15 px-3 py-1 text-xs font-black text-[#b66f00]">
-            {program.cost}
+            {tCost(program.cost)}
           </span>
           <span className="rounded-full bg-[#17211f]/10 px-3 py-1 text-xs font-black text-[#52615b]">
-            {program.location}
+            {tLocalized(program.location)}
           </span>
         </div>
-        <h1 className="mt-5 text-5xl font-black tracking-[-0.05em]">{program.title}</h1>
-        <p className="mt-5 text-lg leading-8 text-[#52615b]">{program.description}</p>
+        <h1 className="mt-5 text-5xl font-black tracking-[-0.05em]">{tLocalized(program.title)}</h1>
+        <p className="mt-5 text-lg leading-8 text-[#52615b]">{tLocalized(program.description)}</p>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <section className="rounded-3xl bg-[#fffaf0] p-6">
             <h2 className="text-xl font-black">{t("discover.detail.whatToBring")}</h2>
             <ul className="mt-4 grid gap-3 text-sm font-bold text-[#52615b]">
               {program.requiredDocuments.map((document) => (
-                <li key={document}>{document}</li>
+                <li key={document.en}>{tLocalized(document)}</li>
               ))}
             </ul>
           </section>
@@ -43,7 +43,9 @@ export function SupportDetail({ program }: { program: SupportProgram }) {
             <dl className="mt-4 grid gap-3 text-sm">
               <div>
                 <dt className="font-black">{t("discover.detail.languages")}</dt>
-                <dd className="mt-1 text-[#52615b]">{program.languages.join(", ")}</dd>
+                <dd className="mt-1 text-[#52615b]">
+                  {program.languages.map((lang) => tLanguage(lang)).join(", ")}
+                </dd>
               </div>
               <div>
                 <dt className="font-black">{t("discover.detail.contact")}</dt>
@@ -60,7 +62,7 @@ export function SupportDetail({ program }: { program: SupportProgram }) {
         <GoogleMapCard
           address={program.address}
           mapQuery={program.mapQuery}
-          title={program.title}
+          title={tLocalized(program.title)}
         />
 
         <div className="mt-8 rounded-3xl bg-[#17211f] p-6 text-white">

@@ -24,7 +24,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function DiscoverClient() {
-  const { t, tCity, tCategory } = useLanguage();
+  const { t, tCity, tCategory, tCost, tLocalized } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
   const [selectedCity, setSelectedCity] = useState<City>(defaultProfile.city);
   const [selectedCategories, setSelectedCategories] = useState<ServiceCategory[]>([]);
@@ -184,14 +184,16 @@ export function DiscoverClient() {
                   </span>
                 ) : null}
                 <span className="rounded-full bg-[#ed9805]/15 px-3 py-1 text-xs font-black text-[#b66f00]">
-                  {program.cost}
+                  {tCost(program.cost)}
                 </span>
                 <span className="rounded-full bg-[#17211f]/10 px-3 py-1 text-xs font-black text-[#52615b]">
-                  {program.location}
+                  {tLocalized(program.location)}
                 </span>
               </div>
-              <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">{program.title}</h2>
-              <p className="mt-3 leading-7 text-[#52615b]">{program.summary}</p>
+              <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">
+                {tLocalized(program.title)}
+              </h2>
+              <p className="mt-3 leading-7 text-[#52615b]">{tLocalized(program.summary)}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {program.tags.map((tag) => (
                   <span className="text-xs font-bold text-[#52615b]" key={tag}>

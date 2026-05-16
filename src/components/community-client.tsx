@@ -19,7 +19,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function CommunityClient() {
-  const { t, tCity, tCategory } = useLanguage();
+  const { t, tCity, tCategory, tLocalized } = useLanguage();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
 
@@ -87,8 +87,10 @@ export function CommunityClient() {
                 {tCity(post.city)}
               </span>
             </div>
-            <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">{post.title}</h2>
-            <p className="mt-3 leading-7 text-[#52615b]">{post.excerpt}</p>
+            <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">
+              {tLocalized(post.title)}
+            </h2>
+            <p className="mt-3 leading-7 text-[#52615b]">{tLocalized(post.excerpt)}</p>
             <p className="mt-4 text-sm font-black text-[#ed9805]">
               {t("community.byAuthor", { name: post.author })}
             </p>

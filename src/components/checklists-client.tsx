@@ -19,7 +19,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function ChecklistsClient() {
-  const { t, tCategory } = useLanguage();
+  const { t, tCategory, tLocalized } = useLanguage();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
 
@@ -66,15 +66,17 @@ export function ChecklistsClient() {
             <span className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]">
               {tCategory(checklist.category)}
             </span>
-            <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">{checklist.title}</h2>
-            <p className="mt-3 leading-7 text-[#52615b]">{checklist.description}</p>
+            <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">
+              {tLocalized(checklist.title)}
+            </h2>
+            <p className="mt-3 leading-7 text-[#52615b]">{tLocalized(checklist.description)}</p>
             <ol className="mt-5 grid gap-3">
               {checklist.steps.map((step, index) => (
-                <li className="flex gap-3 text-sm font-bold leading-6 text-[#52615b]" key={step}>
+                <li className="flex gap-3 text-sm font-bold leading-6 text-[#52615b]" key={step.en}>
                   <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#ed9805] text-xs text-white">
                     {index + 1}
                   </span>
-                  {step}
+                  {tLocalized(step)}
                 </li>
               ))}
             </ol>

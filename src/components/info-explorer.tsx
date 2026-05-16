@@ -3,32 +3,40 @@
 import { useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
+import type { FilterChip } from "@/lib/i18n";
 
 const programIndices = [0, 1, 2, 3] as const;
 
-const programTagsByIndex: Record<number, string[]> = {
-  0: ["Visa", "English", "Free"],
-  1: ["Healthcare", "Free"],
-  2: ["Housing", "English"],
-  3: ["Education", "Free", "English"],
+const programTagsByIndex: Record<number, FilterChip[]> = {
+  0: ["visa", "english", "free"],
+  1: ["healthcare", "free"],
+  2: ["housing", "english"],
+  3: ["education", "free", "english"],
 };
 
-const filters = ["Visa", "Healthcare", "Housing", "Education", "Free", "English"];
+const filters: FilterChip[] = [
+  "visa",
+  "healthcare",
+  "housing",
+  "education",
+  "free",
+  "english",
+];
 
 export function InfoExplorer() {
-  const { t } = useLanguage();
-  const [activeFilters, setActiveFilters] = useState<string[]>(["Free"]);
+  const { t, tDynamic, tChip } = useLanguage();
+  const [activeFilters, setActiveFilters] = useState<FilterChip[]>(["free"]);
 
   const programs = useMemo(
     () =>
       programIndices.map((index) => ({
         index,
-        title: t(`explorer.programs.${index}.title`),
-        category: t(`explorer.programs.${index}.category`),
-        description: t(`explorer.programs.${index}.desc`),
+        title: tDynamic(`explorer.programs.${index}.title`),
+        category: tDynamic(`explorer.programs.${index}.category`),
+        description: tDynamic(`explorer.programs.${index}.desc`),
         tags: programTagsByIndex[index],
       })),
-    [t],
+    [tDynamic],
   );
 
   const filteredPrograms = useMemo(() => {
@@ -41,7 +49,7 @@ export function InfoExplorer() {
     );
   }, [activeFilters, programs]);
 
-  function toggleFilter(filter: string) {
+  function toggleFilter(filter: FilterChip) {
     setActiveFilters((current) =>
       current.includes(filter)
         ? current.filter((item) => item !== filter)
@@ -73,7 +81,7 @@ export function InfoExplorer() {
                 onClick={() => toggleFilter(filter)}
                 type="button"
               >
-                {filter}
+                {tChip(filter)}
               </button>
             );
           })}

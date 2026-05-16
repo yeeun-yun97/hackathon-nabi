@@ -19,7 +19,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 }
 
 export function FaqClient() {
-  const { t, tCategory } = useLanguage();
+  const { t, tCategory, tLocalized, locale } = useLanguage();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
@@ -37,14 +37,16 @@ export function FaqClient() {
     return faqItems.filter((faq) => {
       const cityMatches = matchesCity(faq.cities, city);
       const categoryMatches = categories.length === 0 || categories.includes(faq.category);
+      const localizedQuestion = (faq.question[locale] ?? faq.question.en).toLowerCase();
+      const localizedAnswer = (faq.answer[locale] ?? faq.answer.en).toLowerCase();
       const queryMatches =
         normalizedQuery.length === 0 ||
-        faq.question.toLowerCase().includes(normalizedQuery) ||
-        faq.answer.toLowerCase().includes(normalizedQuery);
+        localizedQuestion.includes(normalizedQuery) ||
+        localizedAnswer.includes(normalizedQuery);
 
       return cityMatches && categoryMatches && queryMatches;
     });
-  }, [categories, city, query]);
+  }, [categories, city, locale, query]);
 
   return (
     <div className="grid gap-6">
@@ -75,8 +77,10 @@ export function FaqClient() {
       <div className="grid gap-3">
         {filteredFaqs.map((faq) => (
           <details className="rounded-[1.5rem] bg-white p-6 ring-1 ring-black/5" key={faq.id}>
-            <summary className="cursor-pointer text-lg font-black">{faq.question}</summary>
-            <p className="mt-4 leading-7 text-[#52615b]">{faq.answer}</p>
+            <summary className="cursor-pointer text-lg font-black">
+              {tLocalized(faq.question)}
+            </summary>
+            <p className="mt-4 leading-7 text-[#52615b]">{tLocalized(faq.answer)}</p>
             <p className="mt-4 text-xs font-black text-[#0b8d79]">{tCategory(faq.category)}</p>
           </details>
         ))}

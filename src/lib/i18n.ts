@@ -1,9 +1,26 @@
-import type { City, ServiceCategory } from "@/lib/data";
+import type {
+  AgeGroup,
+  City,
+  EmploymentStatus,
+  FamilyStatus,
+  Gender,
+  HousingStatus,
+  MaritalStatus,
+  ResidencyStatus,
+  ServiceCategory,
+  YesNoUnsure,
+} from "@/lib/data";
 
 export const supportedLocales = ["en", "ko", "zh"] as const;
 export type Locale = (typeof supportedLocales)[number];
 
 export const defaultLocale: Locale = "en";
+
+export function isLocale(value: unknown): value is Locale {
+  return (
+    typeof value === "string" && (supportedLocales as readonly string[]).includes(value)
+  );
+}
 
 export const localeLabels: Record<Locale, string> = {
   en: "English",
@@ -23,9 +40,7 @@ export const aiResponseLanguageInstruction: Record<Locale, string> = {
   zh: "请始终用简体中文回复用户。(zh-CN)",
 };
 
-type Dict = Record<string, string>;
-
-const en: Dict = {
+const en = {
   // header
   "header.brand.subtitle": "Your local guide",
   "header.nav.discover": "Discover",
@@ -334,9 +349,24 @@ const en: Dict = {
   "language.Vietnamese": "Vietnamese",
   "language.Japanese": "Japanese",
   "language.Thai": "Thai",
-};
 
-const ko: Dict = {
+  // cost tier labels
+  "cost.free": "Free",
+  "cost.low": "Low cost",
+  "cost.paid": "Paid",
+
+  // info-explorer filter chips
+  "chip.visa": "Visa",
+  "chip.healthcare": "Healthcare",
+  "chip.housing": "Housing",
+  "chip.education": "Education",
+  "chip.free": "Free",
+  "chip.english": "English",
+} as const satisfies Record<string, string>;
+
+export type TranslationKey = keyof typeof en;
+
+const ko = {
   // header
   "header.brand.subtitle": "당신의 한국 생활 가이드",
   "header.nav.discover": "정보 찾기",
@@ -627,9 +657,20 @@ const ko: Dict = {
   "language.Vietnamese": "베트남어",
   "language.Japanese": "일본어",
   "language.Thai": "태국어",
-};
 
-const zh: Dict = {
+  "cost.free": "무료",
+  "cost.low": "저렴",
+  "cost.paid": "유료",
+
+  "chip.visa": "비자",
+  "chip.healthcare": "의료",
+  "chip.housing": "주거",
+  "chip.education": "교육",
+  "chip.free": "무료",
+  "chip.english": "영어 가능",
+} satisfies Record<TranslationKey, string>;
+
+const zh = {
   // header
   "header.brand.subtitle": "您的本地生活向导",
   "header.nav.discover": "探索支持",
@@ -906,37 +947,139 @@ const zh: Dict = {
   "language.Vietnamese": "越南语",
   "language.Japanese": "日语",
   "language.Thai": "泰语",
-};
 
-const dictionaries: Record<Locale, Dict> = { en, ko, zh };
+  "cost.free": "免费",
+  "cost.low": "低价",
+  "cost.paid": "付费",
 
-export function translate(
-  locale: Locale,
-  key: string,
+  "chip.visa": "签证",
+  "chip.healthcare": "医疗",
+  "chip.housing": "住房",
+  "chip.education": "教育",
+  "chip.free": "免费",
+  "chip.english": "英语支持",
+} satisfies Record<TranslationKey, string>;
+
+const dictionaries: Record<Locale, Record<TranslationKey, string>> = { en, ko, zh };
+
+const warnedMissingKeys = new Set<string>();
+
+function warnMissingKey(locale: Locale, key: string) {
+  if (process.env.NODE_ENV === "production") {
+    return;
+  }
+
+  const fingerprint = `${locale}::${key}`;
+  if (warnedMissingKeys.has(fingerprint)) {
+    return;
+  }
+  warnedMissingKeys.add(fingerprint);
+  console.warn(
+    `[i18n] Missing translation key "${key}" for locale "${locale}". Falling back to English.`,
+  );
+}
+
+function applyValues(
+  template: string,
   values?: Record<string, string | number>,
 ): string {
-  const template = dictionaries[locale]?.[key] ?? dictionaries.en[key] ?? key;
-
   if (!values) {
     return template;
   }
-
   return Object.entries(values).reduce((output, [name, value]) => {
     return output.replace(new RegExp(`\\{${name}\\}`, "g"), String(value));
   }, template);
 }
 
-export function translateCity(locale: Locale, city: City): string {
-  return translate(locale, `city.${city}`);
+export function translate(
+  locale: Locale,
+  key: TranslationKey,
+  values?: Record<string, string | number>,
+): string {
+  const template = dictionaries[locale]?.[key] ?? dictionaries.en[key];
+  return applyValues(template, values);
 }
 
-export function translateCategory(
+/**
+ * Escape hatch for keys that can only be known at runtime (DB codes,
+ * computed paths, etc.). Prefer the typed helpers (`translate`, `translateOption`)
+ * whenever the key is known statically.
+ */
+export function translateDynamic(
   locale: Locale,
-  category: ServiceCategory,
+  key: string,
+  values?: Record<string, string | number>,
 ): string {
-  return translate(locale, `category.${category}`);
+  const dict = dictionaries[locale] as unknown as Record<string, string | undefined>;
+  const fallback = dictionaries.en as unknown as Record<string, string | undefined>;
+  const template = dict[key] ?? fallback[key];
+
+  if (template === undefined) {
+    warnMissingKey(locale, key);
+    return key;
+  }
+
+  return applyValues(template, values);
+}
+
+export function translateCity(locale: Locale, city: City): string {
+  return translate(locale, `city.${city}` as TranslationKey);
+}
+
+export function translateCategory(locale: Locale, category: ServiceCategory): string {
+  return translate(locale, `category.${category}` as TranslationKey);
 }
 
 export function translateLanguageOption(locale: Locale, language: string): string {
-  return translate(locale, `language.${language}`);
+  return translateDynamic(locale, `language.${language}`);
 }
+
+export type OptionGroupValueMap = {
+  age: AgeGroup;
+  gender: Gender;
+  residency: ResidencyStatus;
+  housing: HousingStatus;
+  marital: MaritalStatus;
+  employment: EmploymentStatus;
+  family: FamilyStatus;
+  yesNo: YesNoUnsure;
+};
+
+export function translateOption<G extends keyof OptionGroupValueMap>(
+  locale: Locale,
+  group: G,
+  value: OptionGroupValueMap[G],
+): string {
+  return translate(locale, `option.${group}.${value}` as TranslationKey);
+}
+
+export type Translator = {
+  (key: TranslationKey, values?: Record<string, string | number>): string;
+};
+
+export type LocalizedText = Record<Locale, string>;
+
+/**
+ * Compact constructor for declaring localized values inline in data files.
+ * `lt(en, ko, zh)` is equivalent to `{ en, ko, zh }`.
+ */
+export function lt(en: string, ko: string, zh: string): LocalizedText {
+  return { en, ko, zh };
+}
+
+export function pickLocalized(value: LocalizedText, locale: Locale): string {
+  return value[locale] ?? value.en;
+}
+
+export type Cost = "free" | "low" | "paid";
+
+export function translateCost(locale: Locale, cost: Cost): string {
+  return translate(locale, `cost.${cost}` as TranslationKey);
+}
+
+export type FilterChip = "visa" | "healthcare" | "housing" | "education" | "free" | "english";
+
+export function translateChip(locale: Locale, chip: FilterChip): string {
+  return translate(locale, `chip.${chip}` as TranslationKey);
+}
+

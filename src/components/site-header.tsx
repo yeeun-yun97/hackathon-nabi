@@ -4,8 +4,9 @@ import Link from "next/link";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLanguage } from "@/components/language-provider";
+import type { TranslationKey } from "@/lib/i18n";
 
-const navItems: Array<{ href: string; key: string }> = [
+const navItems: Array<{ href: string; key: TranslationKey }> = [
   { href: "/discover", key: "header.nav.discover" },
   { href: "/checklists", key: "header.nav.checklists" },
   { href: "/faq", key: "header.nav.faq" },
