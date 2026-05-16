@@ -74,6 +74,11 @@ export type FamilyStatus =
   | "multicultural-family"
   | "extended-family";
 export type YesNoUnsure = "yes" | "no" | "unsure";
+export type DegreeLevel = "none" | "high-school" | "bachelor" | "master" | "phd";
+export type TopikLevel = "none" | "1" | "2" | "3" | "4" | "5" | "6";
+export type KiipStage = "none" | "0" | "1" | "2" | "3" | "4" | "5";
+export type VisaSubtype = "D-2" | "D-10" | "E-7" | "F-2-7" | "F-5" | "other" | "unsure";
+export type SeoulDistrict = "마포구" | "성동구" | "강남구" | "종로구" | "용산구" | "기타";
 
 export type UserProfile = {
   city: City;
@@ -89,6 +94,11 @@ export type UserProfile = {
   hasVisa: YesNoUnsure;
   multiculturalFamily: YesNoUnsure;
   visaExpiryDate: string;
+  degreeLevel: DegreeLevel;
+  topikLevel: TopikLevel;
+  kiipStage: KiipStage;
+  currentVisaSubtype: VisaSubtype;
+  district: SeoulDistrict | "";
 };
 
 export type SupportProgram = {
@@ -109,6 +119,50 @@ export type SupportProgram = {
   contact: string;
   officialUrl: string;
   updatedAt: string;
+};
+
+export type VisaPointComponent = {
+  id: string;
+  label: LocalizedText;
+  points: number;
+  status: "earned" | "available" | "locked";
+  action: LocalizedText;
+  locality?: {
+    label: LocalizedText;
+    nextIntake?: string;
+    url?: string;
+  };
+};
+
+export type VisaTrack = {
+  currentVisa: VisaSubtype;
+  targetVisa: VisaSubtype;
+  currentPoints: number;
+  targetPoints: number;
+  unlockEtaDays: number;
+  expiresInDays: number;
+  earned: VisaPointComponent[];
+  strategies: VisaPointComponent[];
+};
+
+export type FacilitySport = "swimming" | "weights" | "yoga" | "fitness" | "court";
+export type FacilityPayment = "local-card" | "cash" | "foreign-card";
+
+export type Facility = {
+  id: string;
+  slug: string;
+  name: LocalizedText;
+  district: SeoulDistrict;
+  address: string;
+  mapQuery: string;
+  coords: { lat: number; lng: number };
+  hours: { open: string; close: string; note?: LocalizedText };
+  sports: FacilitySport[];
+  pricing: Array<{ tier: LocalizedText; monthly: number; residentDiscount?: boolean }>;
+  requiredId: "ARC";
+  paymentAccepted: FacilityPayment[];
+  indoorShoeRule: boolean;
+  koreanReceptionPrompt: string;
 };
 
 export type Checklist = {
@@ -143,6 +197,233 @@ export type CommunityPost = {
   }>;
   updatedAt: string;
 };
+
+export const districtCoordinates: Record<SeoulDistrict, { lat: number; lng: number }> = {
+  마포구: { lat: 37.5663, lng: 126.9019 },
+  성동구: { lat: 37.5633, lng: 127.0367 },
+  강남구: { lat: 37.5172, lng: 127.0473 },
+  종로구: { lat: 37.5735, lng: 126.979 },
+  용산구: { lat: 37.5326, lng: 126.9905 },
+  기타: { lat: 37.5665, lng: 126.978 },
+};
+
+export const mockF27Track: VisaTrack = {
+  currentVisa: "D-2",
+  targetVisa: "F-2-7",
+  currentPoints: 69,
+  targetPoints: 80,
+  unlockEtaDays: 365,
+  expiresInDays: 180,
+  earned: [
+    {
+      id: "topik-4",
+      label: lt("TOPIK Level 4", "TOPIK 4급", "TOPIK 4级"),
+      points: 20,
+      status: "earned",
+      action: lt(
+        "Language score already reflected in your current total.",
+        "현재 점수에 이미 언어 점수가 반영되어 있습니다.",
+        "语言分数已计入当前总分。",
+      ),
+    },
+    {
+      id: "kiip-5",
+      label: lt("KIIP Stage 5 completion", "사회통합프로그램 5단계 이수", "社会统合项目第5阶段完成"),
+      points: 10,
+      status: "earned",
+      action: lt(
+        "Keep your KIIP certificate ready for application review.",
+        "신청 심사를 위해 KIIP 이수증을 준비해 두세요.",
+        "请准备好 KIIP 完成证明以备审查。",
+      ),
+    },
+    {
+      id: "masters-track",
+      label: lt("Domestic master's track", "국내 석사 과정", "韩国硕士课程"),
+      points: 39,
+      status: "earned",
+      action: lt(
+        "Your active graduate program anchors the current excellence-talent score.",
+        "재학 중인 대학원 과정이 현재 우수인재 점수의 기반입니다.",
+        "您在读的研究生课程是当前优秀人才评分的基础。",
+      ),
+    },
+  ],
+  strategies: [
+    {
+      id: "language-upgrade",
+      label: lt("Option A: Language upgrade", "옵션 A: 언어 점수 업그레이드", "选项 A：语言提升"),
+      points: 15,
+      status: "available",
+      action: lt(
+        "Advance from TOPIK Level 4 toward the KIIP completion bonus path.",
+        "TOPIK 4급에서 KIIP 이수 보너스 경로로 점수를 끌어올리세요.",
+        "从 TOPIK 4 级提升到 KIIP 完成加分路径。",
+      ),
+      locality: {
+        label: lt(
+          "Nearby KIIP cohort: Mapo-gu Multicultural Family Center. Next intake opens in July.",
+          "근처 KIIP 과정: 마포구 가족센터. 다음 접수는 7월에 열립니다.",
+          "附近 KIIP 班：麻浦区家庭中心。下一期预计 7 月开放报名。",
+        ),
+        nextIntake: "2026-07-08",
+        url: "https://www.socinet.go.kr",
+      },
+    },
+    {
+      id: "volunteer-hours",
+      label: lt("Option B: Community service", "옵션 B: 봉사활동", "选项 B：社区服务"),
+      points: 5,
+      status: "available",
+      action: lt(
+        "Log 50 verified hours through the 1365 volunteer portal over the next year.",
+        "향후 1년 동안 1365 자원봉사포털에서 인증 봉사 50시간을 기록하세요.",
+        "未来一年通过 1365 志愿服务平台记录 50 小时认证服务。",
+      ),
+      locality: {
+        label: lt(
+          "Mapo Volunteer Center posts weekend roles that fit student schedules.",
+          "마포구 자원봉사센터에는 학생 일정에 맞는 주말 활동이 올라옵니다.",
+          "麻浦志愿者中心会发布适合学生时间的周末活动。",
+        ),
+        url: "https://www.1365.go.kr",
+      },
+    },
+    {
+      id: "graduation-milestone",
+      label: lt("Option C: Academic milestone", "옵션 C: 학업 마일스톤", "选项 C：学业节点"),
+      points: 7,
+      status: "locked",
+      action: lt(
+        "Clear your upcoming domestic master's graduation milestone next year.",
+        "내년에 예정된 국내 석사 졸업 요건을 공식적으로 완료하세요.",
+        "明年正式完成韩国硕士毕业节点。",
+      ),
+      locality: {
+        label: lt(
+          "Ask your university international office for the graduation certificate timeline.",
+          "대학 국제처에 졸업증명서 발급 일정을 확인하세요.",
+          "请向学校国际处确认毕业证明开具时间。",
+        ),
+      },
+    },
+  ],
+};
+
+export const mockFacilities: Facility[] = [
+  {
+    id: "facility-mapo-art-center",
+    slug: "mapo-art-center",
+    name: lt("Mapo Art Center", "마포아트센터", "麻浦艺术中心"),
+    district: "마포구",
+    address: "서울특별시 마포구 대흥로20길 28",
+    mapQuery: "Mapo Art Center sports center Seoul",
+    coords: { lat: 37.5497, lng: 126.9457 },
+    hours: {
+      open: "09:00",
+      close: "18:00",
+      note: lt(
+        "Standard public desk hours are 9:00 AM-6:00 PM.",
+        "일반 안내 데스크 운영 시간은 오전 9시부터 오후 6시까지입니다.",
+        "公共服务台标准时间为上午 9 点至下午 6 点。",
+      ),
+    },
+    sports: ["swimming", "weights", "fitness"],
+    pricing: [
+      {
+        tier: lt("Student/local resident gym tier", "학생·지역 주민 헬스장 요금", "学生/本地居民健身房价格"),
+        monthly: 45000,
+        residentDiscount: true,
+      },
+      {
+        tier: lt("Swimming monthly access", "월 수영 이용권", "游泳月票"),
+        monthly: 50000,
+        residentDiscount: true,
+      },
+    ],
+    requiredId: "ARC",
+    paymentAccepted: ["local-card"],
+    indoorShoeRule: true,
+    koreanReceptionPrompt:
+      "안녕하세요, 이 지역 주민 할인을 받아 헬스/수영 회원가입을 하고 싶습니다. 외국인등록증 여기 있습니다.",
+  },
+  {
+    id: "facility-seongdong-sports-center",
+    slug: "seongdong-sports-center",
+    name: lt("Seongdong Public Sports Center", "성동구민종합체육센터", "城东区民综合体育中心"),
+    district: "성동구",
+    address: "서울특별시 성동구 왕십리로 89",
+    mapQuery: "Seongdong public sports center Seoul",
+    coords: { lat: 37.5484, lng: 127.0443 },
+    hours: { open: "06:00", close: "22:00" },
+    sports: ["swimming", "weights", "fitness", "court"],
+    pricing: [
+      { tier: lt("Public gym monthly pass", "공공 헬스 월 이용권", "公共健身房月票"), monthly: 42000, residentDiscount: true },
+    ],
+    requiredId: "ARC",
+    paymentAccepted: ["local-card", "cash"],
+    indoorShoeRule: true,
+    koreanReceptionPrompt:
+      "안녕하세요, 이 지역 주민 할인을 받아 헬스/수영 회원가입을 하고 싶습니다. 외국인등록증 여기 있습니다.",
+  },
+  {
+    id: "facility-yongsan-community-pool",
+    slug: "yongsan-community-pool",
+    name: lt("Yongsan Community Pool", "용산구민 수영장", "龙山区民游泳馆"),
+    district: "용산구",
+    address: "서울특별시 용산구 녹사평대로 150",
+    mapQuery: "Yongsan community swimming pool Seoul",
+    coords: { lat: 37.532, lng: 126.9904 },
+    hours: { open: "07:00", close: "21:00" },
+    sports: ["swimming", "fitness"],
+    pricing: [
+      { tier: lt("Lap swim monthly pass", "자유수영 월 이용권", "自由泳月票"), monthly: 48000, residentDiscount: true },
+    ],
+    requiredId: "ARC",
+    paymentAccepted: ["local-card"],
+    indoorShoeRule: true,
+    koreanReceptionPrompt:
+      "안녕하세요, 이 지역 주민 할인을 받아 헬스/수영 회원가입을 하고 싶습니다. 외국인등록증 여기 있습니다.",
+  },
+  {
+    id: "facility-jongno-fitness-hub",
+    slug: "jongno-fitness-hub",
+    name: lt("Jongno Fitness Hub", "종로 생활체육관", "钟路生活体育馆"),
+    district: "종로구",
+    address: "서울특별시 종로구 종로 38",
+    mapQuery: "Jongno public fitness center Seoul",
+    coords: { lat: 37.5701, lng: 126.982 },
+    hours: { open: "08:00", close: "20:00" },
+    sports: ["weights", "yoga", "fitness"],
+    pricing: [
+      { tier: lt("Fitness program monthly access", "생활체육 월 프로그램", "健身课程月票"), monthly: 40000, residentDiscount: true },
+    ],
+    requiredId: "ARC",
+    paymentAccepted: ["local-card", "cash"],
+    indoorShoeRule: true,
+    koreanReceptionPrompt:
+      "안녕하세요, 이 지역 주민 할인을 받아 헬스/수영 회원가입을 하고 싶습니다. 외국인등록증 여기 있습니다.",
+  },
+  {
+    id: "facility-gangnam-community-gym",
+    slug: "gangnam-community-gym",
+    name: lt("Gangnam Community Gym", "강남구민체육관", "江南区民体育馆"),
+    district: "강남구",
+    address: "서울특별시 강남구 학동로 426",
+    mapQuery: "Gangnam public gym Seoul",
+    coords: { lat: 37.5172, lng: 127.0473 },
+    hours: { open: "06:00", close: "22:00" },
+    sports: ["weights", "fitness", "court"],
+    pricing: [
+      { tier: lt("Resident gym tier", "지역 주민 헬스 요금", "居民健身房价格"), monthly: 50000, residentDiscount: true },
+    ],
+    requiredId: "ARC",
+    paymentAccepted: ["local-card"],
+    indoorShoeRule: true,
+    koreanReceptionPrompt:
+      "안녕하세요, 이 지역 주민 할인을 받아 헬스/수영 회원가입을 하고 싶습니다. 외국인등록증 여기 있습니다.",
+  },
+];
 
 export const supportPrograms: SupportProgram[] = [
   {

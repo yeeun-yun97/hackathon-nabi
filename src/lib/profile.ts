@@ -13,9 +13,14 @@ export const defaultProfile: UserProfile = {
   maritalStatus: "single",
   employmentStatus: "job-seeking",
   familyStatus: "single-household",
-  hasVisa: "unsure",
+  hasVisa: "yes",
   multiculturalFamily: "unsure",
-  visaExpiryDate: "",
+  visaExpiryDate: "2026-11-12",
+  degreeLevel: "master",
+  topikLevel: "4",
+  kiipStage: "5",
+  currentVisaSubtype: "D-2",
+  district: "마포구",
 };
 
 export function readStoredProfile(): UserProfile {

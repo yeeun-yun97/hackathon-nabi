@@ -1,13 +1,18 @@
 import type {
   AgeGroup,
   City,
+  DegreeLevel,
   EmploymentStatus,
   FamilyStatus,
   Gender,
   HousingStatus,
+  KiipStage,
   MaritalStatus,
   ResidencyStatus,
   ServiceCategory,
+  SeoulDistrict,
+  TopikLevel,
+  VisaSubtype,
   YesNoUnsure,
 } from "@/lib/data";
 
@@ -44,6 +49,8 @@ const en = {
   // header
   "header.brand.subtitle": "Your local guide",
   "header.nav.discover": "Discover",
+  "header.nav.visa": "Visa Horizon",
+  "header.nav.health": "Health & Recreation",
   "header.nav.checklists": "Checklists",
   "header.nav.faq": "FAQ",
   "header.nav.community": "Community",
@@ -168,6 +175,9 @@ const en = {
   "onboarding.aboutTitle": "About you",
   "onboarding.aboutDescription":
     "This information is only used to decide which categories (immigration, healthcare, labour, education, etc.) to prioritize for you.",
+  "onboarding.educationTitle": "Education & visa progress",
+  "onboarding.educationDescription":
+    "These details power the F-2-7 horizon tracker and nearby language or milestone recommendations.",
   "onboarding.field.preferredLanguage": "Preferred language",
   "onboarding.field.nationality": "Nationality",
   "onboarding.field.nationalityPlaceholder": "e.g. Vietnam, USA",
@@ -183,6 +193,11 @@ const en = {
   "onboarding.field.visaExpiry": "Visa expiry date",
   "onboarding.field.visaExpiryNote":
     "Leave blank if you have no visa or are not sure.",
+  "onboarding.field.degreeLevel": "Degree level",
+  "onboarding.field.topikLevel": "TOPIK level",
+  "onboarding.field.kiipStage": "KIIP stage",
+  "onboarding.field.currentVisaSubtype": "Current visa type",
+  "onboarding.field.district": "Seoul district",
   "onboarding.submit": "Save and find recommendations",
 
   // onboarding option labels
@@ -225,6 +240,39 @@ const en = {
   "option.yesNo.yes": "Yes",
   "option.yesNo.no": "No",
   "option.yesNo.unsure": "Not sure",
+  "option.degree.none": "No degree",
+  "option.degree.high-school": "High school",
+  "option.degree.bachelor": "Bachelor's",
+  "option.degree.master": "Master's",
+  "option.degree.phd": "PhD",
+  "option.topik.none": "No TOPIK",
+  "option.topik.1": "TOPIK Level 1",
+  "option.topik.2": "TOPIK Level 2",
+  "option.topik.3": "TOPIK Level 3",
+  "option.topik.4": "TOPIK Level 4",
+  "option.topik.5": "TOPIK Level 5",
+  "option.topik.6": "TOPIK Level 6",
+  "option.kiip.none": "No KIIP",
+  "option.kiip.0": "KIIP Stage 0",
+  "option.kiip.1": "KIIP Stage 1",
+  "option.kiip.2": "KIIP Stage 2",
+  "option.kiip.3": "KIIP Stage 3",
+  "option.kiip.4": "KIIP Stage 4",
+  "option.kiip.5": "KIIP Stage 5",
+  "option.visaSubtype.D-2": "D-2 Student",
+  "option.visaSubtype.D-10": "D-10 Job seeker",
+  "option.visaSubtype.E-7": "E-7 Professional",
+  "option.visaSubtype.F-2-7": "F-2-7 Excellence Talent",
+  "option.visaSubtype.F-5": "F-5 Permanent resident",
+  "option.visaSubtype.other": "Other",
+  "option.visaSubtype.unsure": "Not sure",
+  "option.district.": "Not selected",
+  "option.district.마포구": "Mapo-gu",
+  "option.district.성동구": "Seongdong-gu",
+  "option.district.강남구": "Gangnam-gu",
+  "option.district.종로구": "Jongno-gu",
+  "option.district.용산구": "Yongsan-gu",
+  "option.district.기타": "Other Seoul district",
 
   // discover page
   "discover.eyebrow": "Discover support",
@@ -370,6 +418,8 @@ const ko = {
   // header
   "header.brand.subtitle": "당신의 한국 생활 가이드",
   "header.nav.discover": "정보 찾기",
+  "header.nav.visa": "비자 호라이즌",
+  "header.nav.health": "건강과 여가",
   "header.nav.checklists": "체크리스트",
   "header.nav.faq": "자주 묻는 질문",
   "header.nav.community": "커뮤니티",
@@ -488,6 +538,9 @@ const ko = {
   "onboarding.aboutTitle": "기본 정보",
   "onboarding.aboutDescription":
     "이 정보는 어떤 카테고리(이민, 의료, 노동, 교육 등)가 더 중요한지를 판단해 추천 우선순위를 정하는 데에만 사용됩니다.",
+  "onboarding.educationTitle": "학업 및 비자 진행 상황",
+  "onboarding.educationDescription":
+    "이 정보는 F-2-7 호라이즌 트래커와 주변 언어·학업 마일스톤 추천에 사용됩니다.",
   "onboarding.field.preferredLanguage": "선호 언어",
   "onboarding.field.nationality": "국적",
   "onboarding.field.nationalityPlaceholder": "예: 베트남, 미국",
@@ -503,6 +556,11 @@ const ko = {
   "onboarding.field.visaExpiry": "비자 만료일",
   "onboarding.field.visaExpiryNote":
     "비자가 없거나 확실하지 않으면 비워두어도 됩니다.",
+  "onboarding.field.degreeLevel": "학위 수준",
+  "onboarding.field.topikLevel": "TOPIK 급수",
+  "onboarding.field.kiipStage": "KIIP 단계",
+  "onboarding.field.currentVisaSubtype": "현재 비자 종류",
+  "onboarding.field.district": "서울 자치구",
   "onboarding.submit": "저장하고 추천 받기",
 
   "option.age.under-18": "18세 미만",
@@ -544,6 +602,39 @@ const ko = {
   "option.yesNo.yes": "예",
   "option.yesNo.no": "아니오",
   "option.yesNo.unsure": "잘 모르겠어요",
+  "option.degree.none": "학위 없음",
+  "option.degree.high-school": "고등학교",
+  "option.degree.bachelor": "학사",
+  "option.degree.master": "석사",
+  "option.degree.phd": "박사",
+  "option.topik.none": "TOPIK 없음",
+  "option.topik.1": "TOPIK 1급",
+  "option.topik.2": "TOPIK 2급",
+  "option.topik.3": "TOPIK 3급",
+  "option.topik.4": "TOPIK 4급",
+  "option.topik.5": "TOPIK 5급",
+  "option.topik.6": "TOPIK 6급",
+  "option.kiip.none": "KIIP 없음",
+  "option.kiip.0": "KIIP 0단계",
+  "option.kiip.1": "KIIP 1단계",
+  "option.kiip.2": "KIIP 2단계",
+  "option.kiip.3": "KIIP 3단계",
+  "option.kiip.4": "KIIP 4단계",
+  "option.kiip.5": "KIIP 5단계",
+  "option.visaSubtype.D-2": "D-2 유학",
+  "option.visaSubtype.D-10": "D-10 구직",
+  "option.visaSubtype.E-7": "E-7 특정활동",
+  "option.visaSubtype.F-2-7": "F-2-7 우수인재",
+  "option.visaSubtype.F-5": "F-5 영주",
+  "option.visaSubtype.other": "기타",
+  "option.visaSubtype.unsure": "잘 모르겠어요",
+  "option.district.": "선택 안 함",
+  "option.district.마포구": "마포구",
+  "option.district.성동구": "성동구",
+  "option.district.강남구": "강남구",
+  "option.district.종로구": "종로구",
+  "option.district.용산구": "용산구",
+  "option.district.기타": "기타 서울 자치구",
 
   // discover
   "discover.eyebrow": "지원 정보 찾기",
@@ -674,6 +765,8 @@ const zh = {
   // header
   "header.brand.subtitle": "您的本地生活向导",
   "header.nav.discover": "探索支持",
+  "header.nav.visa": "签证展望",
+  "header.nav.health": "健康与休闲",
   "header.nav.checklists": "清单",
   "header.nav.faq": "常见问题",
   "header.nav.community": "社区",
@@ -784,6 +877,9 @@ const zh = {
   "onboarding.aboutTitle": "关于您",
   "onboarding.aboutDescription":
     "这些信息仅用于判断哪些类别（移民、医疗、劳动、教育等）对您更重要，以排序推荐。",
+  "onboarding.educationTitle": "教育与签证进度",
+  "onboarding.educationDescription":
+    "这些信息会用于 F-2-7 展望追踪器，以及附近语言课程和学业节点建议。",
   "onboarding.field.preferredLanguage": "首选语言",
   "onboarding.field.nationality": "国籍",
   "onboarding.field.nationalityPlaceholder": "例如：越南、美国",
@@ -798,6 +894,11 @@ const zh = {
   "onboarding.field.multicultural": "是否为多文化家庭？",
   "onboarding.field.visaExpiry": "签证到期日",
   "onboarding.field.visaExpiryNote": "若没有签证或不确定，可以留空。",
+  "onboarding.field.degreeLevel": "学历",
+  "onboarding.field.topikLevel": "TOPIK 等级",
+  "onboarding.field.kiipStage": "KIIP 阶段",
+  "onboarding.field.currentVisaSubtype": "当前签证类型",
+  "onboarding.field.district": "首尔区",
   "onboarding.submit": "保存并查看推荐",
 
   "option.age.under-18": "18 岁以下",
@@ -839,6 +940,39 @@ const zh = {
   "option.yesNo.yes": "是",
   "option.yesNo.no": "否",
   "option.yesNo.unsure": "不确定",
+  "option.degree.none": "无学历",
+  "option.degree.high-school": "高中",
+  "option.degree.bachelor": "本科",
+  "option.degree.master": "硕士",
+  "option.degree.phd": "博士",
+  "option.topik.none": "无 TOPIK",
+  "option.topik.1": "TOPIK 1 级",
+  "option.topik.2": "TOPIK 2 级",
+  "option.topik.3": "TOPIK 3 级",
+  "option.topik.4": "TOPIK 4 级",
+  "option.topik.5": "TOPIK 5 级",
+  "option.topik.6": "TOPIK 6 级",
+  "option.kiip.none": "无 KIIP",
+  "option.kiip.0": "KIIP 第 0 阶段",
+  "option.kiip.1": "KIIP 第 1 阶段",
+  "option.kiip.2": "KIIP 第 2 阶段",
+  "option.kiip.3": "KIIP 第 3 阶段",
+  "option.kiip.4": "KIIP 第 4 阶段",
+  "option.kiip.5": "KIIP 第 5 阶段",
+  "option.visaSubtype.D-2": "D-2 留学",
+  "option.visaSubtype.D-10": "D-10 求职",
+  "option.visaSubtype.E-7": "E-7 专业",
+  "option.visaSubtype.F-2-7": "F-2-7 优秀人才",
+  "option.visaSubtype.F-5": "F-5 永久居留",
+  "option.visaSubtype.other": "其他",
+  "option.visaSubtype.unsure": "不确定",
+  "option.district.": "未选择",
+  "option.district.마포구": "麻浦区",
+  "option.district.성동구": "城东区",
+  "option.district.강남구": "江南区",
+  "option.district.종로구": "钟路区",
+  "option.district.용산구": "龙山区",
+  "option.district.기타": "其他首尔地区",
 
   "discover.eyebrow": "探索支持",
   "discover.title": "查找您身边可获得的公共帮助与本地服务。",
@@ -1043,6 +1177,11 @@ export type OptionGroupValueMap = {
   employment: EmploymentStatus;
   family: FamilyStatus;
   yesNo: YesNoUnsure;
+  degree: DegreeLevel;
+  topik: TopikLevel;
+  kiip: KiipStage;
+  visaSubtype: VisaSubtype;
+  district: SeoulDistrict | "";
 };
 
 export function translateOption<G extends keyof OptionGroupValueMap>(

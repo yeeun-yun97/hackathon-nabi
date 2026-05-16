@@ -8,13 +8,18 @@ import {
   cities,
   type AgeGroup,
   type City,
+  type DegreeLevel,
   type EmploymentStatus,
   type FamilyStatus,
   type Gender,
   type HousingStatus,
+  type KiipStage,
   type MaritalStatus,
   type ResidencyStatus,
+  type SeoulDistrict,
+  type TopikLevel,
   type UserProfile,
+  type VisaSubtype,
   type YesNoUnsure,
 } from "@/lib/data";
 import { defaultProfile, writeStoredProfile } from "@/lib/profile";
@@ -61,6 +66,19 @@ const familyStatuses: FamilyStatus[] = [
   "extended-family",
 ];
 const yesNoUnsureOptions: YesNoUnsure[] = ["yes", "no", "unsure"];
+const degreeLevels: DegreeLevel[] = ["none", "high-school", "bachelor", "master", "phd"];
+const topikLevels: TopikLevel[] = ["none", "1", "2", "3", "4", "5", "6"];
+const kiipStages: KiipStage[] = ["none", "0", "1", "2", "3", "4", "5"];
+const visaSubtypes: VisaSubtype[] = ["D-2", "D-10", "E-7", "F-2-7", "F-5", "other", "unsure"];
+const seoulDistricts: Array<SeoulDistrict | ""> = [
+  "",
+  "마포구",
+  "성동구",
+  "강남구",
+  "종로구",
+  "용산구",
+  "기타",
+];
 
 const cityCoordinates: Record<City, { latitude: number; longitude: number }> = {
   서울시: { latitude: 37.5665, longitude: 126.978 },
@@ -336,6 +354,55 @@ export function OnboardingForm() {
             {t("onboarding.field.visaExpiryNote")}
           </span>
         </label>
+      </section>
+
+      <section className="grid gap-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5">
+        <div>
+          <h2 className="text-2xl font-black tracking-[-0.03em]">
+            {t("onboarding.educationTitle")}
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-[#52615b]">
+            {t("onboarding.educationDescription")}
+          </p>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          <SelectField
+            label={t("onboarding.field.degreeLevel")}
+            onChange={(value) => updateProfile({ degreeLevel: value })}
+            options={degreeLevels.map((id) => ({ id, label: tOption("degree", id) }))}
+            value={profile.degreeLevel}
+          />
+          <SelectField
+            label={t("onboarding.field.topikLevel")}
+            onChange={(value) => updateProfile({ topikLevel: value })}
+            options={topikLevels.map((id) => ({ id, label: tOption("topik", id) }))}
+            value={profile.topikLevel}
+          />
+          <SelectField
+            label={t("onboarding.field.kiipStage")}
+            onChange={(value) => updateProfile({ kiipStage: value })}
+            options={kiipStages.map((id) => ({ id, label: tOption("kiip", id) }))}
+            value={profile.kiipStage}
+          />
+          <SelectField
+            label={t("onboarding.field.currentVisaSubtype")}
+            onChange={(value) => updateProfile({ currentVisaSubtype: value })}
+            options={visaSubtypes.map((id) => ({
+              id,
+              label: tOption("visaSubtype", id),
+            }))}
+            value={profile.currentVisaSubtype}
+          />
+          <SelectField
+            label={t("onboarding.field.district")}
+            onChange={(value) => updateProfile({ district: value })}
+            options={seoulDistricts.map((id) => ({
+              id,
+              label: tOption("district", id),
+            }))}
+            value={profile.district}
+          />
+        </div>
       </section>
 
       <button

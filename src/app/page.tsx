@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { AiChatPreview } from "@/components/ai-chat-preview";
 import { InfoExplorer } from "@/components/info-explorer";
 import { SiteHeader } from "@/components/site-header";
@@ -42,6 +44,29 @@ export default function Home() {
       <SiteHeader />
 
       <main>
+        <section className="mx-auto max-w-7xl px-6 pt-4">
+          <Link
+            className="group flex flex-col gap-3 rounded-[2rem] bg-[#17211f] p-5 text-white shadow-xl shadow-teal-100 transition hover:-translate-y-0.5 sm:flex-row sm:items-center sm:justify-between"
+            href="/visa/notification"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#10c4a9] text-xl">
+                Bell
+              </div>
+              <div>
+                <p className="text-sm font-black text-[#10c4a9]">Visa Status Update</p>
+                <p className="mt-1 text-sm font-bold leading-6 text-white/80">
+                  Your current residence permit expires in 180 days. Based on your updated
+                  employment profile, you may be eligible for an EU Blue Card. Review your options.
+                </p>
+              </div>
+            </div>
+            <span className="w-fit rounded-full bg-white px-4 py-2 text-sm font-black text-[#17211f] transition group-hover:bg-[#ed9805] group-hover:text-white">
+              Open mock lock screen
+            </span>
+          </Link>
+        </section>
+
         <section className="relative mx-auto grid w-full max-w-7xl gap-12 px-6 pb-20 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pt-20">
           <div className="absolute left-1/2 top-10 -z-10 size-[520px] -translate-x-1/2 rounded-full bg-[#10c4a9]/15 blur-3xl" />
           <div>
@@ -129,6 +154,27 @@ export default function Home() {
                 </details>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-6 pb-20">
+          <div className="grid gap-6 rounded-[2.5rem] bg-[#10c4a9] p-8 text-white shadow-xl shadow-teal-100 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <p className="font-black text-white/70">Health & Recreation</p>
+              <h2 className="mt-3 max-w-2xl text-4xl font-black tracking-[-0.04em]">
+                Compare public gyms, pools, and first-visit rules near your district.
+              </h2>
+              <p className="mt-5 max-w-2xl leading-7 text-white/80">
+                See ARC requirements, resident pricing, local-card payment notes, indoor-shoe rules,
+                and a Korean desk prompt before you visit.
+              </p>
+            </div>
+            <Link
+              className="w-fit rounded-full bg-white px-6 py-4 text-sm font-black text-[#17211f] transition hover:-translate-y-0.5"
+              href="/health"
+            >
+              Explore facilities
+            </Link>
           </div>
         </section>
 

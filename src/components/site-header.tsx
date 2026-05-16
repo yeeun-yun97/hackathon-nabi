@@ -8,6 +8,8 @@ import type { TranslationKey } from "@/lib/i18n";
 
 const navItems: Array<{ href: string; key: TranslationKey }> = [
   { href: "/discover", key: "header.nav.discover" },
+  { href: "/visa", key: "header.nav.visa" },
+  { href: "/health", key: "header.nav.health" },
   { href: "/checklists", key: "header.nav.checklists" },
   { href: "/faq", key: "header.nav.faq" },
   { href: "/community", key: "header.nav.community" },
