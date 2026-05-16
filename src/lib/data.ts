@@ -1000,6 +1000,306 @@ export const faqItems: FaqItem[] = [
     category: "legal",
     cities: ["all"],
   },
+  {
+    id: "faq-5",
+    question: lt(
+      "How do I open a Korean bank account as a foreigner?",
+      "외국인이 한국 은행 계좌를 어떻게 개설하나요?",
+      "外国人如何在韩国开设银行账户？",
+    ),
+    answer: lt(
+      "Bring your passport, Alien Registration Card (ARC), and a Korean phone number. Most major banks (KB, Shinhan, Woori, Hana) have foreigner-friendly branches. Online banking and overseas remittance often require additional verification, so ask at the counter.",
+      "여권, 외국인등록증, 한국 휴대폰 번호를 지참하세요. KB·신한·우리·하나 등 대부분의 주요 은행에 외국인 친화 지점이 있습니다. 인터넷뱅킹과 해외송금은 추가 인증이 필요할 수 있으니 창구에서 미리 문의하세요.",
+      "请携带护照、外国人登录证（ARC）和韩国手机号。KB、新韩、友利、韩亚等主要银行都有外国人友好分行。网银和海外汇款通常需要额外验证，请在柜台咨询。",
+    ),
+    category: "finances-spending",
+    cities: ["all"],
+  },
+  {
+    id: "faq-6",
+    question: lt(
+      "How does the Korean National Health Insurance work for foreigners?",
+      "외국인은 한국 국민건강보험을 어떻게 이용하나요?",
+      "外国人如何使用韩国国民健康保险？",
+    ),
+    answer: lt(
+      "Foreigners staying 6 months or longer are usually required to enroll in National Health Insurance (NHIS). It covers a large share of clinic and hospital costs. Bring your ARC and insurance card to medical visits. Check the NHIS website or call 1577-1000 (English available).",
+      "6개월 이상 체류하는 외국인은 보통 국민건강보험(NHIS)에 의무 가입됩니다. 의원·병원 비용의 상당 부분을 보장합니다. 진료 시 외국인등록증과 건강보험증을 지참하세요. 자세한 내용은 NHIS 홈페이지 또는 1577-1000(영어 가능)에 문의하세요.",
+      "在韩居留满 6 个月以上的外国人通常需强制加入国民健康保险（NHIS）。该保险可覆盖大部分门诊和住院费用。就诊时请携带外国人登录证和保险卡。详情请咨询 NHIS 官网或拨打 1577-1000（提供英语服务）。",
+    ),
+    category: "safety-healthcare",
+    cities: ["all"],
+  },
+  {
+    id: "faq-7",
+    question: lt(
+      "What is a T-money card and how do I use it?",
+      "T-money 카드는 무엇이고 어떻게 사용하나요?",
+      "T-money 卡是什么，如何使用？",
+    ),
+    answer: lt(
+      "T-money is a rechargeable transit card used on subways, buses, and many taxis nationwide. Buy one at any convenience store (CU, GS25, 7-Eleven) for about 2,500-4,000 won and recharge with cash at the same stores or at subway machines. Tap when entering and exiting to get transfer discounts.",
+      "T-money는 전국 지하철·버스·일부 택시에서 사용할 수 있는 충전식 교통카드입니다. 편의점(CU, GS25, 세븐일레븐)에서 약 2,500~4,000원에 구매하고 같은 편의점이나 지하철 충전기에서 현금으로 충전합니다. 환승 할인을 받으려면 승하차 시 모두 태그하세요.",
+      "T-money 是全国地铁、公交和部分出租车通用的可充值交通卡。可在便利店（CU、GS25、7-Eleven）以约 2,500~4,000 韩元购买，并在便利店或地铁充值机用现金充值。上下车都要刷卡才能获得换乘折扣。",
+    ),
+    category: "transport",
+    cities: ["all"],
+  },
+  {
+    id: "faq-8",
+    question: lt(
+      "How can I get a Korean mobile phone plan as a foreigner?",
+      "외국인이 한국 휴대폰 요금제는 어떻게 가입하나요?",
+      "外国人如何办理韩国手机套餐？",
+    ),
+    answer: lt(
+      "Postpaid plans (KT, SKT, LG U+) usually require an ARC and a Korean bank account. If you do not have an ARC yet, prepaid SIM cards are widely available at the airport and convenience stores. Budget MVNO carriers (알뜰폰) like KT M mobile or SK 7mobile offer cheaper plans with the same coverage.",
+      "후불제 요금제(KT, SKT, LG U+)는 보통 외국인등록증과 한국 은행 계좌가 필요합니다. 외국인등록증이 아직 없다면 공항이나 편의점에서 선불 유심을 쉽게 구할 수 있습니다. 알뜰폰(KT M모바일, SK 7모바일 등)은 같은 통신망을 사용하면서 더 저렴합니다.",
+      "后付费套餐（KT、SKT、LG U+）通常需要外国人登录证和韩国银行账户。如果尚未取得 ARC，可在机场或便利店购买预付费 SIM 卡。알뜰폰（如 KT M mobile、SK 7mobile）使用相同网络但价格更便宜。",
+    ),
+    category: "finances-spending",
+    cities: ["all"],
+  },
+  {
+    id: "faq-9",
+    question: lt(
+      "Where do I report my address change after moving?",
+      "이사한 뒤 주소 변경은 어디에서 신고하나요?",
+      "搬家后在哪里申报地址变更？",
+    ),
+    answer: lt(
+      "Foreign residents must report a new address within 14 days of moving. Visit the local 행정복지센터 (community service center) or the immigration office in your area with your ARC and proof of residence (lease contract or housing confirmation). Late reporting can result in a fine.",
+      "외국인 거주자는 이사 후 14일 이내에 주소 변경을 신고해야 합니다. 외국인등록증과 거주 증빙(임대 계약서 또는 거주 확인서)을 가지고 가까운 행정복지센터 또는 출입국 관리소를 방문하세요. 신고가 늦으면 과태료가 부과될 수 있습니다.",
+      "外国居民须在搬家后 14 天内申报地址变更。请携带外国人登录证和居住证明（租赁合同或居住确认书）前往附近的行政福祉中心或出入境管理事务所。逾期申报可能会被处以罚款。",
+    ),
+    category: "citizenship",
+    cities: ["all"],
+  },
+  {
+    id: "faq-10",
+    question: lt(
+      "What should I do in a medical emergency?",
+      "의료 응급 상황에서는 어떻게 해야 하나요?",
+      "遇到医疗紧急情况该怎么办？",
+    ),
+    answer: lt(
+      "Call 119 for ambulances and fire emergencies — operators can connect you to an English interpreter. For non-emergency medical questions in English, call 1339. Bring your passport or ARC and insurance card if possible. Major hospitals like Severance and Samsung Medical Center have international clinics.",
+      "구급차나 화재 응급 상황은 119로 전화하세요. 영어 통역 연결이 가능합니다. 응급은 아니지만 의료 관련 영어 상담이 필요하면 1339에 전화하세요. 가능하면 여권 또는 외국인등록증과 보험증을 가져가세요. 세브란스·삼성서울병원 등 대형 병원에는 국제진료센터가 있습니다.",
+      "拨打 119 可呼叫救护车和报告火警，接线员可转接英语翻译。非紧急医疗咨询（提供英语）可拨打 1339。如有可能，请携带护照或外国人登录证和保险卡。Severance、三星首尔等大型医院设有国际诊疗中心。",
+    ),
+    category: "safety-healthcare",
+    cities: ["all"],
+  },
+  {
+    id: "faq-11",
+    question: lt(
+      "Can I work part-time on a student (D-2) visa?",
+      "유학생(D-2) 비자로 아르바이트를 할 수 있나요?",
+      "持留学（D-2）签证可以做兼职吗？",
+    ),
+    answer: lt(
+      "Yes, but you must first apply for a part-time work permit (시간제취업허가) at your immigration office. Hour limits depend on your TOPIK level and academic level (typically 10-25 hours per week during semesters, more during vacations). Working without permission can affect future visa applications.",
+      "가능하지만 먼저 출입국 관리소에서 시간제취업허가를 신청해야 합니다. 허용 시간은 TOPIK 등급과 학위 과정에 따라 다르며, 보통 학기 중 주 10~25시간, 방학 중에는 더 많이 일할 수 있습니다. 허가 없이 일하면 향후 비자 심사에 불이익이 있을 수 있습니다.",
+      "可以，但必须先在出入境管理事务所申请时间制就业许可（시간제취업허가）。每周可工作小时数取决于 TOPIK 等级和学历，通常学期内为每周 10~25 小时，假期可更多。未经许可工作可能影响今后的签证审核。",
+    ),
+    category: "labour-employment",
+    cities: ["all"],
+  },
+  {
+    id: "faq-12",
+    question: lt(
+      "How do I get a Korean driver's license as a foreigner?",
+      "외국인은 한국 운전면허증을 어떻게 발급받나요?",
+      "外国人如何取得韩国驾照？",
+    ),
+    answer: lt(
+      "If your country has a license exchange agreement with Korea, you can convert your existing license at a Driver's License Examination Office. Bring your passport, ARC, original license, an apostilled translation, and a passport photo. Otherwise, you must take the written and road tests. Visit the safedriving.or.kr site for the latest list of eligible countries.",
+      "한국과 면허 상호인정 협정이 있는 국가의 면허는 운전면허시험장에서 한국 면허로 교환할 수 있습니다. 여권, 외국인등록증, 원본 면허증, 아포스티유 번역본, 여권용 사진을 지참하세요. 협정이 없다면 학과·도로주행 시험을 응시해야 합니다. 최신 인정 국가 목록은 safedriving.or.kr에서 확인할 수 있습니다.",
+      "若您所在国家与韩国签有驾照互认协议，可在驾照考试场将原驾照换发为韩国驾照。请携带护照、外国人登录证、原驾照、海牙认证翻译件及护照照片。否则需参加笔试和路考。最新可互认国家名单请见 safedriving.or.kr。",
+    ),
+    category: "transport",
+    cities: ["all"],
+  },
+  {
+    id: "faq-13",
+    question: lt(
+      "Where can I learn Korean for free or low cost?",
+      "한국어를 무료나 저렴한 비용으로 어디에서 배울 수 있나요?",
+      "在哪里可以免费或低价学习韩语？",
+    ),
+    answer: lt(
+      "The Korean Immigration and Integration Program (KIIP, 사회통합프로그램) offers free Korean and culture classes and counts toward visa points. Multicultural family centers and 외국인주민센터 also run subsidized classes. Online options include the free King Sejong Institute (sejonghakdang.org) courses.",
+      "사회통합프로그램(KIIP)은 무료로 한국어·문화 수업을 제공하며 비자 가점에도 반영됩니다. 다문화가족지원센터와 외국인주민센터에서도 저렴한 수업을 운영합니다. 온라인으로는 세종학당(sejonghakdang.org)의 무료 강좌가 있습니다.",
+      "社会统合项目（KIIP）免费提供韩语和文化课程，并可计入签证加分。多文化家庭支援中心和外国人居民中心也开设低价课程。在线学习可使用世宗学堂（sejonghakdang.org）的免费课程。",
+    ),
+    category: "education-skill-building",
+    cities: ["all"],
+  },
+  {
+    id: "faq-14",
+    question: lt(
+      "What documents do I need to rent an apartment in Korea?",
+      "한국에서 집을 임대하려면 어떤 서류가 필요한가요?",
+      "在韩国租房需要哪些文件？",
+    ),
+    answer: lt(
+      "You generally need a passport, ARC, proof of income or employment (or a guarantor), and a deposit. Korean rentals use 전세 (large lump-sum deposit) or 월세 (smaller deposit + monthly rent). Always register the contract at the local office (확정일자) to protect your deposit, and confirm the property has no major liens via the 등기부등본.",
+      "일반적으로 여권, 외국인등록증, 소득·재직 증빙(또는 보증인), 보증금이 필요합니다. 한국 임대 형태는 전세(큰 보증금)와 월세(보증금+월세)로 나뉩니다. 보증금 보호를 위해 반드시 동주민센터에서 확정일자를 받고, 등기부등본으로 권리관계를 확인하세요.",
+      "通常需要护照、外国人登录证、收入或在职证明（或保证人）以及押金。韩国租房分为전세（大额押金）和월세（小额押金+月租）。请务必到管辖政府部门办理确定日期（확정일자）以保护押金，并通过登记簿誊本（등기부등본）确认房屋无重大权利问题。",
+    ),
+    category: "legal",
+    cities: ["all"],
+  },
+  {
+    id: "faq-15",
+    question: lt(
+      "How does waste sorting and recycling work?",
+      "쓰레기 분리수거는 어떻게 하나요?",
+      "垃圾分类与回收如何进行？",
+    ),
+    answer: lt(
+      "Korea has strict waste sorting rules. General trash must go in district-specific 종량제 봉투 (volume-based bags) sold at convenience stores. Food waste uses separate bags or RFID bins. Recyclables (paper, plastic, glass, cans) are collected on designated days. Check your building or the 행정복지센터 for the local schedule. Improper disposal can result in fines.",
+      "한국은 분리수거 규정이 엄격합니다. 일반 쓰레기는 편의점에서 판매하는 지역별 종량제 봉투에 버려야 합니다. 음식물 쓰레기는 전용 봉투나 RFID 수거함을 사용합니다. 재활용품(종이, 플라스틱, 유리, 캔 등)은 지정된 요일에 배출합니다. 자세한 일정은 거주 건물 또는 행정복지센터에서 확인하세요. 잘못 버리면 과태료가 부과될 수 있습니다.",
+      "韩国垃圾分类规定严格。普通垃圾须装入便利店出售的当地종량제（按量收费）专用袋；厨余垃圾使用专用袋或 RFID 回收桶；可回收物（纸、塑料、玻璃、易拉罐）按指定日收集。具体时间请向所住建筑或行政福祉中心确认。违规丢弃可能被处以罚款。",
+    ),
+    category: "safety-healthcare",
+    cities: ["all"],
+  },
+  {
+    id: "faq-16",
+    question: lt(
+      "What is the 1330 helpline?",
+      "1330 안내 전화는 무엇인가요?",
+      "1330 服务热线是什么？",
+    ),
+    answer: lt(
+      "1330 is the Korea Tourism Organization's 24-hour multilingual helpline (English, Chinese, Japanese, and more). Despite the name, it can also help residents with translation in emergencies, transit confusion, restaurant communication, or general living questions. It's a useful first call when you need quick language help.",
+      "1330은 한국관광공사가 운영하는 24시간 다국어 전화 안내(영어·중국어·일본어 등)입니다. 이름은 관광용이지만, 응급 상황 통역, 교통편 안내, 식당 의사소통, 생활 일반 문의 등 거주자도 이용할 수 있습니다. 빠른 언어 지원이 필요할 때 첫 번째로 걸기 좋습니다.",
+      "1330 是韩国旅游公社运营的 24 小时多语言服务热线（提供英语、中文、日语等）。虽名为旅游热线，但居民也可用于紧急翻译、交通指引、餐厅沟通和生活咨询。需要快速语言帮助时是不错的首选。",
+    ),
+    category: "safety-healthcare",
+    cities: ["all"],
+  },
+  {
+    id: "faq-17",
+    question: lt(
+      "How do I get an Alien Registration Card (ARC)?",
+      "외국인등록증(ARC)은 어떻게 발급받나요?",
+      "如何申请外国人登录证（ARC）？",
+    ),
+    answer: lt(
+      "If you stay in Korea more than 90 days, you must apply for an ARC within 90 days of arrival at your local immigration office. Book an appointment via HiKorea (hikorea.go.kr) and bring your passport, visa, photo, application form, residence proof, and the fee (around 30,000 won). Processing takes 2-3 weeks.",
+      "한국에 90일 이상 체류한다면 입국 후 90일 이내에 거주지 관할 출입국 관리소에서 외국인등록증을 신청해야 합니다. 하이코리아(hikorea.go.kr)에서 방문 예약을 하고, 여권·비자·사진·신청서·거주 증빙·수수료(약 3만 원)를 지참하세요. 발급에는 2~3주가 소요됩니다.",
+      "在韩居留 90 天以上者，须在入境后 90 天内于居住地管辖的出入境管理事务所申请外国人登录证。请通过 HiKorea（hikorea.go.kr）预约，并携带护照、签证、照片、申请表、居住证明及手续费（约 30,000 韩元）。办理需 2~3 周。",
+    ),
+    category: "citizenship",
+    cities: ["all"],
+  },
+  {
+    id: "faq-18",
+    question: lt(
+      "Can I send money home from my Korean account?",
+      "한국 계좌에서 본국으로 송금할 수 있나요?",
+      "可以从韩国账户向境外汇款吗？",
+    ),
+    answer: lt(
+      "Yes. Most banks allow overseas remittance once you complete identity verification. There is an annual limit (commonly USD 50,000 for non-employed foreigners) without extra documentation. Apps like Wise, SentBe, and Hanpass often offer cheaper fees and better exchange rates than bank counters.",
+      "가능합니다. 본인 인증을 마치면 대부분의 은행에서 해외 송금이 가능합니다. 추가 서류 없이 송금 가능한 연간 한도가 있으며(보통 무직 외국인 기준 미화 5만 달러), Wise·센트비·한패스 같은 앱이 은행 창구보다 수수료가 저렴하고 환율이 좋은 경우가 많습니다.",
+      "可以。完成实名认证后，大多数银行均可办理海外汇款。无需额外材料的年汇款限额通常为美元 5 万（无工作外国人为准）。Wise、SentBe、Hanpass 等汇款应用通常比银行柜台手续费更低、汇率更优惠。",
+    ),
+    category: "finances-spending",
+    cities: ["all"],
+  },
+  {
+    id: "faq-19",
+    question: lt(
+      "How do I find a job as a foreigner in Korea?",
+      "외국인이 한국에서 일자리를 어떻게 찾나요?",
+      "外国人在韩国如何找工作？",
+    ),
+    answer: lt(
+      "Popular job boards include WorkNet (work.go.kr), HiKorea, Saramin, JobKorea, and English-friendly sites like Seoul Global Center jobs and LinkedIn. Visa type matters: E-7 (specialty), D-10 (job seeker), and F-series visas have different rules. Job centers (고용센터) and the Seoul Global Center offer free counseling.",
+      "워크넷(work.go.kr), 하이코리아, 사람인, 잡코리아, 그리고 서울글로벌센터 잡포털·링크드인 같은 영어 채용 사이트가 많이 활용됩니다. 비자 종류가 중요한데, E-7(전문직), D-10(구직), F계열 비자에 따라 가능한 업무가 다릅니다. 고용센터와 서울글로벌센터에서 무료 상담을 제공합니다.",
+      "常用招聘网站包括 WorkNet（work.go.kr）、HiKorea、Saramin、JobKorea，以及对英语友好的首尔全球中心招聘版和 LinkedIn。签证种类很关键，E-7（专业职）、D-10（求职）、F 系列签证适用规则不同。就业中心（고용센터）和首尔全球中心提供免费咨询。",
+    ),
+    category: "labour-employment",
+    cities: ["all"],
+  },
+  {
+    id: "faq-20",
+    question: lt(
+      "What are common Korean tax obligations for foreign workers?",
+      "외국인 근로자의 일반적인 세금 의무는 무엇인가요?",
+      "外国劳动者常见的纳税义务有哪些？",
+    ),
+    answer: lt(
+      "Most foreign employees pay income tax through monthly withholding and complete year-end settlement (연말정산) in February. If you stay over 183 days a year, you are usually treated as a Korean resident for tax purposes. Check whether your home country has a tax treaty with Korea. The National Tax Service runs a foreign-language helpline at 1588-0560.",
+      "대부분의 외국인 근로자는 매월 원천징수로 소득세를 납부하고 2월에 연말정산을 합니다. 한 해에 183일 이상 체류하면 일반적으로 거주자로 분류돼 한국 기준 과세를 받습니다. 본국과의 조세조약 여부도 확인하세요. 국세청은 1588-0560에서 외국어 상담을 제공합니다.",
+      "大多数外籍员工通过每月预扣纳税，并在 2 月办理年末结算（연말정산）。一年内停留超过 183 天通常被视为税收居民。请查询本国与韩国是否签有税收协定。国税厅在 1588-0560 提供外语咨询。",
+    ),
+    category: "finances-spending",
+    cities: ["all"],
+  },
+  {
+    id: "faq-21",
+    question: lt(
+      "How do I find an English-speaking doctor or hospital?",
+      "영어 가능한 의사나 병원은 어떻게 찾나요?",
+      "如何找到能说英语的医生或医院？",
+    ),
+    answer: lt(
+      "Major hospitals in Seoul (Severance, Samsung Medical Center, Asan, Seoul National University Hospital) have International Healthcare Centers. The Korea Tourism Organization's Medical Korea page (english.visitkorea.or.kr) lists certified hospitals. For non-urgent guidance, call 1339 (24/7 medical helpline with English support).",
+      "서울 대형 병원(세브란스, 삼성서울병원, 아산, 서울대병원)에는 국제진료센터가 있습니다. 한국관광공사의 메디컬코리아 페이지(english.visitkorea.or.kr)에서 인증 병원을 찾을 수 있습니다. 긴급하지 않은 의료 상담은 1339(24시간 영어 가능)로 문의하세요.",
+      "首尔的大医院（Severance、三星首尔、Asan、首尔大学医院）设有国际诊疗中心。韩国旅游公社的 Medical Korea 页面（english.visitkorea.or.kr）列有认证医院。非紧急医疗咨询可拨打 1339（24 小时英语支持）。",
+    ),
+    category: "safety-healthcare",
+    cities: ["all"],
+  },
+  {
+    id: "faq-22",
+    question: lt(
+      "How do I extend my visa before it expires?",
+      "비자가 만료되기 전에 어떻게 연장하나요?",
+      "签证到期前如何申请延长？",
+    ),
+    answer: lt(
+      "You can apply for an extension up to 4 months before expiry. Book an appointment on HiKorea (hikorea.go.kr), prepare your passport, ARC, application form, supporting documents (employment certificate, tuition receipt, housing proof), and the fee. Apply at least 1 month before expiry to avoid overstay risk.",
+      "비자 연장은 만료 4개월 전부터 신청할 수 있습니다. 하이코리아(hikorea.go.kr)에서 예약하고 여권, 외국인등록증, 신청서, 증빙 서류(재직증명서, 등록금 영수증, 거주 증빙 등), 수수료를 준비하세요. 불법 체류를 피하려면 만료 최소 1개월 전에는 신청하세요.",
+      "签证延长可在到期前 4 个月开始申请。请通过 HiKorea（hikorea.go.kr）预约，并准备护照、外国人登录证、申请表、证明材料（在职证明、学费收据、居住证明等）及手续费。建议至少在到期前 1 个月办理，以免逾期居留。",
+    ),
+    category: "citizenship",
+    cities: ["all"],
+  },
+  {
+    id: "faq-23",
+    question: lt(
+      "Are there free Korean cultural programs for foreigners?",
+      "외국인을 위한 무료 한국 문화 체험 프로그램이 있나요?",
+      "有面向外国人的免费韩国文化体验项目吗？",
+    ),
+    answer: lt(
+      "Yes. The Seoul Global Cultural Center, Korea House, and various 외국인주민센터 hold free or low-cost workshops in cooking, hanbok, pottery, calligraphy, and K-pop dance. The Korea Tourism Organization also lists experience programs. Sign up early because popular sessions fill up quickly.",
+      "있습니다. 서울글로벌문화체험센터, 한국의 집, 외국인주민센터 등에서 요리, 한복, 도자기, 서예, K-pop 댄스 등 무료·저렴한 워크숍을 운영합니다. 한국관광공사에서도 다양한 체험 프로그램을 소개하고 있어요. 인기 세션은 금방 마감되니 일찍 신청하세요.",
+      "有的。首尔全球文化中心、Korea House，以及各地外国人居民中心都开设免费或低价的烹饪、韩服、陶艺、书法、K-pop 舞蹈等工作坊。韩国旅游公社也介绍各种体验项目。热门课程很快满额，请尽早报名。",
+    ),
+    category: "education-skill-building",
+    cities: ["all"],
+  },
+  {
+    id: "faq-24",
+    question: lt(
+      "Where can I get help if I face workplace discrimination or unpaid wages?",
+      "직장 차별이나 임금 체불을 겪으면 어디에서 도움을 받을 수 있나요?",
+      "遇到职场歧视或拖欠工资时该向谁求助？",
+    ),
+    answer: lt(
+      "Contact the Ministry of Employment and Labor at 1350 (multilingual support available) to report unpaid wages, illegal overtime, or discrimination. The Korea Legal Aid Corporation (132) and Migrant Workers Centers also offer free counseling. Keep records of contracts, pay stubs, work hours, and any messages with your employer.",
+      "임금 체불, 부당 초과근무, 차별은 고용노동부 1350(다국어 가능)에 신고할 수 있습니다. 대한법률구조공단(132)과 이주노동자센터에서도 무료 상담을 제공합니다. 계약서, 급여명세서, 근무 시간 기록, 사용자와 주고받은 메시지를 보관하세요.",
+      "可拨打雇佣劳动部 1350（提供多语言）举报拖欠工资、违法加班或歧视。大韩法律救助公团（132）和移居劳动者中心也提供免费咨询。请保留合同、工资单、工作时间记录及与雇主的沟通信息。",
+    ),
+    category: "labour-employment",
+    cities: ["all"],
+  },
 ];
 
 export const communityPosts: CommunityPost[] = [
