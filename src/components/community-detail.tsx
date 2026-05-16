@@ -5,11 +5,15 @@ import { FormEvent, useEffect, useState } from "react";
 
 import { useAuth } from "@/components/auth-provider";
 import { useLanguage } from "@/components/language-provider";
+import { ScrapButton } from "@/components/community-scrap-button";
 import type { CommunityPost } from "@/lib/data";
 import {
+  addScrap,
   createRemoteReply,
   fetchRemotePostBySlug,
   fetchRepliesForSlug,
+  fetchScrappedPostSlugs,
+  removeScrap,
   type RemoteCommunityPost,
   type RemoteCommunityReply,
 } from "@/lib/community-db";
@@ -34,6 +38,7 @@ export function CommunityDetail({
   const [replyBody, setReplyBody] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isScrapped, setIsScrapped] = useState(false);
 
   useEffect(() => {
     if (staticPost) return;
@@ -59,6 +64,17 @@ export function CommunityDetail({
       active = false;
     };
   }, [slug]);
+
+  useEffect(() => {
+    if (authLoading || !user || staticPost) return;
+    let active = true;
+    fetchScrappedPostSlugs().then((slugs) => {
+      if (active) setIsScrapped(slugs.has(slug));
+    });
+    return () => {
+      active = false;
+    };
+  }, [authLoading, user, slug, staticPost]);
 
   async function handleReplySubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -86,6 +102,16 @@ export function CommunityDetail({
       setReplyBody("");
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handleToggleScrap() {
+    if (!user || staticPost) return;
+    const previous = isScrapped;
+    setIsScrapped(!previous);
+    const result = previous ? await removeScrap(slug) : await addScrap(slug);
+    if (result.error) {
+      setIsScrapped(previous);
     }
   }
 
@@ -120,26 +146,37 @@ export function CommunityDetail({
     : new Date(remotePost!.createdAt).toLocaleDateString();
   const category = staticPost ? staticPost.category : remotePost!.category;
   const city = staticPost ? staticPost.city : remotePost!.city;
+  const language = !staticPost ? remotePost!.language : null;
 
   return (
     <article className="mx-auto max-w-4xl px-6 pb-20 pt-10">
       <Link className="text-sm font-semibold text-[#2B4FA5] hover:underline" href="/community">
         {t("community.detail.back")}
       </Link>
-      <div className={`${cardClass} mt-8`}>
-        <div className="flex flex-wrap gap-2">
+      <div className={`${cardClass} relative mt-8`}>
+        <div className="flex flex-wrap gap-2 pr-12">
           <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
             {tCategory(category)}
           </span>
           <span className="rounded-full bg-[#0f172a]/[0.05] px-3 py-1 text-xs font-semibold text-[#52615b]">
             {tCity(city)}
           </span>
+          {language ? (
+            <span className="rounded-full bg-[#13C3A8]/10 px-3 py-1 text-xs font-semibold text-[#0E9D86]">
+              {t(`community.language.${language}` as const)}
+            </span>
+          ) : null}
           {!isStatic ? (
             <span className="rounded-full bg-[#16a34a]/10 px-3 py-1 text-xs font-semibold text-[#16a34a]">
               {t("community.userPostBadge")}
             </span>
           ) : null}
         </div>
+        {!isStatic && user ? (
+          <div className="absolute right-6 top-6">
+            <ScrapButton isScrapped={isScrapped} onToggle={handleToggleScrap} />
+          </div>
+        ) : null}
         <h1 className="mt-5 text-5xl font-bold tracking-[-0.04em]">{titleText}</h1>
         <p className="mt-3 text-sm font-semibold text-[#2B4FA5]">
           {isStatic

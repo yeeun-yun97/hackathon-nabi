@@ -6,10 +6,11 @@ import { ChecklistsClient } from "@/components/checklists-client";
 import { DiscoverClient } from "@/components/discover-client";
 import { HealthPanel } from "@/components/health-panel";
 import { useLanguage } from "@/components/language-provider";
+import { NaturalizationPanel } from "@/components/naturalization-panel";
 import { VisaPanel } from "@/components/visa-panel";
 import type { TranslationKey } from "@/lib/i18n";
 
-const TABS = ["support", "visa", "health", "checklists"] as const;
+const TABS = ["support", "visa", "health", "checklists", "naturalization"] as const;
 type TabId = (typeof TABS)[number];
 
 function isTab(value: string | null): value is TabId {
@@ -99,6 +100,8 @@ export function DiscoverContent() {
           <ChecklistsClient />
         </div>
       ) : null}
+
+      {activeTab === "naturalization" ? <NaturalizationPanel /> : null}
     </div>
   );
 }

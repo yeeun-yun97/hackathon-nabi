@@ -1,17 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useAuth } from "@/components/auth-provider";
 import { useLanguage } from "@/components/language-provider";
+import { ScrapButton } from "@/components/community-scrap-button";
 import {
-  communityPosts,
   serviceCategories,
   type City,
   type ServiceCategory,
 } from "@/lib/data";
-import { fetchRemotePosts, type RemoteCommunityPost } from "@/lib/community-db";
+import {
+  addScrap,
+  fetchRemotePosts,
+  fetchScrappedPostSlugs,
+  removeScrap,
+  type RemoteCommunityPost,
+} from "@/lib/community-db";
 import { defaultProfile, readStoredProfile } from "@/lib/profile";
 
 function toggleCategory(categories: ServiceCategory[], category: ServiceCategory) {
@@ -23,12 +29,13 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 const cardClass = "rounded-3xl border border-black/[0.06] bg-white p-6";
 
 export function CommunityClient() {
-  const { t, tCity, tCategory, tLocalized } = useLanguage();
+  const { t, tCity, tCategory } = useLanguage();
   const { user, isLoading: authLoading } = useAuth();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
   const [remotePosts, setRemotePosts] = useState<RemoteCommunityPost[]>([]);
   const [postsLoading, setPostsLoading] = useState(true);
+  const [scrappedSlugs, setScrappedSlugs] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -51,15 +58,16 @@ export function CommunityClient() {
     };
   }, []);
 
-  const filteredSeed = useMemo(
-    () =>
-      communityPosts.filter(
-        (post) =>
-          post.city === city &&
-          (categories.length === 0 || categories.includes(post.category)),
-      ),
-    [categories, city],
-  );
+  useEffect(() => {
+    if (authLoading || !user) return;
+    let active = true;
+    fetchScrappedPostSlugs().then((slugs) => {
+      if (active) setScrappedSlugs(slugs);
+    });
+    return () => {
+      active = false;
+    };
+  }, [authLoading, user]);
 
   const filteredRemote = useMemo(
     () =>
@@ -71,7 +79,34 @@ export function CommunityClient() {
     [categories, city, remotePosts],
   );
 
-  const visibleSeed = filteredSeed.length > 0 ? filteredSeed : communityPosts;
+  const handleToggleScrap = useCallback(
+    async (slug: string) => {
+      if (!user) return;
+      const isCurrentlyScrapped = scrappedSlugs.has(slug);
+      setScrappedSlugs((current) => {
+        const next = new Set(current);
+        if (isCurrentlyScrapped) {
+          next.delete(slug);
+        } else {
+          next.add(slug);
+        }
+        return next;
+      });
+      const result = isCurrentlyScrapped ? await removeScrap(slug) : await addScrap(slug);
+      if (result.error) {
+        setScrappedSlugs((current) => {
+          const next = new Set(current);
+          if (isCurrentlyScrapped) {
+            next.add(slug);
+          } else {
+            next.delete(slug);
+          }
+          return next;
+        });
+      }
+    },
+    [scrappedSlugs, user],
+  );
 
   const writeCta = user ? (
     <Link
@@ -119,65 +154,71 @@ export function CommunityClient() {
         <div className="mt-6 border-t border-black/[0.06] pt-5">{!authLoading ? writeCta : null}</div>
       </aside>
       <section className="grid gap-4">
-        {!postsLoading && filteredRemote.length > 0 ? (
-          <div className="grid gap-4">
-            <h2 className="text-xl font-bold tracking-[-0.02em]">
-              {t("community.userPostsHeading")}
-            </h2>
-            {filteredRemote.map((post) => (
-              <Link
-                className="rounded-3xl border border-black/[0.06] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#2B4FA5]/30 hover:shadow-lg hover:shadow-[#2B4FA5]/5"
-                href={`/community/${post.slug}`}
-                key={post.id}
-              >
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
-                    {tCategory(post.category)}
-                  </span>
-                  <span className="rounded-full bg-[#0f172a]/[0.05] px-3 py-1 text-xs font-semibold text-[#52615b]">
-                    {tCity(post.city)}
-                  </span>
-                  <span className="rounded-full bg-[#16a34a]/10 px-3 py-1 text-xs font-semibold text-[#16a34a]">
-                    {t("community.userPostBadge")}
-                  </span>
-                </div>
-                <h3 className="mt-4 text-2xl font-bold tracking-[-0.02em]">{post.title}</h3>
-                <p className="mt-3 line-clamp-3 leading-7 text-[#52615b]">{post.body}</p>
-                <p className="mt-4 text-sm font-semibold text-[#2B4FA5]">
-                  {t("community.byAuthor", { name: post.authorName })}
-                </p>
-              </Link>
-            ))}
-          </div>
-        ) : null}
-        {filteredSeed.length === 0 ? (
+        {postsLoading ? (
           <div className={cardClass}>
-            <p className="font-semibold">{t("community.noLocalMatch")}</p>
-            <p className="mt-2 text-[#52615b]">{t("community.noLocalMatchHint")}</p>
+            <p className="text-[#52615b]">{t("common.loading")}</p>
           </div>
-        ) : null}
-        {visibleSeed.map((post) => (
-          <Link
-            className="rounded-3xl border border-black/[0.06] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#2B4FA5]/30 hover:shadow-lg hover:shadow-[#2B4FA5]/5"
-            href={`/community/${post.slug}`}
-            key={post.id}
-          >
-            <div className="flex flex-wrap gap-2">
-              <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
-                {tCategory(post.category)}
-              </span>
-              <span className="rounded-full bg-[#0f172a]/[0.05] px-3 py-1 text-xs font-semibold text-[#52615b]">
-                {tCity(post.city)}
-              </span>
-            </div>
-            <h2 className="mt-4 text-2xl font-bold tracking-[-0.02em]">{tLocalized(post.title)}</h2>
-            <p className="mt-3 leading-7 text-[#52615b]">{tLocalized(post.excerpt)}</p>
-            <p className="mt-4 text-sm font-semibold text-[#2B4FA5]">
-              {t("community.byAuthor", { name: post.author })}
-            </p>
-          </Link>
-        ))}
+        ) : filteredRemote.length === 0 ? (
+          <div className={cardClass}>
+            <p className="font-semibold">{t("community.empty")}</p>
+          </div>
+        ) : (
+          filteredRemote.map((post) => (
+            <RemotePostCard
+              isScrapped={scrappedSlugs.has(post.slug)}
+              key={post.id}
+              onToggleScrap={() => handleToggleScrap(post.slug)}
+              post={post}
+              showScrapButton={Boolean(user)}
+            />
+          ))
+        )}
       </section>
+    </div>
+  );
+}
+
+function RemotePostCard({
+  post,
+  isScrapped,
+  onToggleScrap,
+  showScrapButton,
+}: {
+  post: RemoteCommunityPost;
+  isScrapped: boolean;
+  onToggleScrap: () => void | Promise<void>;
+  showScrapButton: boolean;
+}) {
+  const { t, tCategory, tCity } = useLanguage();
+
+  return (
+    <div className="relative">
+      <Link
+        className="block rounded-3xl border border-black/[0.06] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#2B4FA5]/30 hover:shadow-lg hover:shadow-[#2B4FA5]/5"
+        href={`/community/${post.slug}`}
+      >
+        <div className="flex flex-wrap gap-2 pr-12">
+          <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
+            {tCategory(post.category)}
+          </span>
+          <span className="rounded-full bg-[#0f172a]/[0.05] px-3 py-1 text-xs font-semibold text-[#52615b]">
+            {tCity(post.city)}
+          </span>
+          <span className="rounded-full bg-[#13C3A8]/10 px-3 py-1 text-xs font-semibold text-[#0E9D86]">
+            {t(`community.language.${post.language}` as const)}
+          </span>
+        </div>
+        <h3 className="mt-4 text-2xl font-bold tracking-[-0.02em]">{post.title}</h3>
+        <p className="mt-3 line-clamp-3 leading-7 text-[#52615b]">{post.body}</p>
+        <p className="mt-4 text-sm font-semibold text-[#2B4FA5]">
+          {t("community.byAuthor", { name: post.authorName })}
+        </p>
+      </Link>
+      {showScrapButton ? (
+        <div className="absolute right-5 top-5">
+          <ScrapButton isScrapped={isScrapped} onToggle={onToggleScrap} />
+        </div>
+      ) : null}
     </div>
   );
 }

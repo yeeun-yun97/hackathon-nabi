@@ -12,25 +12,35 @@ import {
   type City,
   type ServiceCategory,
 } from "@/lib/data";
-import { createRemotePost } from "@/lib/community-db";
+import {
+  createRemotePost,
+  postLanguages,
+  type PostLanguage,
+} from "@/lib/community-db";
 import { defaultProfile, readStoredProfile } from "@/lib/profile";
 
 const cardClass = "rounded-3xl border border-black/[0.06] bg-white p-8";
 const inputClass =
   "mt-2 w-full rounded-2xl border border-black/[0.08] bg-[#f6f7fb] px-4 py-3 text-base outline-none transition focus:border-[#2B4FA5] focus:ring-2 focus:ring-[#2B4FA5]/20";
 
+function languageKey(lang: PostLanguage) {
+  return `community.language.${lang}` as const;
+}
+
 export function CommunityNewPost() {
-  const { t, tCity, tCategory } = useLanguage();
+  const { t, tCity, tCategory, locale } = useLanguage();
   const { user, profile, isLoading } = useAuth();
   const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [authorName, setAuthorName] = useState("");
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [category, setCategory] = useState<ServiceCategory>(serviceCategories[0].id);
+  const [userPickedLanguage, setUserPickedLanguage] = useState<PostLanguage | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const language: PostLanguage = userPickedLanguage ?? locale;
 
   useEffect(() => {
     if (isLoading) return;
@@ -44,23 +54,16 @@ export function CommunityNewPost() {
     });
   }, [isLoading, user, router]);
 
-  useEffect(() => {
-    const fallback = profile?.displayName ?? user?.email?.split("@")[0];
-    if (!fallback) return;
-    queueMicrotask(() => {
-      setAuthorName((current) => (current.length === 0 ? fallback : current));
-    });
-  }, [profile, user]);
-
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
 
     const trimmedTitle = title.trim();
     const trimmedBody = body.trim();
-    const trimmedAuthor = authorName.trim();
+    const authorName =
+      profile?.displayName?.trim() || user?.email?.split("@")[0] || "member";
 
-    if (trimmedTitle.length < 3 || trimmedBody.length < 10 || trimmedAuthor.length < 2) {
+    if (trimmedTitle.length < 3 || trimmedBody.length < 10) {
       setError(t("community.fields.titlePlaceholder"));
       return;
     }
@@ -72,7 +75,8 @@ export function CommunityNewPost() {
         body: trimmedBody,
         category,
         city,
-        authorName: trimmedAuthor,
+        authorName,
+        language,
       });
 
       if (result.error || !result.post) {
@@ -117,19 +121,21 @@ export function CommunityNewPost() {
             value={title}
           />
         </label>
-        <label className="block">
-          <span className="text-sm font-semibold">{t("community.fields.author")}</span>
-          <input
-            className={inputClass}
-            maxLength={60}
-            onChange={(event) => setAuthorName(event.target.value)}
-            placeholder={t("community.fields.authorPlaceholder")}
-            required
-            type="text"
-            value={authorName}
-          />
-        </label>
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-3">
+          <label className="block">
+            <span className="text-sm font-semibold">{t("community.fields.language")}</span>
+            <select
+              className={inputClass}
+              onChange={(event) => setUserPickedLanguage(event.target.value as PostLanguage)}
+              value={language}
+            >
+              {postLanguages.map((lang) => (
+                <option key={lang} value={lang}>
+                  {t(languageKey(lang))}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="block">
             <span className="text-sm font-semibold">{t("community.fields.category")}</span>
             <select

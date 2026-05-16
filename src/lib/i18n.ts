@@ -467,6 +467,7 @@ const en = {
   "discover.tabs.visa": "Visa",
   "discover.tabs.health": "Health",
   "discover.tabs.checklists": "Checklists",
+  "discover.tabs.naturalization": "Naturalization",
 
   // discover detail
   "discover.detail.back": "Back to discover",
@@ -627,6 +628,15 @@ const en = {
   "me.notSignedIn.subtitle": "Log in or create an account to view your profile.",
   "me.notSignedIn.signIn": "Sign in",
   "me.notSignedIn.signUp": "Sign up",
+  "me.sections.tabs.aria": "My content",
+  "me.sections.tabs.posts": "My posts",
+  "me.sections.tabs.replies": "My replies",
+  "me.sections.tabs.scraps": "Saved",
+  "me.sections.posts.empty": "You haven't posted yet.",
+  "me.sections.posts.cta": "Write your first post",
+  "me.sections.replies.empty": "No replies yet.",
+  "me.sections.replies.onPost": "On: {title}",
+  "me.sections.scraps.empty": "Nothing saved yet.",
 
   // community write / replies
   "community.writePost": "Write a post",
@@ -652,6 +662,130 @@ const en = {
   "community.detail.posting": "Posting...",
   "community.detail.repliesCount": "{count} replies",
   "community.detail.byAuthorOn": "By {name} · {date}",
+  "community.fields.language": "Post language",
+  "community.language.ko": "Korean",
+  "community.language.en": "English",
+  "community.language.zh": "Chinese",
+  "community.scrap.add": "Save post",
+  "community.scrap.remove": "Remove from saved",
+
+  // naturalization helper
+  "naturalization.eyebrow": "Naturalization helper",
+  "naturalization.title": "Plan your path to Korean nationality.",
+  "naturalization.subtitle":
+    "Answer a few questions to see which naturalization tracks fit your situation, what you still need, and where the risks are.",
+  "naturalization.wizard.aria": "Naturalization wizard",
+  "naturalization.progress.label": "Step {current} of {total}",
+  "naturalization.progress.step1": "Basic info",
+  "naturalization.progress.step2": "Family",
+  "naturalization.progress.step3": "Result",
+  "naturalization.actions.next": "Next",
+  "naturalization.actions.back": "Back",
+  "naturalization.actions.seeResult": "See result",
+  "naturalization.actions.restart": "Restart",
+  "naturalization.option.yes": "Yes",
+  "naturalization.option.no": "No",
+  "naturalization.option.unsure": "Not sure",
+  "naturalization.step1.title": "Basic info",
+  "naturalization.step1.description":
+    "We use these to estimate your eligibility timeline.",
+  "naturalization.step1.field.nationality": "Nationality",
+  "naturalization.step1.field.nationalityPlaceholder": "e.g. United States",
+  "naturalization.step1.field.age": "Age",
+  "naturalization.step1.field.currentVisa": "Current visa",
+  "naturalization.step1.field.entryDate": "Entry date to Korea",
+  "naturalization.step1.field.entryDateHint":
+    "First date you entered Korea on your current track.",
+  "naturalization.step1.field.continuousResidence": "Continuous residence",
+  "naturalization.step1.field.continuousResidenceHint":
+    "Have you stayed in Korea continuously without long absences?",
+  "naturalization.step2.title": "Family relations",
+  "naturalization.step2.description":
+    "Your family ties affect simplified and special naturalization paths.",
+  "naturalization.step2.q1.title": "Is your spouse a Korean national?",
+  "naturalization.step2.q1.marriageYears": "Marriage duration (years)",
+  "naturalization.step2.q1.marriageYearsHint":
+    "Number of years married. Decimals allowed (e.g. 1.5).",
+  "naturalization.step2.q2.title": "Is either parent a Korean national?",
+  "naturalization.step2.q2.whichParent": "Which parent?",
+  "naturalization.step2.q2.father": "Father",
+  "naturalization.step2.q2.mother": "Mother",
+  "naturalization.step2.q2.both": "Both",
+  "naturalization.result.summaryEyebrow": "Based on your answers",
+  "naturalization.result.summaryTitle": "Here's where you stand",
+  "naturalization.result.summarySubtitle":
+    "A snapshot of likely paths, what to prepare, and where to be careful.",
+  "naturalization.result.disclaimer":
+    "This is informational only — verify with HiKorea or a licensed lawyer.",
+  "naturalization.result.entryDateMissing":
+    "Add your entry date in Step 1 for a more accurate timeline.",
+  "naturalization.result.types.eyebrow": "Naturalization types",
+  "naturalization.result.types.title": "Possible tracks for you",
+  "naturalization.result.types.general.title": "General naturalization",
+  "naturalization.result.types.general.description":
+    "Five or more years of continuous residence and current F-5 status.",
+  "naturalization.result.types.simplified.title": "Simplified naturalization",
+  "naturalization.result.types.simplified.description":
+    "Marriage to a Korean national, or three years of residence with deeper local ties.",
+  "naturalization.result.types.special.title": "Special naturalization",
+  "naturalization.result.types.special.description":
+    "Korean parent, adopted by a Korean, or other special qualifications.",
+  "naturalization.badge.green": "Likely",
+  "naturalization.badge.yellow": "Needs conditions",
+  "naturalization.badge.red": "Currently difficult",
+  "naturalization.result.checklist.eyebrow": "Eligibility checklist",
+  "naturalization.result.checklist.title": "What's met, what's missing",
+  "naturalization.result.checklist.continuousResidence":
+    "Continuous residence in Korea",
+  "naturalization.result.checklist.fiveYears": "Five or more years in Korea",
+  "naturalization.result.checklist.threeYears": "Three or more years in Korea",
+  "naturalization.result.checklist.f5": "F-5 permanent resident status",
+  "naturalization.result.checklist.koreanSpouse": "Korean spouse",
+  "naturalization.result.checklist.marriageDuration":
+    "Marriage of two or more years",
+  "naturalization.result.checklist.koreanParent": "Korean parent",
+  "naturalization.result.checklist.adultAge": "Adult age (19+)",
+  "naturalization.result.checklist.status.met": "Met",
+  "naturalization.result.checklist.status.partial": "Partially met",
+  "naturalization.result.checklist.status.notMet": "Not met",
+  "naturalization.result.actions.eyebrow": "Recommended action plan",
+  "naturalization.result.actions.title": "Suggested next steps",
+  "naturalization.result.actions.acquireF5":
+    "Acquire F-5 permanent residence",
+  "naturalization.result.actions.acquireF5Description":
+    "Build the points and documents needed to qualify for F-5 before applying for general naturalization.",
+  "naturalization.result.actions.completeKiip": "Complete the KIIP program",
+  "naturalization.result.actions.completeKiipDescription":
+    "Finishing KIIP through stage 5 satisfies the social integration requirement.",
+  "naturalization.result.actions.gatherSpouseDocs":
+    "Gather marriage and joint-life documents",
+  "naturalization.result.actions.gatherSpouseDocsDescription":
+    "Marriage certificate, joint accounts, residence ledger, photos — anything proving an authentic shared life.",
+  "naturalization.result.actions.gatherFamilyRegistry":
+    "Collect your Korean parent's family registry",
+  "naturalization.result.actions.gatherFamilyRegistryDescription":
+    "기본증명서 and 가족관계증명서 from your Korean parent are central to special naturalization.",
+  "naturalization.result.actions.submitApplication":
+    "Submit your naturalization application",
+  "naturalization.result.actions.submitApplicationDescription":
+    "File at the immigration office with the required forms, fees, and supporting documents.",
+  "naturalization.result.actions.prepareInterview":
+    "Prepare for the interview",
+  "naturalization.result.actions.prepareInterviewDescription":
+    "Practice Korean conversation, basic civics, and your family story before your slot.",
+  "naturalization.result.risks.eyebrow": "Potential risks",
+  "naturalization.result.risks.title": "Things that could slow you down",
+  "naturalization.result.risks.absences.title": "Long absences from Korea",
+  "naturalization.result.risks.absences.description":
+    "Trips outside Korea longer than six months can break continuous residence and reset your clock.",
+  "naturalization.result.risks.taxArrears.title":
+    "Possible tax or fine arrears",
+  "naturalization.result.risks.taxArrears.description":
+    "Unpaid taxes, health insurance premiums, or fines must be cleared before naturalization.",
+  "naturalization.result.risks.marriageAuthenticity.title":
+    "Marriage authenticity review",
+  "naturalization.result.risks.marriageAuthenticity.description":
+    "Marriage-based applications get extra scrutiny — keep evidence of a real shared life.",
 } as const satisfies Record<string, string>;
 
 export type TranslationKey = keyof typeof en;
@@ -1064,6 +1198,7 @@ const ko = {
   "discover.tabs.visa": "비자",
   "discover.tabs.health": "건강 & 여가",
   "discover.tabs.checklists": "체크리스트",
+  "discover.tabs.naturalization": "귀화 도우미",
 
   "discover.detail.back": "지원 정보로 돌아가기",
   "discover.detail.whatToBring": "준비할 것",
@@ -1209,6 +1344,15 @@ const ko = {
   "me.notSignedIn.subtitle": "로그인하거나 계정을 만들어 프로필을 확인해 보세요.",
   "me.notSignedIn.signIn": "로그인",
   "me.notSignedIn.signUp": "회원가입",
+  "me.sections.tabs.aria": "내 활동",
+  "me.sections.tabs.posts": "내가 쓴 글",
+  "me.sections.tabs.replies": "내 댓글",
+  "me.sections.tabs.scraps": "스크랩",
+  "me.sections.posts.empty": "아직 작성한 글이 없어요.",
+  "me.sections.posts.cta": "첫 글 작성하기",
+  "me.sections.replies.empty": "아직 작성한 댓글이 없어요.",
+  "me.sections.replies.onPost": "글: {title}",
+  "me.sections.scraps.empty": "아직 스크랩한 글이 없어요.",
 
   // community write / replies
   "community.writePost": "글쓰기",
@@ -1234,6 +1378,122 @@ const ko = {
   "community.detail.posting": "등록 중...",
   "community.detail.repliesCount": "답글 {count}개",
   "community.detail.byAuthorOn": "작성자 {name} · {date}",
+
+  // 귀화 도우미
+  "naturalization.eyebrow": "귀화 도우미",
+  "naturalization.title": "한국 국적 취득까지의 길을 설계해 보세요.",
+  "naturalization.subtitle":
+    "몇 가지 질문에 답하면 어떤 귀화 유형이 적합한지, 무엇을 더 준비해야 하는지, 어떤 위험이 있는지 한눈에 알려드려요.",
+  "naturalization.wizard.aria": "귀화 도우미 마법사",
+  "naturalization.progress.label": "{total}단계 중 {current}단계",
+  "naturalization.progress.step1": "기본 정보",
+  "naturalization.progress.step2": "가족 관계",
+  "naturalization.progress.step3": "결과",
+  "naturalization.actions.next": "다음",
+  "naturalization.actions.back": "이전",
+  "naturalization.actions.seeResult": "결과 보기",
+  "naturalization.actions.restart": "다시 시작",
+  "naturalization.option.yes": "예",
+  "naturalization.option.no": "아니요",
+  "naturalization.option.unsure": "잘 모르겠어요",
+  "naturalization.step1.title": "기본 정보",
+  "naturalization.step1.description":
+    "이 정보를 바탕으로 자격 시점과 일정을 추정해요.",
+  "naturalization.step1.field.nationality": "국적",
+  "naturalization.step1.field.nationalityPlaceholder": "예: 미국",
+  "naturalization.step1.field.age": "나이",
+  "naturalization.step1.field.currentVisa": "현재 비자",
+  "naturalization.step1.field.entryDate": "한국 입국일",
+  "naturalization.step1.field.entryDateHint":
+    "현재 체류 트랙으로 한국에 처음 입국한 날짜를 입력하세요.",
+  "naturalization.step1.field.continuousResidence": "연속 체류 여부",
+  "naturalization.step1.field.continuousResidenceHint":
+    "한국에서 장기간 출국 없이 연속해서 체류하셨나요?",
+  "naturalization.step2.title": "가족 관계",
+  "naturalization.step2.description":
+    "가족 관계는 간이귀화와 특별귀화 자격에 영향을 줍니다.",
+  "naturalization.step2.q1.title": "배우자가 한국인인가요?",
+  "naturalization.step2.q1.marriageYears": "혼인 기간 (년)",
+  "naturalization.step2.q1.marriageYearsHint":
+    "결혼한 햇수를 입력하세요. 소수점도 가능합니다 (예: 1.5).",
+  "naturalization.step2.q2.title": "부모 중 한국 국적자가 있나요?",
+  "naturalization.step2.q2.whichParent": "어느 분이신가요?",
+  "naturalization.step2.q2.father": "아버지",
+  "naturalization.step2.q2.mother": "어머니",
+  "naturalization.step2.q2.both": "두 분 모두",
+  "naturalization.result.summaryEyebrow": "입력하신 답변 기준",
+  "naturalization.result.summaryTitle": "현재 상태 요약",
+  "naturalization.result.summarySubtitle":
+    "가능성 있는 귀화 유형, 준비할 항목, 주의할 위험을 정리했어요.",
+  "naturalization.result.disclaimer":
+    "본 화면은 참고용 안내일 뿐이며, 실제 신청 전 HiKorea 또는 변호사를 통해 반드시 확인하세요.",
+  "naturalization.result.entryDateMissing":
+    "더 정확한 일정을 보려면 1단계에서 입국일을 입력하세요.",
+  "naturalization.result.types.eyebrow": "귀화 가능 유형",
+  "naturalization.result.types.title": "당신에게 가능한 트랙",
+  "naturalization.result.types.general.title": "일반귀화",
+  "naturalization.result.types.general.description":
+    "5년 이상 연속 체류와 현재 F-5 영주 자격이 필요한 트랙.",
+  "naturalization.result.types.simplified.title": "간이귀화",
+  "naturalization.result.types.simplified.description":
+    "한국인 배우자와의 혼인 또는 3년 이상 체류와 강한 지역 연결을 요구하는 트랙.",
+  "naturalization.result.types.special.title": "특별귀화",
+  "naturalization.result.types.special.description":
+    "한국인 부모가 있거나 그 외 특별한 자격이 인정되는 트랙.",
+  "naturalization.badge.green": "가능성 높음",
+  "naturalization.badge.yellow": "추가 조건 필요",
+  "naturalization.badge.red": "현재 어려움",
+  "naturalization.result.checklist.eyebrow": "체크리스트",
+  "naturalization.result.checklist.title": "충족 항목과 부족 항목",
+  "naturalization.result.checklist.continuousResidence": "한국 연속 체류",
+  "naturalization.result.checklist.fiveYears": "한국 거주 5년 이상",
+  "naturalization.result.checklist.threeYears": "한국 거주 3년 이상",
+  "naturalization.result.checklist.f5": "F-5 영주 자격 보유",
+  "naturalization.result.checklist.koreanSpouse": "한국인 배우자",
+  "naturalization.result.checklist.marriageDuration": "혼인 2년 이상",
+  "naturalization.result.checklist.koreanParent": "한국인 부모",
+  "naturalization.result.checklist.adultAge": "성년 연령 (19세 이상)",
+  "naturalization.result.checklist.status.met": "충족",
+  "naturalization.result.checklist.status.partial": "부분 충족",
+  "naturalization.result.checklist.status.notMet": "미충족",
+  "naturalization.result.actions.eyebrow": "추천 액션 플랜",
+  "naturalization.result.actions.title": "다음 단계 제안",
+  "naturalization.result.actions.acquireF5": "F-5 영주권 취득",
+  "naturalization.result.actions.acquireF5Description":
+    "일반귀화 신청 전 F-5 영주 자격에 필요한 점수와 서류를 미리 준비하세요.",
+  "naturalization.result.actions.completeKiip": "KIIP 이수",
+  "naturalization.result.actions.completeKiipDescription":
+    "KIIP 5단계까지 이수하면 사회통합 요건을 충족할 수 있습니다.",
+  "naturalization.result.actions.gatherSpouseDocs": "혼인 및 공동 생활 서류 준비",
+  "naturalization.result.actions.gatherSpouseDocsDescription":
+    "혼인관계증명서, 공동 통장, 주민등록등본, 사진 등 진정한 부부 생활을 입증할 자료를 모으세요.",
+  "naturalization.result.actions.gatherFamilyRegistry":
+    "한국인 부모의 가족관계 서류 준비",
+  "naturalization.result.actions.gatherFamilyRegistryDescription":
+    "한국인 부모의 기본증명서와 가족관계증명서는 특별귀화에서 핵심 서류입니다.",
+  "naturalization.result.actions.submitApplication": "귀화 신청 제출",
+  "naturalization.result.actions.submitApplicationDescription":
+    "필요 서식, 수수료, 증빙 서류를 갖춰 출입국·외국인청에 신청서를 접수하세요.",
+  "naturalization.result.actions.prepareInterview": "면접 준비",
+  "naturalization.result.actions.prepareInterviewDescription":
+    "한국어 회화, 기본 시민 상식, 가족 사정 질문에 답할 수 있도록 일정 전 충분히 연습하세요.",
+  "naturalization.result.risks.eyebrow": "예상 리스크",
+  "naturalization.result.risks.title": "지연을 부를 수 있는 요소",
+  "naturalization.result.risks.absences.title": "장기 해외체류 이력",
+  "naturalization.result.risks.absences.description":
+    "6개월 이상 출국이 있을 경우 연속 체류가 끊겨 기간이 다시 계산될 수 있습니다.",
+  "naturalization.result.risks.taxArrears.title": "세금·과태료 체납 가능성",
+  "naturalization.result.risks.taxArrears.description":
+    "체납 세금, 건강보험료, 과태료가 있다면 귀화 신청 전에 모두 정리해야 합니다.",
+  "naturalization.result.risks.marriageAuthenticity.title": "혼인 진정성 심사",
+  "naturalization.result.risks.marriageAuthenticity.description":
+    "혼인 기반 신청은 추가 심사가 진행되므로 진정한 부부 생활을 입증할 자료를 충실히 준비하세요.",
+  "community.fields.language": "글 작성 언어",
+  "community.language.ko": "한국어",
+  "community.language.en": "영어",
+  "community.language.zh": "중국어",
+  "community.scrap.add": "스크랩하기",
+  "community.scrap.remove": "스크랩 해제",
 } satisfies Record<TranslationKey, string>;
 
 const zh = {
@@ -1625,6 +1885,7 @@ const zh = {
   "discover.tabs.visa": "签证",
   "discover.tabs.health": "健康与休闲",
   "discover.tabs.checklists": "清单",
+  "discover.tabs.naturalization": "归化助手",
 
   "discover.detail.back": "返回探索支持",
   "discover.detail.whatToBring": "需要携带",
@@ -1767,6 +2028,15 @@ const zh = {
   "me.notSignedIn.subtitle": "登录或注册以查看您的资料。",
   "me.notSignedIn.signIn": "登录",
   "me.notSignedIn.signUp": "注册",
+  "me.sections.tabs.aria": "我的内容",
+  "me.sections.tabs.posts": "我的帖子",
+  "me.sections.tabs.replies": "我的回复",
+  "me.sections.tabs.scraps": "收藏",
+  "me.sections.posts.empty": "您还没有发布帖子。",
+  "me.sections.posts.cta": "写第一篇帖子",
+  "me.sections.replies.empty": "您还没有发表回复。",
+  "me.sections.replies.onPost": "帖子：{title}",
+  "me.sections.scraps.empty": "您还没有收藏任何帖子。",
 
   // community write / replies
   "community.writePost": "发帖",
@@ -1791,6 +2061,122 @@ const zh = {
   "community.detail.posting": "发布中...",
   "community.detail.repliesCount": "{count} 条回复",
   "community.detail.byAuthorOn": "作者 {name} · {date}",
+  "community.fields.language": "帖子语言",
+  "community.language.ko": "韩语",
+  "community.language.en": "英语",
+  "community.language.zh": "中文",
+  "community.scrap.add": "收藏帖子",
+  "community.scrap.remove": "取消收藏",
+
+  // 归化助手
+  "naturalization.eyebrow": "归化助手",
+  "naturalization.title": "规划你通往韩国国籍的路径。",
+  "naturalization.subtitle":
+    "回答几个简单问题，了解哪种归化途径适合你、还需要准备什么、以及可能存在的风险。",
+  "naturalization.wizard.aria": "归化助手向导",
+  "naturalization.progress.label": "第 {current} 步 / 共 {total} 步",
+  "naturalization.progress.step1": "基本信息",
+  "naturalization.progress.step2": "家庭关系",
+  "naturalization.progress.step3": "结果",
+  "naturalization.actions.next": "下一步",
+  "naturalization.actions.back": "上一步",
+  "naturalization.actions.seeResult": "查看结果",
+  "naturalization.actions.restart": "重新开始",
+  "naturalization.option.yes": "是",
+  "naturalization.option.no": "否",
+  "naturalization.option.unsure": "不确定",
+  "naturalization.step1.title": "基本信息",
+  "naturalization.step1.description":
+    "我们将根据这些信息估算你的资格时间表。",
+  "naturalization.step1.field.nationality": "国籍",
+  "naturalization.step1.field.nationalityPlaceholder": "例如：美国",
+  "naturalization.step1.field.age": "年龄",
+  "naturalization.step1.field.currentVisa": "当前签证",
+  "naturalization.step1.field.entryDate": "入境韩国日期",
+  "naturalization.step1.field.entryDateHint":
+    "请填写当前居留途径下首次进入韩国的日期。",
+  "naturalization.step1.field.continuousResidence": "连续居住情况",
+  "naturalization.step1.field.continuousResidenceHint":
+    "你是否在韩国连续居住，没有长时间出境？",
+  "naturalization.step2.title": "家庭关系",
+  "naturalization.step2.description":
+    "家庭关系会影响简易归化和特别归化的资格。",
+  "naturalization.step2.q1.title": "你的配偶是韩国人吗？",
+  "naturalization.step2.q1.marriageYears": "婚姻年数",
+  "naturalization.step2.q1.marriageYearsHint":
+    "请填写已婚年数，可填小数（例如 1.5）。",
+  "naturalization.step2.q2.title": "父母中是否有韩国国籍者？",
+  "naturalization.step2.q2.whichParent": "哪一位？",
+  "naturalization.step2.q2.father": "父亲",
+  "naturalization.step2.q2.mother": "母亲",
+  "naturalization.step2.q2.both": "父母双方",
+  "naturalization.result.summaryEyebrow": "基于你的回答",
+  "naturalization.result.summaryTitle": "当前情况一览",
+  "naturalization.result.summarySubtitle":
+    "可能的归化途径、需要准备的内容以及需要注意的风险。",
+  "naturalization.result.disclaimer":
+    "本页面仅供参考，请通过 HiKorea 或专业律师确认实际情况。",
+  "naturalization.result.entryDateMissing":
+    "请在第 1 步填写入境日期，以获得更准确的时间估算。",
+  "naturalization.result.types.eyebrow": "归化类型",
+  "naturalization.result.types.title": "可能适用于你的途径",
+  "naturalization.result.types.general.title": "一般归化",
+  "naturalization.result.types.general.description":
+    "需要在韩连续居住 5 年以上，并已持有 F-5 永久居留资格。",
+  "naturalization.result.types.simplified.title": "简易归化",
+  "naturalization.result.types.simplified.description":
+    "与韩国国民结婚，或在韩居住 3 年以上并具有较强的本地联系。",
+  "naturalization.result.types.special.title": "特别归化",
+  "naturalization.result.types.special.description":
+    "拥有韩国国籍的父母，或满足其他特别资格条件。",
+  "naturalization.badge.green": "可能性高",
+  "naturalization.badge.yellow": "需补充条件",
+  "naturalization.badge.red": "当前较难",
+  "naturalization.result.checklist.eyebrow": "资格清单",
+  "naturalization.result.checklist.title": "已满足与未满足的条件",
+  "naturalization.result.checklist.continuousResidence": "在韩连续居住",
+  "naturalization.result.checklist.fiveYears": "在韩居住满 5 年以上",
+  "naturalization.result.checklist.threeYears": "在韩居住满 3 年以上",
+  "naturalization.result.checklist.f5": "持有 F-5 永久居留资格",
+  "naturalization.result.checklist.koreanSpouse": "韩国籍配偶",
+  "naturalization.result.checklist.marriageDuration": "结婚 2 年以上",
+  "naturalization.result.checklist.koreanParent": "韩国籍父母",
+  "naturalization.result.checklist.adultAge": "成年年龄（19 岁以上）",
+  "naturalization.result.checklist.status.met": "已满足",
+  "naturalization.result.checklist.status.partial": "部分满足",
+  "naturalization.result.checklist.status.notMet": "未满足",
+  "naturalization.result.actions.eyebrow": "推荐行动方案",
+  "naturalization.result.actions.title": "建议的下一步",
+  "naturalization.result.actions.acquireF5": "获取 F-5 永久居留资格",
+  "naturalization.result.actions.acquireF5Description":
+    "在申请一般归化前，先积累 F-5 永久居留所需的积分与材料。",
+  "naturalization.result.actions.completeKiip": "完成 KIIP 课程",
+  "naturalization.result.actions.completeKiipDescription":
+    "完成 KIIP 第 5 阶段后，可满足社会融合的要求。",
+  "naturalization.result.actions.gatherSpouseDocs": "整理婚姻与共同生活材料",
+  "naturalization.result.actions.gatherSpouseDocsDescription":
+    "结婚证、共同账户、住民登录誊本、共同生活照片等，均可证明真实的婚姻生活。",
+  "naturalization.result.actions.gatherFamilyRegistry":
+    "整理韩国父母的家族关系材料",
+  "naturalization.result.actions.gatherFamilyRegistryDescription":
+    "韩国籍父母的基本证明书与家族关系证明书是特别归化的关键材料。",
+  "naturalization.result.actions.submitApplication": "提交归化申请",
+  "naturalization.result.actions.submitApplicationDescription":
+    "携带所需表格、费用和证明材料前往出入境·外国人厅提交申请。",
+  "naturalization.result.actions.prepareInterview": "准备面试",
+  "naturalization.result.actions.prepareInterviewDescription":
+    "面试前练习韩语会话、基本公民常识，并准备好家庭情况相关问题的回答。",
+  "naturalization.result.risks.eyebrow": "潜在风险",
+  "naturalization.result.risks.title": "可能拖慢进度的因素",
+  "naturalization.result.risks.absences.title": "长期离境韩国",
+  "naturalization.result.risks.absences.description":
+    "单次离境超过 6 个月可能中断连续居住，导致居住年限重新计算。",
+  "naturalization.result.risks.taxArrears.title": "可能存在税款或罚款欠缴",
+  "naturalization.result.risks.taxArrears.description":
+    "未缴清的税款、健康保险费或罚款必须在归化申请前结清。",
+  "naturalization.result.risks.marriageAuthenticity.title": "婚姻真实性审查",
+  "naturalization.result.risks.marriageAuthenticity.description":
+    "基于婚姻的归化会受到额外审查，请妥善保存真实婚姻生活的证据。",
 } satisfies Record<TranslationKey, string>;
 
 const dictionaries: Record<Locale, Record<TranslationKey, string>> = { en, ko, zh };
