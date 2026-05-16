@@ -34,7 +34,32 @@ function storedFromPossession(answer: VisaPossessionAnswer): YesNoUnsure {
 const inputClass =
   "rounded-2xl border border-black/[0.06] bg-[#f6f7fb] px-4 py-3 font-medium outline-none transition focus:border-[#13C3A8] focus:ring-2 focus:ring-[#13C3A8]/20";
 
+const selectClass = `${inputClass} w-full appearance-none pr-10`;
+
 const sectionDividerClass = "border-t border-black/[0.08] pt-8";
+
+function SelectChevron() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-[#52615b]"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+    >
+      <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function RequiredBadge({ label }: { label: string }) {
+  return (
+    <span className="ml-1 inline-flex items-center rounded-full bg-[#E0445B]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#E0445B]">
+      {label}
+    </span>
+  );
+}
 
 type SelectFieldProps<TValue extends string> = {
   label: string;
@@ -52,17 +77,20 @@ function SelectField<TValue extends string>({
   return (
     <label className="grid gap-2 text-sm font-semibold text-[#17211f]">
       {label}
-      <select
-        className={inputClass}
-        onChange={(event) => onChange(event.target.value as TValue)}
-        value={value}
-      >
-        {options.map((option) => (
-          <option key={option.id} value={option.id}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      <div className="relative">
+        <select
+          className={selectClass}
+          onChange={(event) => onChange(event.target.value as TValue)}
+          value={value}
+        >
+          {options.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <SelectChevron />
+      </div>
     </label>
   );
 }
@@ -205,47 +233,47 @@ export function VisaExpiryQuickEdit({ profile, onSaved }: VisaExpiryQuickEditPro
               {t("visa.edit.noVisaState")}
             </p>
           ) : (
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              <label className="grid gap-2 text-sm font-semibold text-[#17211f]">
-                {t("onboarding.field.currentVisaSubtype")}
-                <select
-                  className={inputClass}
-                  onChange={(event) => setVisaSubtype(event.target.value as VisaSubtype)}
-                  value={visaSubtype}
-                >
-                  {visaSubtypes.map((id) => (
-                    <option key={id} value={id}>
-                      {tOption("visaSubtype", id)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid gap-2 text-sm font-semibold text-[#17211f]">
-                {t("onboarding.field.visaIssue")} <span className="text-[#E0445B]">*</span>
-                <input
-                  className={inputClass}
-                  onChange={(event) => setIssueDate(event.target.value)}
-                  required
-                  type="date"
-                  value={issueDate}
-                />
-                <span className="text-xs font-normal leading-5 text-[#52615b]">
-                  {t("onboarding.field.visaIssueNote")}
-                </span>
-              </label>
-              <label className="grid gap-2 text-sm font-semibold text-[#17211f] md:col-span-2">
-                {t("onboarding.field.visaExpiry")} <span className="text-[#E0445B]">*</span>
-                <input
-                  className={inputClass}
-                  onChange={(event) => setExpiryDate(event.target.value)}
-                  required
-                  type="date"
-                  value={expiryDate}
-                />
-                <span className="text-xs font-normal leading-5 text-[#52615b]">
-                  {t("onboarding.field.visaExpiryNote")}
-                </span>
-              </label>
+            <div className="mt-5 space-y-4">
+              <SelectField
+                label={t("onboarding.field.currentVisaSubtype")}
+                onChange={setVisaSubtype}
+                options={visaSubtypes.map((id) => ({ id, label: tOption("visaSubtype", id) }))}
+                value={visaSubtype}
+              />
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="grid items-start gap-2 text-sm font-semibold text-[#17211f]">
+                  <span className="flex items-center">
+                    {t("onboarding.field.visaIssue")}
+                    <RequiredBadge label={t("common.required")} />
+                  </span>
+                  <input
+                    className={inputClass}
+                    onChange={(event) => setIssueDate(event.target.value)}
+                    required
+                    type="date"
+                    value={issueDate}
+                  />
+                  <span className="text-xs font-normal leading-5 text-[#52615b]">
+                    {t("onboarding.field.visaIssueNote")}
+                  </span>
+                </label>
+                <label className="grid items-start gap-2 text-sm font-semibold text-[#17211f]">
+                  <span className="flex items-center">
+                    {t("onboarding.field.visaExpiry")}
+                    <RequiredBadge label={t("common.required")} />
+                  </span>
+                  <input
+                    className={inputClass}
+                    onChange={(event) => setExpiryDate(event.target.value)}
+                    required
+                    type="date"
+                    value={expiryDate}
+                  />
+                  <span className="text-xs font-normal leading-5 text-[#52615b]">
+                    {t("onboarding.field.visaExpiryNote")}
+                  </span>
+                </label>
+              </div>
             </div>
           )}
         </div>
