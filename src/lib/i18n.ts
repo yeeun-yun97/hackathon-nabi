@@ -56,6 +56,7 @@ const en = {
   "header.nav.community": "Community",
   "header.nav.chat": "AI Chat",
   "header.cta.setProfile": "Set profile",
+  "header.cta.myPage": "My page",
   "header.language.label": "Language",
 
   // seo
@@ -609,6 +610,24 @@ const en = {
   "auth.requiredToWrite": "Log in to share your story",
   "auth.requiredToReply": "Log in to leave a reply",
 
+  // my page
+  "me.eyebrow": "My page",
+  "me.title": "Hi, {name}",
+  "me.subtitle": "Your profile and account in one place.",
+  "me.profile.title": "Profile snapshot",
+  "me.profile.description": "Recommendations across nabi use these values. Update anytime.",
+  "me.profile.city": "City",
+  "me.profile.visa": "Current visa",
+  "me.profile.residency": "Residency",
+  "me.profile.family": "Family",
+  "me.profile.empty": "Not set",
+  "me.actions.editProfile": "Edit profile",
+  "me.actions.signOut": "Sign out",
+  "me.notSignedIn.title": "Please sign in to see your page.",
+  "me.notSignedIn.subtitle": "Log in or create an account to view your profile.",
+  "me.notSignedIn.signIn": "Sign in",
+  "me.notSignedIn.signUp": "Sign up",
+
   // community write / replies
   "community.writePost": "Write a post",
   "community.writeBack": "Back to community",
@@ -648,6 +667,7 @@ const ko = {
   "header.nav.community": "커뮤니티",
   "header.nav.chat": "AI 상담",
   "header.cta.setProfile": "프로필 설정",
+  "header.cta.myPage": "마이페이지",
   "header.language.label": "언어",
 
   "seo.title": "nabi: 대한민국의 외국인 거주자를 위한 서비스",
@@ -1173,6 +1193,23 @@ const ko = {
   "auth.requiredToWrite": "로그인하면 경험을 공유할 수 있어요",
   "auth.requiredToReply": "로그인하면 답글을 남길 수 있어요",
 
+  "me.eyebrow": "마이페이지",
+  "me.title": "{name}님 안녕하세요",
+  "me.subtitle": "프로필과 계정을 한곳에서 관리하세요.",
+  "me.profile.title": "프로필 요약",
+  "me.profile.description": "nabi의 모든 추천이 이 값을 사용해요. 언제든 수정할 수 있어요.",
+  "me.profile.city": "도시",
+  "me.profile.visa": "현재 비자",
+  "me.profile.residency": "거주 상태",
+  "me.profile.family": "가족 상황",
+  "me.profile.empty": "미설정",
+  "me.actions.editProfile": "프로필 수정",
+  "me.actions.signOut": "로그아웃",
+  "me.notSignedIn.title": "마이페이지를 보려면 로그인이 필요해요.",
+  "me.notSignedIn.subtitle": "로그인하거나 계정을 만들어 프로필을 확인해 보세요.",
+  "me.notSignedIn.signIn": "로그인",
+  "me.notSignedIn.signUp": "회원가입",
+
   // community write / replies
   "community.writePost": "글쓰기",
   "community.writeBack": "커뮤니티로 돌아가기",
@@ -1210,6 +1247,7 @@ const zh = {
   "header.nav.community": "社区",
   "header.nav.chat": "AI 咨询",
   "header.cta.setProfile": "设置个人资料",
+  "header.cta.myPage": "我的",
   "header.language.label": "语言",
 
   "seo.title": "nabi：为在韩国的外国居民服务",
@@ -1712,6 +1750,23 @@ const zh = {
   "auth.greeting": "你好，{name}",
   "auth.requiredToWrite": "登录后即可分享您的经验",
   "auth.requiredToReply": "登录后即可发表回复",
+
+  "me.eyebrow": "我的",
+  "me.title": "你好，{name}",
+  "me.subtitle": "在一处管理您的资料和账户。",
+  "me.profile.title": "资料概览",
+  "me.profile.description": "nabi 的所有推荐都基于这些信息，随时可以更新。",
+  "me.profile.city": "所在城市",
+  "me.profile.visa": "当前签证",
+  "me.profile.residency": "居留状态",
+  "me.profile.family": "家庭情况",
+  "me.profile.empty": "未设置",
+  "me.actions.editProfile": "编辑资料",
+  "me.actions.signOut": "退出登录",
+  "me.notSignedIn.title": "请登录后查看您的页面。",
+  "me.notSignedIn.subtitle": "登录或注册以查看您的资料。",
+  "me.notSignedIn.signIn": "登录",
+  "me.notSignedIn.signUp": "注册",
 
   // community write / replies
   "community.writePost": "发帖",
