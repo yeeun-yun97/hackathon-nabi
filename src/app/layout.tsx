@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description:
       "Personalized visa, local service, healthcare, recreation, and community guidance for foreign residents in Korea.",
     siteName: "nabi",
-    images: [{ url: "/logo.png", width: 1294, height: 390, alt: "nabi logo" }],
+    images: [{ url: "/nabi-logo.png", width: 3790, height: 1362, alt: "nabi logo" }],
     locale: "en_US",
     type: "website",
   },
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "nabi: for foreigners in korea",
     description:
       "Personalized visa, local service, healthcare, recreation, and community guidance for foreign residents in Korea.",
-    images: ["/logo.png"],
+    images: ["/nabi-logo.png"],
   },
 };
 

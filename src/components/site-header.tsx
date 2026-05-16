@@ -26,10 +26,10 @@ export function SiteHeader() {
           <Image
             alt="nabi"
             className="h-auto w-32"
-            height={390}
+            height={1362}
             priority
-            src="/logo.png"
-            width={1294}
+            src="/nabi-logo.png"
+            width={3790}
           />
           <p className="sr-only">{t("header.brand.subtitle")}</p>
         </Link>

@@ -16,10 +16,10 @@ export default function OnboardingPage() {
           <Image
             alt="nabi"
             className="h-auto w-24"
-            height={390}
+            height={1362}
             priority
-            src="/logo.png"
-            width={1294}
+            src="/nabi-logo.png"
+            width={3790}
           />
         </Link>
         <div className="mb-10 mt-12">
