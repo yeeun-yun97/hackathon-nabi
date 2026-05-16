@@ -58,11 +58,11 @@ export function InfoExplorer() {
   }
 
   return (
-    <div className="rounded-[2.5rem] bg-white p-5 shadow-2xl shadow-orange-100 ring-1 ring-black/5">
-      <div className="rounded-[2rem] bg-[#f7fbf8] p-6">
+    <div className="rounded-3xl border border-black/[0.06] bg-white p-5 shadow-xl shadow-[#0f172a]/5">
+      <div className="rounded-3xl bg-[#f6f7fb] p-6">
         <div className="flex items-center justify-between">
-          <p className="font-black">{t("explorer.title")}</p>
-          <span className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]">
+          <p className="font-semibold">{t("explorer.title")}</p>
+          <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
             {t("explorer.cityChip")}
           </span>
         </div>
@@ -72,10 +72,10 @@ export function InfoExplorer() {
 
             return (
               <button
-                className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                   isActive
-                    ? "bg-[#10c4a9] text-white"
-                    : "bg-white text-[#4e5a55] ring-1 ring-black/5"
+                    ? "bg-[#2B4FA5] text-white"
+                    : "border border-black/[0.06] bg-white text-[#52615b] hover:border-[#2B4FA5]/30 hover:text-[#2B4FA5]"
                 }`}
                 key={filter}
                 onClick={() => toggleFilter(filter)}
@@ -88,17 +88,22 @@ export function InfoExplorer() {
         </div>
         <div className="mt-6 grid gap-3">
           {filteredPrograms.map((program) => (
-            <article className="rounded-3xl bg-white p-5 ring-1 ring-black/5" key={program.index}>
+            <article
+              className="rounded-2xl border border-black/[0.06] bg-white p-5"
+              key={program.index}
+            >
               <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-black text-[#0b8d79]">{program.category}</p>
-                <p className="text-xs font-bold text-[#6b756f]">{t("explorer.cityChip")}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#2B4FA5]">
+                  {program.category}
+                </p>
+                <p className="text-xs font-medium text-[#6b756f]">{t("explorer.cityChip")}</p>
               </div>
-              <h3 className="mt-2 text-xl font-black">{program.title}</h3>
+              <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">{program.title}</h3>
               <p className="mt-3 text-sm leading-6 text-[#52615b]">{program.description}</p>
             </article>
           ))}
           {filteredPrograms.length === 0 ? (
-            <div className="rounded-3xl bg-white p-5 text-sm font-bold text-[#52615b] ring-1 ring-black/5">
+            <div className="rounded-2xl border border-black/[0.06] bg-white p-5 text-sm font-medium text-[#52615b]">
               {t("explorer.empty")}
             </div>
           ) : null}

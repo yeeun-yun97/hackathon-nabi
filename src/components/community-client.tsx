@@ -18,6 +18,8 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
     : [...categories, category];
 }
 
+const cardClass = "rounded-3xl border border-black/[0.06] bg-white p-6";
+
 export function CommunityClient() {
   const { t, tCity, tCategory, tLocalized } = useLanguage();
   const [city, setCity] = useState<City>(defaultProfile.city);
@@ -44,17 +46,21 @@ export function CommunityClient() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
-      <aside className="h-fit rounded-[2rem] bg-white p-6 ring-1 ring-black/5">
-        <p className="text-sm font-black text-[#ed9805]">{t("community.filtersLabel")}</p>
-        <p className="mt-3 text-2xl font-black">{tCity(city)}</p>
+      <aside className={`${cardClass} h-fit`}>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
+          {t("community.filtersLabel")}
+        </p>
+        <p className="mt-3 text-2xl font-bold tracking-[-0.02em]">{tCity(city)}</p>
         <div className="mt-5 grid gap-2">
           {serviceCategories.map((category) => {
             const isActive = categories.includes(category.id);
 
             return (
               <button
-                className={`rounded-2xl px-4 py-3 text-left text-sm font-black ${
-                  isActive ? "bg-[#10c4a9] text-white" : "bg-[#fffaf0] text-[#52615b]"
+                className={`rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
+                  isActive
+                    ? "bg-[#2B4FA5] text-white"
+                    : "border border-black/[0.06] bg-[#f6f7fb] text-[#52615b] hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
                 }`}
                 key={category.id}
                 onClick={() => setCategories((current) => toggleCategory(current, category.id))}
@@ -66,32 +72,30 @@ export function CommunityClient() {
           })}
         </div>
       </aside>
-      <section className="grid gap-5">
+      <section className="grid gap-4">
         {filteredPosts.length === 0 ? (
-          <div className="rounded-[2rem] bg-white p-6 ring-1 ring-black/5">
-            <p className="font-black">{t("community.noLocalMatch")}</p>
+          <div className={cardClass}>
+            <p className="font-semibold">{t("community.noLocalMatch")}</p>
             <p className="mt-2 text-[#52615b]">{t("community.noLocalMatchHint")}</p>
           </div>
         ) : null}
         {visiblePosts.map((post) => (
           <Link
-            className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-100"
+            className="rounded-3xl border border-black/[0.06] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#2B4FA5]/30 hover:shadow-lg hover:shadow-[#2B4FA5]/5"
             href={`/community/${post.slug}`}
             key={post.id}
           >
             <div className="flex flex-wrap gap-2">
-              <span className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]">
+              <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
                 {tCategory(post.category)}
               </span>
-              <span className="rounded-full bg-[#17211f]/10 px-3 py-1 text-xs font-black text-[#52615b]">
+              <span className="rounded-full bg-[#0f172a]/[0.05] px-3 py-1 text-xs font-semibold text-[#52615b]">
                 {tCity(post.city)}
               </span>
             </div>
-            <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">
-              {tLocalized(post.title)}
-            </h2>
+            <h2 className="mt-4 text-2xl font-bold tracking-[-0.02em]">{tLocalized(post.title)}</h2>
             <p className="mt-3 leading-7 text-[#52615b]">{tLocalized(post.excerpt)}</p>
-            <p className="mt-4 text-sm font-black text-[#ed9805]">
+            <p className="mt-4 text-sm font-semibold text-[#2B4FA5]">
               {t("community.byAuthor", { name: post.author })}
             </p>
           </Link>

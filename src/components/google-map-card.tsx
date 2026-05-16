@@ -14,16 +14,18 @@ export function GoogleMapCard({ title, address, mapQuery }: GoogleMapCardProps) 
   const searchUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
 
   return (
-    <section className="mt-8 rounded-3xl bg-[#fffaf0] p-6 ring-1 ring-black/5">
-      <div className="p-6">
-        <p className="text-sm font-black text-[#ed9805]">{t("googleMap.locationLabel")}</p>
-        <h2 className="mt-2 text-2xl font-black tracking-[-0.03em]">{title}</h2>
-        <p className="mt-2 text-sm font-bold leading-6 text-[#52615b]">{address}</p>
+    <section className="mt-8 rounded-2xl border border-black/[0.06] bg-[#f6f7fb] p-6">
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
+          {t("googleMap.locationLabel")}
+        </p>
+        <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em]">{title}</h2>
+        <p className="mt-2 text-sm font-medium leading-6 text-[#52615b]">{address}</p>
       </div>
-      <div className="rounded-3xl bg-white p-5 ring-1 ring-black/5">
+      <div className="mt-5 rounded-2xl border border-black/[0.06] bg-white p-5">
         <p className="text-sm leading-6 text-[#52615b]">{t("googleMap.note")}</p>
         <a
-          className="mt-4 inline-flex rounded-full bg-[#10c4a9] px-5 py-3 text-sm font-black text-white"
+          className="mt-4 inline-flex rounded-full bg-[#2B4FA5] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#23408a]"
           href={searchUrl}
           rel="noreferrer"
           target="_blank"

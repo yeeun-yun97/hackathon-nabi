@@ -89,6 +89,10 @@ const cityCoordinates: Record<City, { latitude: number; longitude: number }> = {
   대전시: { latitude: 36.3504, longitude: 127.3845 },
 };
 
+const cardClass = "rounded-3xl border border-black/[0.06] bg-white p-6";
+const inputClass =
+  "rounded-2xl border border-black/[0.06] bg-[#f6f7fb] px-4 py-3 font-medium outline-none transition focus:border-[#2B4FA5] focus:ring-2 focus:ring-[#2B4FA5]/20";
+
 type SelectFieldProps<TValue extends string> = {
   label: string;
   value: TValue;
@@ -103,10 +107,10 @@ function SelectField<TValue extends string>({
   onChange,
 }: SelectFieldProps<TValue>) {
   return (
-    <label className="grid gap-2 text-sm font-black">
+    <label className="grid gap-2 text-sm font-semibold">
       {label}
       <select
-        className="rounded-2xl bg-[#fffaf0] px-4 py-3 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
+        className={inputClass}
         onChange={(event) => onChange(event.target.value as TValue)}
         value={value}
       >
@@ -188,22 +192,20 @@ export function OnboardingForm() {
   }
 
   return (
-    <form className="grid gap-8" onSubmit={handleSubmit}>
-      <section className="grid gap-6 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5 lg:grid-cols-[1fr_0.8fr]">
+    <form className="grid gap-6" onSubmit={handleSubmit}>
+      <section className={`${cardClass} grid gap-6 lg:grid-cols-[1fr_0.8fr]`}>
         <div>
-          <h2 className="text-2xl font-black tracking-[-0.03em]">
-            {t("onboarding.cityTitle")}
-          </h2>
+          <h2 className="text-2xl font-bold tracking-[-0.02em]">{t("onboarding.cityTitle")}</h2>
           <p className="mt-2 text-sm leading-6 text-[#52615b]">
             {t("onboarding.cityDescription")}
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {cities.map((city) => (
               <button
-                className={`rounded-2xl px-4 py-3 text-left text-sm font-black transition ${
+                className={`rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
                   profile.city === city
-                    ? "bg-[#10c4a9] text-white"
-                    : "bg-[#fffaf0] text-[#17211f] ring-1 ring-black/5"
+                    ? "bg-[#2B4FA5] text-white"
+                    : "border border-black/[0.06] bg-[#f6f7fb] text-[#17211f] hover:border-[#2B4FA5]/40"
                 }`}
                 key={city}
                 onClick={() => updateCity(city)}
@@ -214,7 +216,7 @@ export function OnboardingForm() {
             ))}
           </div>
           <button
-            className="mt-4 rounded-full bg-[#17211f] px-5 py-3 text-sm font-black text-white"
+            className="mt-4 rounded-full border border-black/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#17211f] transition hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
             onClick={detectLocation}
             type="button"
           >
@@ -223,19 +225,19 @@ export function OnboardingForm() {
           <p className="mt-3 text-sm leading-6 text-[#52615b]">{locationStatus}</p>
         </div>
 
-        <div className="rounded-3xl bg-[#fffaf0] p-6 ring-1 ring-black/5">
-          <p className="text-sm font-black text-[#ed9805]">
+        <div className="rounded-2xl border border-black/[0.06] bg-[#f6f7fb] p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
             {t("onboarding.selectedCityLabel")}
           </p>
-          <h3 className="mt-2 text-4xl font-black tracking-[-0.05em]">{tCity(profile.city)}</h3>
+          <h3 className="mt-2 text-4xl font-bold tracking-[-0.04em]">{tCity(profile.city)}</h3>
           <p className="mt-4 text-sm leading-6 text-[#52615b]">
             {t("onboarding.selectedCityNote")}
           </p>
         </div>
       </section>
 
-      <section className="grid gap-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5">
-        <h2 className="text-2xl font-black tracking-[-0.03em]">{t("onboarding.aboutTitle")}</h2>
+      <section className={`${cardClass} grid gap-5`}>
+        <h2 className="text-2xl font-bold tracking-[-0.02em]">{t("onboarding.aboutTitle")}</h2>
         <p className="text-sm leading-6 text-[#52615b]">{t("onboarding.aboutDescription")}</p>
         <div className="grid gap-5 md:grid-cols-2">
           <SelectField
@@ -244,10 +246,10 @@ export function OnboardingForm() {
             options={languages.map((language) => ({ id: language, label: tLanguage(language) }))}
             value={profile.preferredLanguage}
           />
-          <label className="grid gap-2 text-sm font-black">
+          <label className="grid gap-2 text-sm font-semibold">
             {t("onboarding.field.nationality")}
             <input
-              className="rounded-2xl bg-[#fffaf0] px-4 py-3 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
+              className={inputClass}
               onChange={(event) => updateProfile({ nationality: event.target.value })}
               placeholder={t("onboarding.field.nationalityPlaceholder")}
               value={profile.nationality}
@@ -301,16 +303,16 @@ export function OnboardingForm() {
         </div>
       </section>
 
-      <section className="grid gap-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5 md:grid-cols-3">
+      <section className={`${cardClass} grid gap-5 md:grid-cols-3`}>
         <div>
-          <p className="text-sm font-black">{t("onboarding.field.hasVisa")}</p>
+          <p className="text-sm font-semibold">{t("onboarding.field.hasVisa")}</p>
           <div className="mt-3 grid gap-2">
             {yesNoUnsureOptions.map((option) => (
               <button
-                className={`rounded-2xl px-4 py-3 text-left text-sm font-black ${
+                className={`rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
                   profile.hasVisa === option
-                    ? "bg-[#17211f] text-white"
-                    : "bg-[#fffaf0] text-[#17211f] ring-1 ring-black/5"
+                    ? "bg-[#2B4FA5] text-white"
+                    : "border border-black/[0.06] bg-[#f6f7fb] text-[#17211f] hover:border-[#2B4FA5]/40"
                 }`}
                 key={option}
                 onClick={() => updateProfile({ hasVisa: option })}
@@ -323,14 +325,14 @@ export function OnboardingForm() {
         </div>
 
         <div>
-          <p className="text-sm font-black">{t("onboarding.field.multicultural")}</p>
+          <p className="text-sm font-semibold">{t("onboarding.field.multicultural")}</p>
           <div className="mt-3 grid gap-2">
             {yesNoUnsureOptions.map((option) => (
               <button
-                className={`rounded-2xl px-4 py-3 text-left text-sm font-black ${
+                className={`rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
                   profile.multiculturalFamily === option
-                    ? "bg-[#17211f] text-white"
-                    : "bg-[#fffaf0] text-[#17211f] ring-1 ring-black/5"
+                    ? "bg-[#2B4FA5] text-white"
+                    : "border border-black/[0.06] bg-[#f6f7fb] text-[#17211f] hover:border-[#2B4FA5]/40"
                 }`}
                 key={option}
                 onClick={() => updateProfile({ multiculturalFamily: option })}
@@ -342,23 +344,23 @@ export function OnboardingForm() {
           </div>
         </div>
 
-        <label className="grid h-fit gap-2 text-sm font-black">
+        <label className="grid h-fit gap-2 text-sm font-semibold">
           {t("onboarding.field.visaExpiry")}
           <input
-            className="rounded-2xl bg-[#fffaf0] px-4 py-3 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
+            className={inputClass}
             onChange={(event) => updateProfile({ visaExpiryDate: event.target.value })}
             type="date"
             value={profile.visaExpiryDate}
           />
-          <span className="text-xs font-medium leading-5 text-[#52615b]">
+          <span className="text-xs font-normal leading-5 text-[#52615b]">
             {t("onboarding.field.visaExpiryNote")}
           </span>
         </label>
       </section>
 
-      <section className="grid gap-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5">
+      <section className={`${cardClass} grid gap-5`}>
         <div>
-          <h2 className="text-2xl font-black tracking-[-0.03em]">
+          <h2 className="text-2xl font-bold tracking-[-0.02em]">
             {t("onboarding.educationTitle")}
           </h2>
           <p className="mt-2 text-sm leading-6 text-[#52615b]">
@@ -406,7 +408,7 @@ export function OnboardingForm() {
       </section>
 
       <button
-        className="rounded-full bg-[#ed9805] px-7 py-4 text-base font-black text-white shadow-xl shadow-orange-200 transition hover:-translate-y-0.5"
+        className="rounded-full bg-[#2B4FA5] px-7 py-3.5 text-base font-semibold text-white transition hover:bg-[#23408a]"
         type="submit"
       >
         {t("onboarding.submit")}

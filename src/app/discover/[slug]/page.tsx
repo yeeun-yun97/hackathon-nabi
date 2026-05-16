@@ -21,7 +21,7 @@ export default async function SupportDetailPage({ params }: SupportDetailPagePro
   }
 
   return (
-    <main className="min-h-screen bg-[#fffaf0] text-[#17211f]">
+    <main className="min-h-screen bg-[#f6f7fb] text-[#17211f]">
       <SiteHeader />
       <SupportDetail program={program} />
     </main>

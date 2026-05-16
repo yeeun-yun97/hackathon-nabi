@@ -21,7 +21,7 @@ export default async function CommunityDetailPage({ params }: CommunityDetailPag
   }
 
   return (
-    <main className="min-h-screen bg-[#fffaf0] text-[#17211f]">
+    <main className="min-h-screen bg-[#f6f7fb] text-[#17211f]">
       <SiteHeader />
       <CommunityDetail post={post} />
     </main>

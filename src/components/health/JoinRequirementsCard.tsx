@@ -1,33 +1,45 @@
 "use client";
 
+import { useLanguage } from "@/components/language-provider";
 import type { Facility } from "@/lib/data";
+import type { TranslationKey } from "@/lib/i18n";
 
-const paymentLabels: Record<Facility["paymentAccepted"][number], string> = {
-  cash: "Cash",
-  "foreign-card": "Foreign card",
-  "local-card": "Local Korean card",
+const paymentLabelKeys: Record<Facility["paymentAccepted"][number], TranslationKey> = {
+  cash: "health.payment.cash",
+  "foreign-card": "health.payment.foreign",
+  "local-card": "health.payment.local",
 };
 
 export function JoinRequirementsCard({ facility }: { facility: Facility }) {
+  const { t } = useLanguage();
+  const paymentList = facility.paymentAccepted
+    .map((payment) => t(paymentLabelKeys[payment]))
+    .join(", ");
+
   return (
-    <section className="rounded-3xl bg-[#fffaf0] p-6">
-      <p className="text-sm font-black text-[#ed9805]">Join requirements</p>
-      <h2 className="mt-2 text-2xl font-black tracking-[-0.03em]">Bring these before you queue</h2>
-      <ul className="mt-5 grid gap-3 text-sm font-bold leading-6 text-[#52615b]">
+    <section className="rounded-3xl border border-black/[0.06] bg-white p-6">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
+        {t("health.requirements.eyebrow")}
+      </p>
+      <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em]">
+        {t("health.requirements.title")}
+      </h2>
+      <ul className="mt-5 grid gap-3 text-sm font-medium leading-6 text-[#52615b]">
         <li>
-          <span className="font-black text-[#17211f]">ARC required:</span> Show your Alien
-          Registration Card for local residency discounts.
+          <span className="font-semibold text-[#17211f]">{t("health.requirements.arc")}</span>{" "}
+          {t("health.requirements.arcDesc")}
         </li>
         <li>
-          <span className="font-black text-[#17211f]">Payment:</span>{" "}
-          {facility.paymentAccepted.map((payment) => paymentLabels[payment]).join(", ")}. Public
-          centers may prefer a Korean-issued card at the desk.
+          <span className="font-semibold text-[#17211f]">{t("health.requirements.payment")}</span>{" "}
+          {paymentList}. {t("health.requirements.paymentSuffix")}
         </li>
         <li>
-          <span className="font-black text-[#17211f]">Indoor shoes:</span>{" "}
+          <span className="font-semibold text-[#17211f]">
+            {t("health.requirements.indoorShoes")}
+          </span>{" "}
           {facility.indoorShoeRule
-            ? "Bring clean indoor-only shoes for the gym floor."
-            : "Ask the desk whether separate indoor shoes are required."}
+            ? t("health.requirements.indoorShoesYes")
+            : t("health.requirements.indoorShoesNo")}
         </li>
       </ul>
     </section>

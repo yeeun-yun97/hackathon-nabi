@@ -34,25 +34,30 @@ export function AiChatPreview() {
   }
 
   return (
-    <form className="rounded-[2rem] bg-white p-5 text-[#17211f]" onSubmit={handleSubmit}>
-      <label className="text-sm font-black text-[#0b8d79]" htmlFor="ai-message">
+    <form className="rounded-3xl bg-white p-6 text-[#17211f]" onSubmit={handleSubmit}>
+      <label
+        className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]"
+        htmlFor="ai-message"
+      >
         {t("chatPreview.label")}
       </label>
       <textarea
-        className="mt-3 min-h-28 w-full resize-none rounded-3xl bg-[#fffaf0] p-5 text-lg font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
+        className="mt-3 min-h-28 w-full resize-none rounded-2xl border border-black/[0.06] bg-[#f6f7fb] p-4 text-base font-medium outline-none transition focus:border-[#2B4FA5] focus:ring-2 focus:ring-[#2B4FA5]/20"
         id="ai-message"
         onChange={(event) => setCustomMessage(event.target.value)}
         value={message}
       />
       <button
-        className="mt-3 rounded-full bg-[#ed9805] px-5 py-3 text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-3 rounded-full bg-[#2B4FA5] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#23408a] disabled:cursor-not-allowed disabled:opacity-60"
         disabled={isLoading}
         type="submit"
       >
         {isLoading ? t("common.asking") : t("chatPreview.button")}
       </button>
-      <div className="mt-5 rounded-3xl bg-[#fffaf0] p-5">
-        <p className="text-sm font-black text-[#ed9805]">{t("common.answer")}</p>
+      <div className="mt-5 rounded-2xl border border-black/[0.06] bg-[#f6f7fb] p-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
+          {t("common.answer")}
+        </p>
         <p className="mt-3 whitespace-pre-wrap leading-7 text-[#52615b]">{reply}</p>
       </div>
     </form>

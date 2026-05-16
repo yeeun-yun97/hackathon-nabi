@@ -21,7 +21,7 @@ export function SiteHeader() {
   const { t } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#fffaf0]/95 shadow-sm shadow-black/5 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-black/[0.06] bg-[#f6f7fb]/85 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link className="flex items-center gap-3" href="/">
           <Image
@@ -34,9 +34,13 @@ export function SiteHeader() {
           />
           <p className="sr-only">{t("header.brand.subtitle")}</p>
         </Link>
-        <nav className="hidden items-center gap-7 text-sm font-bold text-[#4e5a55] lg:flex">
+        <nav className="hidden items-center gap-7 text-sm font-semibold text-[#52615b] lg:flex">
           {navItems.map((item) => (
-            <Link className="transition hover:text-[#0b8d79]" href={item.href} key={item.href}>
+            <Link
+              className="transition-colors hover:text-[#2B4FA5]"
+              href={item.href}
+              key={item.href}
+            >
               {t(item.key)}
             </Link>
           ))}
@@ -44,7 +48,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
           <Link
-            className="rounded-full bg-[#17211f] px-5 py-3 text-sm font-black text-white"
+            className="rounded-full bg-[#2B4FA5] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#23408a]"
             href="/onboarding"
           >
             {t("header.cta.setProfile")}

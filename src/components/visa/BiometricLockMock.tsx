@@ -1,20 +1,27 @@
+"use client";
+
+import { useLanguage } from "@/components/language-provider";
+
 type BiometricLockMockProps = {
   statusText?: string;
 };
 
-export function BiometricLockMock({ statusText = "Confirming identity" }: BiometricLockMockProps) {
+export function BiometricLockMock({ statusText }: BiometricLockMockProps) {
+  const { t } = useLanguage();
+  const status = statusText ?? t("visa.biometric.status");
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,#24413c_0%,#17211f_48%,#07100e_100%)] px-6 text-white">
-      <section className="w-full max-w-sm rounded-[2.5rem] bg-white/8 p-8 text-center shadow-2xl shadow-black/30 ring-1 ring-white/15 backdrop-blur">
-        <p className="text-xs font-black uppercase tracking-[0.35em] text-[#10c4a9]">
-          nabi secure pass
+    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,#1c2a4a_0%,#0f172a_48%,#05080f_100%)] px-6 text-white">
+      <section className="w-full max-w-sm rounded-3xl border border-white/15 bg-white/8 p-8 text-center shadow-2xl shadow-black/30 backdrop-blur">
+        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#13C3A8]">
+          {t("visa.biometric.brand")}
         </p>
-        <div className="mx-auto mt-8 flex size-44 items-center justify-center rounded-full bg-[#10c4a9]/10 ring-1 ring-[#10c4a9]/30">
-          <div className="relative flex size-32 items-center justify-center rounded-full bg-[#17211f] shadow-2xl shadow-[#10c4a9]/20">
-            <div className="absolute size-40 animate-ping rounded-full border border-[#10c4a9]/40" />
+        <div className="mx-auto mt-8 flex size-44 items-center justify-center rounded-full bg-[#13C3A8]/10 ring-1 ring-[#13C3A8]/30">
+          <div className="relative flex size-32 items-center justify-center rounded-full bg-[#0f172a] shadow-2xl shadow-[#13C3A8]/20">
+            <div className="absolute size-40 animate-ping rounded-full border border-[#13C3A8]/40" />
             <svg
               aria-hidden="true"
-              className="size-24 text-[#10c4a9]"
+              className="size-24 text-[#13C3A8]"
               fill="none"
               viewBox="0 0 96 96"
             >
@@ -55,10 +62,8 @@ export function BiometricLockMock({ statusText = "Confirming identity" }: Biomet
           </div>
         </div>
         <div className="mt-8" role="status" aria-live="polite">
-          <h1 className="text-3xl font-black tracking-[-0.04em]">{statusText}</h1>
-          <p className="mt-3 text-sm leading-6 text-white/65">
-            Unlocking your visa dashboard with stored profile context.
-          </p>
+          <h1 className="text-3xl font-bold tracking-[-0.03em]">{status}</h1>
+          <p className="mt-3 text-sm leading-6 text-white/65">{t("visa.biometric.note")}</p>
         </div>
       </section>
     </div>

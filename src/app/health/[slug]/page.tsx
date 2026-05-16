@@ -23,7 +23,7 @@ export default async function FacilityDetailPage({ params }: FacilityDetailPageP
   }
 
   return (
-    <main className="min-h-screen bg-[#fffaf0] text-[#17211f]">
+    <main className="min-h-screen bg-[#f6f7fb] text-[#17211f]">
       <SiteHeader />
       <article className="mx-auto max-w-5xl px-6 pb-20 pt-10">
         <FacilityDetailPanel facility={facility} />

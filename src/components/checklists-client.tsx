@@ -48,8 +48,10 @@ export function ChecklistsClient() {
 
           return (
             <button
-              className={`rounded-full px-4 py-2 text-sm font-black ${
-                isActive ? "bg-[#10c4a9] text-white" : "bg-white text-[#52615b] ring-1 ring-black/5"
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                isActive
+                  ? "bg-[#2B4FA5] text-white"
+                  : "border border-black/[0.06] bg-white text-[#52615b] hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
               }`}
               key={category.id}
               onClick={() => setCategories((current) => toggleCategory(current, category.id))}
@@ -60,20 +62,26 @@ export function ChecklistsClient() {
           );
         })}
       </div>
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         {filteredChecklists.map((checklist) => (
-          <article className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-black/5" key={checklist.id}>
-            <span className="rounded-full bg-[#10c4a9]/15 px-3 py-1 text-xs font-black text-[#0b8d79]">
+          <article
+            className="rounded-3xl border border-black/[0.06] bg-white p-6"
+            key={checklist.id}
+          >
+            <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
               {tCategory(checklist.category)}
             </span>
-            <h2 className="mt-4 text-2xl font-black tracking-[-0.03em]">
+            <h2 className="mt-4 text-2xl font-bold tracking-[-0.02em]">
               {tLocalized(checklist.title)}
             </h2>
             <p className="mt-3 leading-7 text-[#52615b]">{tLocalized(checklist.description)}</p>
             <ol className="mt-5 grid gap-3">
               {checklist.steps.map((step, index) => (
-                <li className="flex gap-3 text-sm font-bold leading-6 text-[#52615b]" key={step.en}>
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#ed9805] text-xs text-white">
+                <li
+                  className="flex gap-3 text-sm font-medium leading-6 text-[#52615b]"
+                  key={step.en}
+                >
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#2B4FA5]/10 text-xs font-semibold text-[#2B4FA5]">
                     {index + 1}
                   </span>
                   {tLocalized(step)}
@@ -84,8 +92,8 @@ export function ChecklistsClient() {
         ))}
       </div>
       {filteredChecklists.length === 0 ? (
-        <div className="rounded-[2rem] bg-white p-8 text-center ring-1 ring-black/5">
-          <p className="font-black">{t("checklists.empty")}</p>
+        <div className="rounded-3xl border border-black/[0.06] bg-white p-8 text-center">
+          <p className="font-semibold">{t("checklists.empty")}</p>
         </div>
       ) : null}
     </div>

@@ -121,6 +121,167 @@ const en = {
   "home.aiDescription":
     "A ChatGPT-powered route is ready, so questions like \"I live in Seoul and need a visa extension\" can be answered with checklists and the right offices.",
 
+  // home visa alert
+  "home.visaAlert.eyebrow": "Visa Status Update",
+  "home.visaAlert.body":
+    "Your current residence permit expires in 180 days. Based on your updated employment profile, you may be eligible for an EU Blue Card. Review your options.",
+  "home.visaAlert.cta": "Open mock lock screen",
+
+  // home life-in-korea moments
+  "home.life.0.eyebrow": "Settle in",
+  "home.life.0.caption": "Make Korea feel like home.",
+  "home.life.0.alt": "Friends taking a photo at Gwanghwamun",
+  "home.life.1.eyebrow": "Work & grow",
+  "home.life.1.caption": "Build your career, your way.",
+  "home.life.1.alt": "Young professionals walking in Gangnam",
+  "home.life.2.eyebrow": "Learn",
+  "home.life.2.caption": "Pick up the language at your pace.",
+  "home.life.2.alt": "Students studying together at a Korean language institute",
+
+  // home explorer section
+  "home.explorerEyebrow": "Try it now",
+  "home.explorerTitle": "Filter programs to fit your moment.",
+  "home.explorerDescription":
+    "Pick the tags that match where you are — and see real programs available near you.",
+
+  // home health & recreation
+  "home.health.eyebrow": "Health & Recreation",
+  "home.health.title":
+    "Compare public gyms, pools, and first-visit rules near your district.",
+  "home.health.description":
+    "See ARC requirements, resident pricing, local-card payment notes, indoor-shoe rules, and a Korean desk prompt before you visit.",
+  "home.health.cta": "Explore facilities",
+
+  // visa page
+  "visa.eyebrow": "Visa Horizon",
+  "visa.title": "Renew today, plan your next status.",
+  "visa.subtitle":
+    "A dual-track view for immediate renewal prep and long-term F-2-7 readiness.",
+  "visa.replayNotification": "Replay notification",
+  "visa.horizonTrack": "Horizon track",
+  "visa.fromTo": "{current} to {target}",
+  "visa.horizonDescription":
+    "Your mock F-2-7 score is close. These options show practical ways to close the remaining point gap.",
+  "visa.daysUntilCheckpoint": "{days} days until renewal checkpoint",
+  "visa.estimatedUnlock": "Estimated unlock",
+  "visa.daysShort": "{days} days",
+  "visa.ofPoints": "of {target} pts",
+
+  // visa renew checklist
+  "visa.renewal.eyebrow": "Renewal track",
+  "visa.renewal.title": "Keep your {current} status ready before the deadline.",
+  "visa.renewal.description":
+    "nabi turns your stored visa, district, and education profile into a practical immigration visit checklist.",
+  "visa.renewal.steps.0":
+    "Reserve a HiKorea visit before the renewal window fills.",
+  "visa.renewal.steps.1":
+    "Prepare passport, ARC, application form, housing proof, and fee.",
+  "visa.renewal.steps.2":
+    "Bring enrollment or employment proof that matches your current visa.",
+  "visa.clock.label": "Your visa clock",
+  "visa.clock.daysLeft": "{days} days left",
+  "visa.clock.expiryNotSet": "Expiry date not set",
+  "visa.clock.checkExpiry": "Check expiry date",
+  "visa.clock.expiry": "Expiry",
+  "visa.clock.notProvided": "Not provided",
+  "visa.clock.district": "District",
+  "visa.clock.notSelected": "Not selected",
+  "visa.clock.profileBasis": "Profile basis",
+
+  // visa strategy options
+  "visa.strategy.points": "+{points} pts",
+  "visa.strategy.status.available": "available",
+  "visa.strategy.status.earned": "earned",
+  "visa.strategy.status.locked": "locked",
+  "visa.strategy.nextIntake": "Next intake: {date}",
+  "visa.strategy.openResource": "Open resource",
+
+  // visa notification page
+  "visa.notification.label": "Notification",
+  "visa.notification.tapHint": "Tap to unlock your visa horizon",
+  "visa.notification.dateLabel": "Saturday, May 16",
+  "visa.notification.brand": "nabi Visa Horizon",
+  "visa.notification.title": "Visa renewal window opens soon",
+  "visa.notification.body":
+    "nabi prepared your renewal checklist and F-2-7 horizon options.",
+  "visa.notification.timestamp": "now",
+
+  // biometric
+  "visa.biometric.brand": "nabi secure pass",
+  "visa.biometric.status": "Confirming identity",
+  "visa.biometric.note":
+    "Unlocking your visa dashboard with stored profile context.",
+
+  // health page
+  "health.eyebrow": "Health & Recreation",
+  "health.title": "Find public gyms and pools that are easier to join.",
+  "health.subtitle":
+    "Compare local facilities by sports, open hours, monthly public pricing, and the practical desk requirements foreigners need on the first visit.",
+
+  "health.openNow": "Open now",
+  "health.closed": "Closed",
+  "health.closedNow": "Closed now",
+  "health.monthlyRate": "Monthly public rate",
+  "health.residentDiscount": "Resident discount: ARC required",
+
+  // facility list
+  "health.list.eyebrow": "Closest to your district",
+  "health.list.sortedFrom": "Sorted from {district}",
+  "health.list.updateDistrict": "Update district",
+  "health.list.distance": "{km} km",
+
+  // facility detail
+  "health.detail.back": "Back to Health & Recreation",
+  "health.detail.intro":
+    "Public sports center options for lap swimming, general weight lifting, and indoor fitness with resident pricing around ₩40,000-₩50,000 per month.",
+  "health.detail.sports": "Sports available",
+  "health.detail.pricing": "Monthly pricing",
+
+  // sports
+  "health.sport.swimming": "Lap swimming",
+  "health.sport.weights": "General weight lifting",
+  "health.sport.yoga": "Yoga",
+  "health.sport.fitness": "Indoor fitness",
+  "health.sport.court": "Court sports",
+
+  // join requirements
+  "health.requirements.eyebrow": "Join requirements",
+  "health.requirements.title": "Bring these before you queue",
+  "health.requirements.arc": "ARC required:",
+  "health.requirements.arcDesc":
+    "Show your Alien Registration Card for local residency discounts.",
+  "health.requirements.payment": "Payment:",
+  "health.requirements.paymentSuffix":
+    "Public centers may prefer a Korean-issued card at the desk.",
+  "health.requirements.indoorShoes": "Indoor shoes:",
+  "health.requirements.indoorShoesYes":
+    "Bring clean indoor-only shoes for the gym floor.",
+  "health.requirements.indoorShoesNo":
+    "Ask the desk whether separate indoor shoes are required.",
+  "health.payment.cash": "Cash",
+  "health.payment.foreign": "Foreign card",
+  "health.payment.local": "Local Korean card",
+
+  // first visit onboarding
+  "health.firstVisit.eyebrow": "First visit onboarding",
+  "health.firstVisit.title": "A desk script for joining",
+  "health.firstVisit.steps.0":
+    "1. Arrive during desk hours and take a queue ticket if available.",
+  "health.firstVisit.steps.1":
+    "2. Show your ARC and ask for the local resident discount before paying.",
+  "health.firstVisit.steps.2":
+    "3. Confirm the swim lane or gym time block, then ask where to store indoor shoes.",
+  "health.firstVisit.openModal": "Open Korean receptionist text",
+  "health.firstVisit.modalEyebrow": "Reception desk",
+  "health.firstVisit.modalTitle": "Show this sentence",
+  "health.firstVisit.close": "Close",
+
+  // korean shield
+  "health.shield.label": "Show this exact Korean",
+  "health.shield.note":
+    "Keep this sentence in Korean so a receptionist can read it directly.",
+  "health.shield.copy": "Copy Korean text",
+
   // info explorer
   "explorer.title": "Personalized search",
   "explorer.cityChip": "Seoul",
@@ -492,6 +653,162 @@ const ko = {
   "home.aiDescription":
     "ChatGPT API 라우트가 준비되어 있어 사용자가 \"서울에 살고 있고 비자 연장을 해야 해요\"처럼 질문하면 체크리스트와 관련 기관을 안내하도록 확장할 수 있습니다.",
 
+  // 비자 알림
+  "home.visaAlert.eyebrow": "비자 상태 업데이트",
+  "home.visaAlert.body":
+    "현재 체류 자격이 180일 후 만료됩니다. 업데이트된 고용 정보를 기반으로 EU 블루카드 대상이 될 수 있어요. 옵션을 확인해보세요.",
+  "home.visaAlert.cta": "잠금화면 미리보기 열기",
+
+  // Life in Korea 섹션
+  "home.life.0.eyebrow": "정착하기",
+  "home.life.0.caption": "한국이 집처럼 편안해지도록.",
+  "home.life.0.alt": "광화문에서 함께 사진을 찍는 친구들",
+  "home.life.1.eyebrow": "일하고 성장하기",
+  "home.life.1.caption": "당신의 방식으로 커리어를 쌓아요.",
+  "home.life.1.alt": "강남 거리를 걷는 직장인들",
+  "home.life.2.eyebrow": "배우기",
+  "home.life.2.caption": "내 속도로 한국어를 익혀요.",
+  "home.life.2.alt": "한국어 학당에서 함께 공부하는 학생들",
+
+  // 프로그램 탐색기
+  "home.explorerEyebrow": "지금 바로 써보기",
+  "home.explorerTitle": "지금 내 상황에 맞는 프로그램만 골라보세요.",
+  "home.explorerDescription":
+    "지금 내 상황과 맞는 태그를 선택하면 가까운 곳의 실제 프로그램을 바로 보여드려요.",
+
+  // 건강 & 여가
+  "home.health.eyebrow": "건강 & 여가",
+  "home.health.title": "구별 공공 체육시설, 수영장, 첫 방문 규정을 비교해보세요.",
+  "home.health.description":
+    "외국인등록증 요구사항, 주민 할인 가격, 지역카드 결제 안내, 실내화 규정, 그리고 데스크 응대용 한국어 문구까지 한 번에.",
+  "home.health.cta": "시설 둘러보기",
+
+  // 비자 페이지
+  "visa.eyebrow": "비자 호라이즌",
+  "visa.title": "오늘 갱신하고, 다음 자격을 계획하세요.",
+  "visa.subtitle":
+    "당장의 갱신 준비와 장기적인 F-2-7 준비를 한 화면에서 보여드립니다.",
+  "visa.replayNotification": "알림 다시 보기",
+  "visa.horizonTrack": "호라이즌 트랙",
+  "visa.fromTo": "{current} → {target}",
+  "visa.horizonDescription":
+    "F-2-7 모의 점수가 거의 다 왔어요. 남은 점수를 채울 실질적인 방법들을 모았습니다.",
+  "visa.daysUntilCheckpoint": "갱신 체크포인트까지 {days}일",
+  "visa.estimatedUnlock": "예상 달성 시점",
+  "visa.daysShort": "{days}일",
+  "visa.ofPoints": "/ {target}점",
+
+  // 갱신 체크리스트
+  "visa.renewal.eyebrow": "갱신 트랙",
+  "visa.renewal.title": "마감 전에 {current} 자격을 안전하게 유지하세요.",
+  "visa.renewal.description":
+    "저장된 비자·구·학력 프로필을 바탕으로 실제 방문에 필요한 체크리스트를 만들어드립니다.",
+  "visa.renewal.steps.0": "갱신 창구가 가득 차기 전에 HiKorea 예약을 잡으세요.",
+  "visa.renewal.steps.1":
+    "여권, 외국인등록증, 신청서, 주거 증빙, 수수료를 준비하세요.",
+  "visa.renewal.steps.2":
+    "현재 비자에 맞는 재학·재직 증빙을 함께 챙기세요.",
+  "visa.clock.label": "비자 카운트다운",
+  "visa.clock.daysLeft": "{days}일 남음",
+  "visa.clock.expiryNotSet": "만료일이 설정되지 않았습니다",
+  "visa.clock.checkExpiry": "만료일을 확인해주세요",
+  "visa.clock.expiry": "만료일",
+  "visa.clock.notProvided": "입력되지 않음",
+  "visa.clock.district": "거주 구",
+  "visa.clock.notSelected": "선택되지 않음",
+  "visa.clock.profileBasis": "프로필 기반",
+
+  // 전략 옵션
+  "visa.strategy.points": "+{points}점",
+  "visa.strategy.status.available": "가능",
+  "visa.strategy.status.earned": "획득",
+  "visa.strategy.status.locked": "잠김",
+  "visa.strategy.nextIntake": "다음 모집: {date}",
+  "visa.strategy.openResource": "자료 열기",
+
+  // 비자 알림 페이지
+  "visa.notification.label": "알림",
+  "visa.notification.tapHint": "탭해서 비자 호라이즌 열기",
+  "visa.notification.dateLabel": "5월 16일 토요일",
+  "visa.notification.brand": "nabi 비자 호라이즌",
+  "visa.notification.title": "비자 갱신 창구가 곧 열립니다",
+  "visa.notification.body":
+    "갱신 체크리스트와 F-2-7 호라이즌 옵션을 nabi가 준비해두었어요.",
+  "visa.notification.timestamp": "지금",
+
+  // 생체 인증
+  "visa.biometric.brand": "nabi 시큐어 패스",
+  "visa.biometric.status": "본인 확인 중",
+  "visa.biometric.note": "저장된 프로필로 비자 대시보드를 여는 중이에요.",
+
+  // 건강 & 여가 페이지
+  "health.eyebrow": "건강 & 여가",
+  "health.title": "외국인이 더 쉽게 등록할 수 있는 공공 체육시설을 찾아보세요.",
+  "health.subtitle":
+    "종목, 운영 시간, 월 회원료, 그리고 첫 방문 때 필요한 데스크 절차를 한 번에 비교합니다.",
+
+  "health.openNow": "운영 중",
+  "health.closed": "운영 종료",
+  "health.closedNow": "지금은 운영 종료",
+  "health.monthlyRate": "공공 월 이용료",
+  "health.residentDiscount": "거주자 할인: 외국인등록증 필요",
+
+  // 시설 리스트
+  "health.list.eyebrow": "내 구 기준 가까운 순",
+  "health.list.sortedFrom": "{district} 기준 정렬",
+  "health.list.updateDistrict": "구 변경하기",
+  "health.list.distance": "{km} km",
+
+  // 시설 상세
+  "health.detail.back": "건강 & 여가로 돌아가기",
+  "health.detail.intro":
+    "수영, 일반 웨이트, 실내 운동이 가능한 공공 체육센터로, 거주자 기준 월 약 4–5만원대 가격입니다.",
+  "health.detail.sports": "운영 종목",
+  "health.detail.pricing": "월별 이용료",
+
+  // 종목
+  "health.sport.swimming": "자유 수영",
+  "health.sport.weights": "일반 웨이트",
+  "health.sport.yoga": "요가",
+  "health.sport.fitness": "실내 피트니스",
+  "health.sport.court": "코트 스포츠",
+
+  // 가입 요건
+  "health.requirements.eyebrow": "가입 요건",
+  "health.requirements.title": "줄 서기 전에 이것부터 준비하세요",
+  "health.requirements.arc": "외국인등록증 필수:",
+  "health.requirements.arcDesc":
+    "거주자 할인을 받으려면 외국인등록증을 제시하세요.",
+  "health.requirements.payment": "결제:",
+  "health.requirements.paymentSuffix":
+    "공공 센터는 한국 발급 카드 결제를 선호할 수 있어요.",
+  "health.requirements.indoorShoes": "실내화:",
+  "health.requirements.indoorShoesYes": "체육관용 깨끗한 실내화를 가져가세요.",
+  "health.requirements.indoorShoesNo": "데스크에 실내화 별도 필요 여부를 확인하세요.",
+  "health.payment.cash": "현금",
+  "health.payment.foreign": "해외 카드",
+  "health.payment.local": "한국 카드",
+
+  // 첫 방문 온보딩
+  "health.firstVisit.eyebrow": "첫 방문 온보딩",
+  "health.firstVisit.title": "데스크에서 쓰는 가입 스크립트",
+  "health.firstVisit.steps.0":
+    "1. 데스크 운영 시간에 도착하고 번호표가 있으면 뽑으세요.",
+  "health.firstVisit.steps.1":
+    "2. 외국인등록증을 보여주고 결제 전에 거주자 할인을 요청하세요.",
+  "health.firstVisit.steps.2":
+    "3. 수영 레인이나 헬스장 이용 시간을 확인하고, 실내화 보관 위치를 물어보세요.",
+  "health.firstVisit.openModal": "한국어 응대 문구 열기",
+  "health.firstVisit.modalEyebrow": "리셉션 데스크",
+  "health.firstVisit.modalTitle": "이 문장을 보여주세요",
+  "health.firstVisit.close": "닫기",
+
+  // 한국어 카드
+  "health.shield.label": "이 한국어 그대로 보여주세요",
+  "health.shield.note":
+    "리셉션 직원이 그대로 읽을 수 있도록 한국어 문장을 유지해주세요.",
+  "health.shield.copy": "한국어 복사",
+
   // explorer
   "explorer.title": "맞춤 검색",
   "explorer.cityChip": "서울",
@@ -839,6 +1156,154 @@ const zh = {
   "home.aiTitle": "用您自己的话提问",
   "home.aiDescription":
     "已准备好 ChatGPT 路由——例如 \"我住在首尔，需要延长签证\" 这样的问题，将给出清单与对应机构指引。",
+
+  // 签证提醒
+  "home.visaAlert.eyebrow": "签证状态更新",
+  "home.visaAlert.body":
+    "您当前的居留许可将在 180 天后到期。根据更新后的就业信息，您可能符合欧盟蓝卡资格。点击查看可选项。",
+  "home.visaAlert.cta": "打开锁屏样例",
+
+  // 在韩生活
+  "home.life.0.eyebrow": "落地生活",
+  "home.life.0.caption": "让韩国成为像家一样的地方。",
+  "home.life.0.alt": "在光化门一起合影的朋友们",
+  "home.life.1.eyebrow": "工作成长",
+  "home.life.1.caption": "用属于你的方式打造职业生涯。",
+  "home.life.1.alt": "在江南街头走路的年轻职场人",
+  "home.life.2.eyebrow": "学习",
+  "home.life.2.caption": "按自己的节奏掌握韩语。",
+  "home.life.2.alt": "在韩语学院一起学习的学生们",
+
+  // 项目浏览
+  "home.explorerEyebrow": "立即体验",
+  "home.explorerTitle": "按你当前的情境筛选项目。",
+  "home.explorerDescription": "选择符合你状态的标签，立即查看附近真实可用的项目。",
+
+  // 健康与休闲
+  "home.health.eyebrow": "健康与休闲",
+  "home.health.title": "比较各区的公共健身房、泳池及首次入场规则。",
+  "home.health.description":
+    "外国人登录证要求、居民优惠价格、本地卡支付说明、室内鞋规则，以及前台沟通用韩语句子，一次了解。",
+  "home.health.cta": "探索设施",
+
+  // 签证页面
+  "visa.eyebrow": "签证 Horizon",
+  "visa.title": "今天续签，规划下一步身份。",
+  "visa.subtitle": "同一界面查看眼前的续签准备与长期 F-2-7 规划。",
+  "visa.replayNotification": "重播通知",
+  "visa.horizonTrack": "Horizon 轨道",
+  "visa.fromTo": "{current} 到 {target}",
+  "visa.horizonDescription":
+    "您的 F-2-7 模拟分数已经接近。这些方案帮助您补足剩余分数。",
+  "visa.daysUntilCheckpoint": "距续签节点还有 {days} 天",
+  "visa.estimatedUnlock": "预计达成时间",
+  "visa.daysShort": "{days} 天",
+  "visa.ofPoints": "/ {target} 分",
+
+  // 续签清单
+  "visa.renewal.eyebrow": "续签轨道",
+  "visa.renewal.title": "在期限前保持您的 {current} 身份。",
+  "visa.renewal.description":
+    "nabi 根据已保存的签证、地区、教育档案，生成实用的出入境访问清单。",
+  "visa.renewal.steps.0": "在续签窗口被订满之前，先到 HiKorea 预约。",
+  "visa.renewal.steps.1": "准备护照、外国人登录证、申请表、住所证明与手续费。",
+  "visa.renewal.steps.2": "携带与当前签证匹配的在学或在职证明。",
+  "visa.clock.label": "您的签证倒计时",
+  "visa.clock.daysLeft": "剩余 {days} 天",
+  "visa.clock.expiryNotSet": "未设置到期日",
+  "visa.clock.checkExpiry": "请确认到期日",
+  "visa.clock.expiry": "到期日",
+  "visa.clock.notProvided": "未填写",
+  "visa.clock.district": "居住区",
+  "visa.clock.notSelected": "未选择",
+  "visa.clock.profileBasis": "档案依据",
+
+  // 策略选项
+  "visa.strategy.points": "+{points} 分",
+  "visa.strategy.status.available": "可获得",
+  "visa.strategy.status.earned": "已获得",
+  "visa.strategy.status.locked": "未达成",
+  "visa.strategy.nextIntake": "下一次招生：{date}",
+  "visa.strategy.openResource": "打开资源",
+
+  // 签证通知页
+  "visa.notification.label": "通知",
+  "visa.notification.tapHint": "点击解锁您的 Visa Horizon",
+  "visa.notification.dateLabel": "5 月 16 日 星期六",
+  "visa.notification.brand": "nabi Visa Horizon",
+  "visa.notification.title": "签证续签窗口即将开放",
+  "visa.notification.body": "nabi 已为您准备续签清单与 F-2-7 Horizon 选项。",
+  "visa.notification.timestamp": "刚刚",
+
+  // 生物识别
+  "visa.biometric.brand": "nabi 安全通行",
+  "visa.biometric.status": "正在确认身份",
+  "visa.biometric.note": "正在使用保存的档案为您打开签证仪表盘。",
+
+  // 健康与休闲页面
+  "health.eyebrow": "健康与休闲",
+  "health.title": "找到外国人更容易加入的公共体育设施。",
+  "health.subtitle":
+    "按运动项目、营业时间、月费、首次入场所需手续等维度比较各类设施。",
+
+  "health.openNow": "营业中",
+  "health.closed": "已闭馆",
+  "health.closedNow": "目前已闭馆",
+  "health.monthlyRate": "公共月费",
+  "health.residentDiscount": "居民优惠：需外国人登录证",
+
+  // 设施列表
+  "health.list.eyebrow": "按区距离排序",
+  "health.list.sortedFrom": "以 {district} 为起点",
+  "health.list.updateDistrict": "更换地区",
+  "health.list.distance": "{km} 公里",
+
+  // 设施详情
+  "health.detail.back": "返回健康与休闲",
+  "health.detail.intro":
+    "可进行自由泳、一般力量训练与室内健身的公共体育中心，本地居民月费约 4–5 万韩元。",
+  "health.detail.sports": "可用项目",
+  "health.detail.pricing": "月度费用",
+
+  // 项目
+  "health.sport.swimming": "自由泳",
+  "health.sport.weights": "一般力量训练",
+  "health.sport.yoga": "瑜伽",
+  "health.sport.fitness": "室内健身",
+  "health.sport.court": "场地球类",
+
+  // 加入要求
+  "health.requirements.eyebrow": "加入要求",
+  "health.requirements.title": "排队前先备齐这些",
+  "health.requirements.arc": "需外国人登录证：",
+  "health.requirements.arcDesc": "出示外国人登录证可享本地居民优惠。",
+  "health.requirements.payment": "支付方式：",
+  "health.requirements.paymentSuffix": "公共中心可能更倾向于韩国本地卡。",
+  "health.requirements.indoorShoes": "室内鞋：",
+  "health.requirements.indoorShoesYes": "请准备健身房专用的干净室内鞋。",
+  "health.requirements.indoorShoesNo": "请向前台确认是否需要单独室内鞋。",
+  "health.payment.cash": "现金",
+  "health.payment.foreign": "境外卡",
+  "health.payment.local": "韩国本地卡",
+
+  // 首次入场
+  "health.firstVisit.eyebrow": "首次入场指引",
+  "health.firstVisit.title": "前台沟通脚本",
+  "health.firstVisit.steps.0":
+    "1. 在前台营业时间到达，如有取号机请先取号。",
+  "health.firstVisit.steps.1":
+    "2. 出示外国人登录证，并在付款前请求居民优惠。",
+  "health.firstVisit.steps.2":
+    "3. 确认游泳道或健身时段，并询问室内鞋存放位置。",
+  "health.firstVisit.openModal": "打开韩语前台文本",
+  "health.firstVisit.modalEyebrow": "前台",
+  "health.firstVisit.modalTitle": "请出示这句话",
+  "health.firstVisit.close": "关闭",
+
+  // 韩语卡
+  "health.shield.label": "请直接出示这段韩语",
+  "health.shield.note": "保留韩语原文，让前台人员可直接阅读。",
+  "health.shield.copy": "复制韩语",
 
   "explorer.title": "个性化搜索",
   "explorer.cityChip": "首尔",

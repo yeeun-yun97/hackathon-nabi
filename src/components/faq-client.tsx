@@ -51,7 +51,7 @@ export function FaqClient() {
   return (
     <div className="grid gap-6">
       <input
-        className="rounded-full bg-white px-6 py-4 font-bold outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-[#10c4a9]"
+        className="rounded-full border border-black/[0.06] bg-white px-6 py-3.5 font-medium outline-none transition focus:border-[#2B4FA5] focus:ring-2 focus:ring-[#2B4FA5]/20"
         onChange={(event) => setQuery(event.target.value)}
         placeholder={t("faq.searchPlaceholder")}
         value={query}
@@ -62,8 +62,10 @@ export function FaqClient() {
 
           return (
             <button
-              className={`rounded-full px-4 py-2 text-sm font-black ${
-                isActive ? "bg-[#10c4a9] text-white" : "bg-white text-[#52615b] ring-1 ring-black/5"
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                isActive
+                  ? "bg-[#2B4FA5] text-white"
+                  : "border border-black/[0.06] bg-white text-[#52615b] hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
               }`}
               key={category.id}
               onClick={() => setCategories((current) => toggleCategory(current, category.id))}
@@ -76,12 +78,15 @@ export function FaqClient() {
       </div>
       <div className="grid gap-3">
         {filteredFaqs.map((faq) => (
-          <details className="rounded-[1.5rem] bg-white p-6 ring-1 ring-black/5" key={faq.id}>
-            <summary className="cursor-pointer text-lg font-black">
+          <details
+            className="rounded-2xl border border-black/[0.06] bg-white p-6 open:border-[#2B4FA5]/20"
+            key={faq.id}
+          >
+            <summary className="cursor-pointer text-lg font-semibold">
               {tLocalized(faq.question)}
             </summary>
             <p className="mt-4 leading-7 text-[#52615b]">{tLocalized(faq.answer)}</p>
-            <p className="mt-4 text-xs font-black text-[#0b8d79]">{tCategory(faq.category)}</p>
+            <p className="mt-4 text-xs font-semibold text-[#2B4FA5]">{tCategory(faq.category)}</p>
           </details>
         ))}
       </div>
