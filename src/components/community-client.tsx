@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+import { useAuth } from "@/components/auth-provider";
 import { useLanguage } from "@/components/language-provider";
 import {
   communityPosts,
@@ -10,6 +11,7 @@ import {
   type City,
   type ServiceCategory,
 } from "@/lib/data";
+import { fetchRemotePosts, type RemoteCommunityPost } from "@/lib/community-db";
 import { defaultProfile, readStoredProfile } from "@/lib/profile";
 
 function toggleCategory(categories: ServiceCategory[], category: ServiceCategory) {
@@ -22,8 +24,11 @@ const cardClass = "rounded-3xl border border-black/[0.06] bg-white p-6";
 
 export function CommunityClient() {
   const { t, tCity, tCategory, tLocalized } = useLanguage();
+  const { user, isLoading: authLoading } = useAuth();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
+  const [remotePosts, setRemotePosts] = useState<RemoteCommunityPost[]>([]);
+  const [postsLoading, setPostsLoading] = useState(true);
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -32,7 +37,21 @@ export function CommunityClient() {
     });
   }, []);
 
-  const filteredPosts = useMemo(
+  useEffect(() => {
+    let active = true;
+    fetchRemotePosts()
+      .then((rows) => {
+        if (active) setRemotePosts(rows);
+      })
+      .finally(() => {
+        if (active) setPostsLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const filteredSeed = useMemo(
     () =>
       communityPosts.filter(
         (post) =>
@@ -42,7 +61,33 @@ export function CommunityClient() {
     [categories, city],
   );
 
-  const visiblePosts = filteredPosts.length > 0 ? filteredPosts : communityPosts;
+  const filteredRemote = useMemo(
+    () =>
+      remotePosts.filter(
+        (post) =>
+          post.city === city &&
+          (categories.length === 0 || categories.includes(post.category)),
+      ),
+    [categories, city, remotePosts],
+  );
+
+  const visibleSeed = filteredSeed.length > 0 ? filteredSeed : communityPosts;
+
+  const writeCta = user ? (
+    <Link
+      className="inline-flex w-fit items-center justify-center rounded-full bg-[#2B4FA5] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#23408a]"
+      href="/community/new"
+    >
+      {t("community.writePost")}
+    </Link>
+  ) : (
+    <Link
+      className="inline-flex w-fit items-center justify-center rounded-full border border-[#2B4FA5]/30 bg-white px-5 py-2.5 text-sm font-semibold text-[#2B4FA5] transition hover:border-[#2B4FA5] hover:bg-[#2B4FA5]/5"
+      href="/login?redirectTo=/community/new"
+    >
+      {t("auth.requiredToWrite")}
+    </Link>
+  );
 
   return (
     <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
@@ -71,15 +116,47 @@ export function CommunityClient() {
             );
           })}
         </div>
+        <div className="mt-6 border-t border-black/[0.06] pt-5">{!authLoading ? writeCta : null}</div>
       </aside>
       <section className="grid gap-4">
-        {filteredPosts.length === 0 ? (
+        {!postsLoading && filteredRemote.length > 0 ? (
+          <div className="grid gap-4">
+            <h2 className="text-xl font-bold tracking-[-0.02em]">
+              {t("community.userPostsHeading")}
+            </h2>
+            {filteredRemote.map((post) => (
+              <Link
+                className="rounded-3xl border border-black/[0.06] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#2B4FA5]/30 hover:shadow-lg hover:shadow-[#2B4FA5]/5"
+                href={`/community/${post.slug}`}
+                key={post.id}
+              >
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full bg-[#2B4FA5]/10 px-3 py-1 text-xs font-semibold text-[#2B4FA5]">
+                    {tCategory(post.category)}
+                  </span>
+                  <span className="rounded-full bg-[#0f172a]/[0.05] px-3 py-1 text-xs font-semibold text-[#52615b]">
+                    {tCity(post.city)}
+                  </span>
+                  <span className="rounded-full bg-[#16a34a]/10 px-3 py-1 text-xs font-semibold text-[#16a34a]">
+                    {t("community.userPostBadge")}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-2xl font-bold tracking-[-0.02em]">{post.title}</h3>
+                <p className="mt-3 line-clamp-3 leading-7 text-[#52615b]">{post.body}</p>
+                <p className="mt-4 text-sm font-semibold text-[#2B4FA5]">
+                  {t("community.byAuthor", { name: post.authorName })}
+                </p>
+              </Link>
+            ))}
+          </div>
+        ) : null}
+        {filteredSeed.length === 0 ? (
           <div className={cardClass}>
             <p className="font-semibold">{t("community.noLocalMatch")}</p>
             <p className="mt-2 text-[#52615b]">{t("community.noLocalMatchHint")}</p>
           </div>
         ) : null}
-        {visiblePosts.map((post) => (
+        {visibleSeed.map((post) => (
           <Link
             className="rounded-3xl border border-black/[0.06] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#2B4FA5]/30 hover:shadow-lg hover:shadow-[#2B4FA5]/5"
             href={`/community/${post.slug}`}

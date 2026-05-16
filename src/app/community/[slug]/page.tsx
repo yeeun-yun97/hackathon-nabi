@@ -1,5 +1,3 @@
-import { notFound } from "next/navigation";
-
 import { CommunityDetail } from "@/components/community-detail";
 import { SiteHeader } from "@/components/site-header";
 import { communityPosts } from "@/lib/data";
@@ -12,18 +10,16 @@ export function generateStaticParams() {
   return communityPosts.map((post) => ({ slug: post.slug }));
 }
 
+export const dynamicParams = true;
+
 export default async function CommunityDetailPage({ params }: CommunityDetailPageProps) {
   const { slug } = await params;
-  const post = communityPosts.find((item) => item.slug === slug);
-
-  if (!post) {
-    notFound();
-  }
+  const staticPost = communityPosts.find((item) => item.slug === slug) ?? null;
 
   return (
     <main className="min-h-screen bg-[#f6f7fb] text-[#17211f]">
       <SiteHeader />
-      <CommunityDetail post={post} />
+      <CommunityDetail slug={slug} staticPost={staticPost} />
     </main>
   );
 }

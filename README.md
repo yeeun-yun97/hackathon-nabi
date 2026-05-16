@@ -16,6 +16,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Community + auth setup
+
+The community feature (writing posts, replying, login/signup) is backed by Supabase. After setting `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`, run the SQL in `supabase/schema.sql` once in the Supabase SQL editor to create the `profiles`, `community_posts`, and `community_replies` tables along with the row-level security policies.
+
+If your Supabase project has "Confirm email" enabled, new signups will need to confirm their email before logging in. Disable email confirmation in **Authentication → Providers → Email** for a quicker hackathon flow.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
