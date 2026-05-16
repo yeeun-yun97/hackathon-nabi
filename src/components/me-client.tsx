@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { useAuth } from "@/components/auth-provider";
 import { useLanguage } from "@/components/language-provider";
 import { OnboardingForm } from "@/components/onboarding-form";
 import { ScrapButton } from "@/components/community-scrap-button";
-import { mockFacilities, type UserProfile } from "@/lib/data";
+import { mockFacilities } from "@/lib/data";
 import {
   fetchPostsByCurrentUser,
   fetchRepliesByCurrentUser,
@@ -16,8 +16,10 @@ import {
   type RemoteCommunityPost,
   type ReplyWithPost,
 } from "@/lib/community-db";
-import { defaultProfile, readStoredProfile } from "@/lib/profile";
+import { useStoredProfile } from "@/lib/use-stored-profile";
 import type { TranslationKey } from "@/lib/i18n";
+
+const visaEditHref = `/visa/edit?from=${encodeURIComponent("/me")}`;
 
 const cardClass = "rounded-3xl border border-black/[0.06] bg-white p-6 md:p-8";
 
@@ -67,23 +69,13 @@ export function MeClient() {
 function SignedInView() {
   const { t, tCity, tCategory, tOption, tLocalized } = useLanguage();
   const { user, profile: authProfile, signOut } = useAuth();
-  const [profile, setProfile] = useState<UserProfile>(defaultProfile);
+  const profile = useStoredProfile();
   const [profileEditorOpen, setProfileEditorOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<TabId>("posts");
   const [myPosts, setMyPosts] = useState<RemoteCommunityPost[]>([]);
   const [myReplies, setMyReplies] = useState<ReplyWithPost[]>([]);
   const [scraps, setScraps] = useState<RemoteCommunityPost[]>([]);
   const [contentLoading, setContentLoading] = useState(true);
-
-  useEffect(() => {
-    queueMicrotask(() => {
-      setProfile(readStoredProfile());
-    });
-  }, []);
-
-  const refreshProfileFromStorage = useCallback(() => {
-    setProfile(readStoredProfile());
-  }, []);
 
   useEffect(() => {
     let active = true;
@@ -164,7 +156,7 @@ function SignedInView() {
           </button>
           <Link
             className="rounded-full border border-black/[0.08] bg-white px-5 py-2.5 text-sm font-semibold text-[#52615b] transition hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
-            href="/visa/edit"
+            href={visaEditHref}
           >
             {t("visa.edit.open")}
           </Link>
@@ -193,10 +185,7 @@ function SignedInView() {
             <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("me.profileEditor.sectionDescription")}</p>
             <div className="mt-6 max-w-5xl">
               <OnboardingForm
-                onAfterSave={() => {
-                  refreshProfileFromStorage();
-                  setProfileEditorOpen(false);
-                }}
+                onAfterSave={() => setProfileEditorOpen(false)}
                 onCancel={() => setProfileEditorOpen(false)}
                 redirectAfterSave={null}
                 submitLabelKey="me.profileEditor.save"

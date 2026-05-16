@@ -2,6 +2,9 @@ import type { UserProfile } from "@/lib/data";
 
 export const profileStorageKey = "nabi:user-profile";
 
+/** Window event dispatched on writeStoredProfile so sibling client components can live-refresh. */
+export const profileUpdatedEvent = "nabi:profile-updated";
+
 export const defaultProfile: UserProfile = {
   city: "서울시",
   preferredLanguage: "English",
@@ -62,4 +65,7 @@ export function readStoredProfile(): UserProfile {
 
 export function writeStoredProfile(profile: UserProfile) {
   window.localStorage.setItem(profileStorageKey, JSON.stringify(profile));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent<UserProfile>(profileUpdatedEvent, { detail: profile }));
+  }
 }

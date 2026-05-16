@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { useLanguage } from "@/components/language-provider";
@@ -8,19 +7,14 @@ import { HorizonProgressArc } from "@/components/visa/HorizonProgressArc";
 import { RenewVisaChecklistCard } from "@/components/visa/RenewVisaChecklistCard";
 import { StrategyOptions } from "@/components/visa/StrategyOptions";
 import { VisaProfileSummaryCard } from "@/components/visa/visa-profile-summary-card";
-import type { UserProfile } from "@/lib/data";
 import { buildVisaHorizonFromProfile } from "@/lib/visa-horizon-from-profile";
-import { defaultProfile, readStoredProfile } from "@/lib/profile";
+import { useStoredProfile } from "@/lib/use-stored-profile";
+
+const visaEditHref = `/visa/edit?from=${encodeURIComponent("/discover?tab=visa")}`;
 
 export function VisaPanel() {
   const { t, locale, tOption } = useLanguage();
-  const [profile, setProfile] = useState<UserProfile>(defaultProfile);
-
-  useEffect(() => {
-    queueMicrotask(() => {
-      setProfile(readStoredProfile());
-    });
-  }, []);
+  const profile = useStoredProfile();
 
   const horizon = buildVisaHorizonFromProfile(profile);
   const currentVisaLabel = tOption("visaSubtype", profile.currentVisaSubtype);
@@ -52,7 +46,7 @@ export function VisaPanel() {
       </div>
 
       <div className="grid gap-6">
-        <VisaProfileSummaryCard profile={profile} />
+        <VisaProfileSummaryCard editHref={visaEditHref} profile={profile} />
         {profile.hasVisa === "yes" ? (
           <RenewVisaChecklistCard currentVisaLabel={currentVisaLabel} profile={profile} />
         ) : (
@@ -69,7 +63,7 @@ export function VisaPanel() {
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 className="rounded-full bg-[#13C3A8] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0fa08a]"
-                href="/visa/edit"
+                href={visaEditHref}
               >
                 {t("visa.noVisa.editCta")}
               </Link>

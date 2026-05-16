@@ -7,9 +7,10 @@ import type { UserProfile } from "@/lib/data";
 
 type VisaProfileSummaryCardProps = {
   profile: UserProfile;
+  editHref?: string;
 };
 
-export function VisaProfileSummaryCard({ profile }: VisaProfileSummaryCardProps) {
+export function VisaProfileSummaryCard({ profile, editHref = "/visa/edit" }: VisaProfileSummaryCardProps) {
   const { t, tOption } = useLanguage();
   const visaDeclared = profile.hasVisa === "yes";
 
@@ -94,7 +95,7 @@ export function VisaProfileSummaryCard({ profile }: VisaProfileSummaryCardProps)
 
       <Link
         className="mt-6 inline-flex rounded-full bg-[#13C3A8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0fa08a]"
-        href="/visa/edit"
+        href={editHref}
       >
         {t("visa.edit.open")}
       </Link>
