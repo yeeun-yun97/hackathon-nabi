@@ -2,6 +2,7 @@
 
 import { FacilityGrid } from "@/components/health/FacilityGrid";
 import { FacilityListByDistance } from "@/components/health/FacilityListByDistance";
+import { FacilityMap } from "@/components/health/FacilityMap";
 import { useLanguage } from "@/components/language-provider";
 import { mockFacilities } from "@/lib/data";
 
@@ -23,7 +24,8 @@ export function HealthPanel() {
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
-        <div>
+        <div className="grid gap-8">
+          <FacilityMap facilities={mockFacilities} />
           <FacilityGrid facilities={mockFacilities} />
         </div>
         <aside className="lg:sticky lg:top-6 lg:h-fit">

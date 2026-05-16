@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
 import {
@@ -22,7 +22,8 @@ import {
   type VisaSubtype,
   type YesNoUnsure,
 } from "@/lib/data";
-import { defaultProfile, writeStoredProfile } from "@/lib/profile";
+import type { TranslationKey } from "@/lib/i18n";
+import { defaultProfile, readStoredProfile, writeStoredProfile } from "@/lib/profile";
 
 const languages = ["English", "Korean", "Chinese", "Vietnamese", "Japanese", "Thai"];
 
@@ -124,13 +125,31 @@ function SelectField<TValue extends string>({
   );
 }
 
-export function OnboardingForm() {
+export type OnboardingFormProps = {
+  redirectAfterSave?: string | null;
+  onAfterSave?: () => void;
+  submitLabelKey?: TranslationKey;
+  onCancel?: () => void;
+};
+
+export function OnboardingForm({
+  redirectAfterSave = "/discover",
+  onAfterSave,
+  submitLabelKey = "onboarding.submit",
+  onCancel,
+}: OnboardingFormProps = {}) {
   const router = useRouter();
   const { t, tCity, tLanguage, tOption } = useLanguage();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
   const [locationStatus, setLocationStatus] = useState(
     t("onboarding.locationStatus.initial"),
   );
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      setProfile(readStoredProfile());
+    });
+  }, []);
 
   function updateProfile(nextProfile: Partial<UserProfile>) {
     setProfile((current) => ({ ...current, ...nextProfile }));
@@ -187,8 +206,12 @@ export function OnboardingForm() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    writeStoredProfile(profile);
-    router.push("/discover");
+    const existing = readStoredProfile();
+    writeStoredProfile({ ...profile, savedFacilities: existing.savedFacilities });
+    onAfterSave?.();
+    if (redirectAfterSave !== null) {
+      router.push(redirectAfterSave);
+    }
   }
 
   return (
@@ -407,12 +430,23 @@ export function OnboardingForm() {
         </div>
       </section>
 
-      <button
-        className="rounded-full bg-[#2B4FA5] px-7 py-3.5 text-base font-semibold text-white transition hover:bg-[#23408a]"
-        type="submit"
-      >
-        {t("onboarding.submit")}
-      </button>
+      <div className="flex flex-wrap gap-3">
+        {onCancel ? (
+          <button
+            className="rounded-full border border-black/10 bg-white px-7 py-3.5 text-base font-semibold text-[#52615b] transition hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
+            onClick={onCancel}
+            type="button"
+          >
+            {t("me.profileEditor.cancel")}
+          </button>
+        ) : null}
+        <button
+          className="rounded-full bg-[#2B4FA5] px-7 py-3.5 text-base font-semibold text-white transition hover:bg-[#23408a]"
+          type="submit"
+        >
+          {t(submitLabelKey)}
+        </button>
+      </div>
     </form>
   );
 }

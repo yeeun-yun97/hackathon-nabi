@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { useLanguage } from "@/components/language-provider";
 import {
@@ -20,6 +21,7 @@ function toggleCategory(categories: ServiceCategory[], category: ServiceCategory
 
 export function ChecklistsClient() {
   const { t, tCategory, tLocalized } = useLanguage();
+  const searchParams = useSearchParams();
   const [city, setCity] = useState<City>(defaultProfile.city);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
 
@@ -29,6 +31,15 @@ export function ChecklistsClient() {
       setCity(profile.city);
     });
   }, []);
+
+  useEffect(() => {
+    if (searchParams.get("category") !== "visa") {
+      return;
+    }
+    queueMicrotask(() => {
+      setCategories(["citizenship"]);
+    });
+  }, [searchParams]);
 
   const filteredChecklists = useMemo(
     () =>

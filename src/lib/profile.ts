@@ -21,7 +21,23 @@ export const defaultProfile: UserProfile = {
   kiipStage: "5",
   currentVisaSubtype: "D-2",
   district: "마포구",
+  savedFacilities: [],
 };
+
+/** Full calendar days from today until the visa expiry date (0 if missing or invalid). */
+export function daysUntilVisaExpiry(visaExpiryDate: string): number {
+  if (!visaExpiryDate) {
+    return 0;
+  }
+
+  const target = new Date(visaExpiryDate).getTime();
+
+  if (Number.isNaN(target)) {
+    return 0;
+  }
+
+  return Math.max(0, Math.ceil((target - Date.now()) / (1000 * 60 * 60 * 24)));
+}
 
 export function readStoredProfile(): UserProfile {
   if (typeof window === "undefined") {

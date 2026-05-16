@@ -33,14 +33,6 @@ export function JoinRequirementsCard({ facility }: { facility: Facility }) {
           <span className="font-semibold text-[#17211f]">{t("health.requirements.payment")}</span>{" "}
           {paymentList}. {t("health.requirements.paymentSuffix")}
         </li>
-        <li>
-          <span className="font-semibold text-[#17211f]">
-            {t("health.requirements.indoorShoes")}
-          </span>{" "}
-          {facility.indoorShoeRule
-            ? t("health.requirements.indoorShoesYes")
-            : t("health.requirements.indoorShoesNo")}
-        </li>
       </ul>
     </section>
   );

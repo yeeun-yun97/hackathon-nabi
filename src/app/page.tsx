@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { AiChatPreview } from "@/components/ai-chat-preview";
 import { InfoExplorer } from "@/components/info-explorer";
 import { SiteHeader } from "@/components/site-header";
 import { useLanguage } from "@/components/language-provider";
+import type { UserProfile } from "@/lib/data";
+import { defaultProfile, daysUntilVisaExpiry, readStoredProfile } from "@/lib/profile";
 
 const lifeMomentImages = [
   { src: "/life-in-korea1.webp", index: 0 },
@@ -16,6 +19,19 @@ const lifeMomentImages = [
 
 export default function Home() {
   const { t } = useLanguage();
+  const [profile, setProfile] = useState<UserProfile>(defaultProfile);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      setProfile(readStoredProfile());
+    });
+  }, []);
+
+  const visaDaysLeft = daysUntilVisaExpiry(profile.visaExpiryDate);
+  const visaAlertBody =
+    visaDaysLeft > 0
+      ? t("home.visaAlert.body", { days: visaDaysLeft })
+      : t("home.visaAlert.bodyFallback");
 
   const services = [
     {
@@ -85,7 +101,7 @@ export default function Home() {
                   {t("home.visaAlert.eyebrow")}
                 </p>
                 <p className="mt-1.5 text-sm font-medium leading-6 text-white/80">
-                  {t("home.visaAlert.body")}
+                  {visaAlertBody}
                 </p>
               </div>
             </div>

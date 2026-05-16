@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
 import { useLanguage } from "@/components/language-provider";
 import type { UserProfile } from "@/lib/data";
 
@@ -13,6 +16,13 @@ export function RenewVisaChecklistCard({
   currentVisaLabel,
 }: RenewVisaChecklistCardProps) {
   const { t } = useLanguage();
+  const [nowMs, setNowMs] = useState<number | null>(null);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      setNowMs(Date.now());
+    });
+  }, []);
 
   const renewalSteps = [
     t("visa.renewal.steps.0"),
@@ -20,7 +30,7 @@ export function RenewVisaChecklistCard({
     t("visa.renewal.steps.2"),
   ];
 
-  function formatDaysUntilExpiry(dateString: string) {
+  function formatDaysUntilExpiry(dateString: string, now: number) {
     if (!dateString) {
       return t("visa.clock.expiryNotSet");
     }
@@ -31,13 +41,24 @@ export function RenewVisaChecklistCard({
       return t("visa.clock.checkExpiry");
     }
 
-    const days = Math.max(0, Math.ceil((target - Date.now()) / (1000 * 60 * 60 * 24)));
+    const days = Math.max(0, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
 
     return t("visa.clock.daysLeft", { days });
   }
 
+  const daysUntilExpiryLabel =
+    nowMs === null ? t("common.loading") : formatDaysUntilExpiry(profile.visaExpiryDate, nowMs);
+
   return (
     <section className="overflow-hidden rounded-3xl bg-[#0f172a] text-white">
+      <div className="sticky top-0 z-20 border-b border-white/[0.08] bg-[#0f172a]/95 px-6 py-4 backdrop-blur md:px-8">
+        <Link
+          className="inline-flex w-full items-center justify-center rounded-full bg-[#13C3A8] px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#0fa08a] md:w-auto"
+          href="/discover?tab=checklists&category=visa"
+        >
+          {t("visa.renewal.primaryCta")}
+        </Link>
+      </div>
       <div className="grid gap-8 p-6 md:grid-cols-[1fr_280px] md:p-8">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#13C3A8]">
@@ -68,7 +89,7 @@ export function RenewVisaChecklistCard({
             {t("visa.clock.label")}
           </p>
           <p className="mt-3 text-4xl font-bold tracking-[-0.04em]">
-            {formatDaysUntilExpiry(profile.visaExpiryDate)}
+            {daysUntilExpiryLabel}
           </p>
           <dl className="mt-6 grid gap-4 text-sm">
             <div>

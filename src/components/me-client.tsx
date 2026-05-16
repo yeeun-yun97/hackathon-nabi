@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 
 import { useAuth } from "@/components/auth-provider";
 import { useLanguage } from "@/components/language-provider";
+import { OnboardingForm } from "@/components/onboarding-form";
 import { ScrapButton } from "@/components/community-scrap-button";
-import { type UserProfile } from "@/lib/data";
+import { mockFacilities, type UserProfile } from "@/lib/data";
 import {
   fetchPostsByCurrentUser,
   fetchRepliesByCurrentUser,
@@ -64,9 +65,10 @@ export function MeClient() {
 }
 
 function SignedInView() {
-  const { t, tCity, tCategory, tOption } = useLanguage();
+  const { t, tCity, tCategory, tOption, tLocalized } = useLanguage();
   const { user, profile: authProfile, signOut } = useAuth();
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
+  const [profileEditorOpen, setProfileEditorOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<TabId>("posts");
   const [myPosts, setMyPosts] = useState<RemoteCommunityPost[]>([]);
   const [myReplies, setMyReplies] = useState<ReplyWithPost[]>([]);
@@ -77,6 +79,10 @@ function SignedInView() {
     queueMicrotask(() => {
       setProfile(readStoredProfile());
     });
+  }, []);
+
+  const refreshProfileFromStorage = useCallback(() => {
+    setProfile(readStoredProfile());
   }, []);
 
   useEffect(() => {
@@ -112,6 +118,10 @@ function SignedInView() {
 
   const displayName = authProfile?.displayName ?? user?.email?.split("@")[0] ?? "";
 
+  const savedFacilityList = profile.savedFacilities
+    .map((slug) => mockFacilities.find((f) => f.slug === slug))
+    .filter((f): f is (typeof mockFacilities)[number] => Boolean(f));
+
   return (
     <div className="mx-auto max-w-4xl px-6 pb-20 pt-10">
       <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
@@ -145,11 +155,24 @@ function SignedInView() {
         </dl>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link
+          <button
             className="rounded-full bg-[#2B4FA5] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#23408a]"
+            onClick={() => setProfileEditorOpen((open) => !open)}
+            type="button"
+          >
+            {profileEditorOpen ? t("me.profileEditor.close") : t("me.actions.editProfile")}
+          </button>
+          <Link
+            className="rounded-full border border-black/[0.08] bg-white px-5 py-2.5 text-sm font-semibold text-[#52615b] transition hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
+            href="/visa/edit"
+          >
+            {t("visa.edit.open")}
+          </Link>
+          <Link
+            className="rounded-full border border-black/[0.08] bg-white px-5 py-2.5 text-sm font-semibold text-[#52615b] transition hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
             href="/onboarding"
           >
-            {t("me.actions.editProfile")}
+            {t("me.profileEditor.openFullPage")}
           </Link>
           <button
             className="rounded-full border border-black/[0.08] bg-white px-5 py-2.5 text-sm font-semibold text-[#52615b] transition hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
@@ -161,6 +184,57 @@ function SignedInView() {
             {t("me.actions.signOut")}
           </button>
         </div>
+
+        {profileEditorOpen ? (
+          <div className="mt-10 border-t border-black/[0.08] pt-10" id="profile-editor">
+            <h2 className="text-xl font-bold tracking-[-0.02em] text-[#17211f]">
+              {t("me.profileEditor.sectionTitle")}
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("me.profileEditor.sectionDescription")}</p>
+            <div className="mt-6 max-w-5xl">
+              <OnboardingForm
+                onAfterSave={() => {
+                  refreshProfileFromStorage();
+                  setProfileEditorOpen(false);
+                }}
+                onCancel={() => setProfileEditorOpen(false)}
+                redirectAfterSave={null}
+                submitLabelKey="me.profileEditor.save"
+              />
+            </div>
+          </div>
+        ) : null}
+      </section>
+
+      <section className={`${cardClass} mt-10`}>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2B4FA5]">
+          {t("me.savedFacilities.eyebrow")}
+        </p>
+        <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em]">{t("me.savedFacilities.title")}</h2>
+        <p className="mt-2 text-sm leading-6 text-[#52615b]">{t("me.savedFacilities.description")}</p>
+        {savedFacilityList.length === 0 ? (
+          <p className="mt-4 text-[#52615b]">{t("me.savedFacilities.empty")}</p>
+        ) : (
+          <ul className="mt-5 grid gap-3">
+            {savedFacilityList.map((facility) => (
+              <li key={facility.id}>
+                <Link
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-black/[0.06] bg-[#f6f7fb] p-4 font-semibold text-[#17211f] transition hover:border-[#2B4FA5]/40"
+                  href={`/health/${facility.slug}`}
+                >
+                  <span>{tLocalized(facility.name)}</span>
+                  <span className="text-sm font-medium text-[#2B4FA5]">{facility.district}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        <Link
+          className="mt-6 inline-flex rounded-full border border-black/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#52615b] transition hover:border-[#2B4FA5]/40 hover:text-[#2B4FA5]"
+          href="/discover?tab=health"
+        >
+          {t("me.savedFacilities.cta")}
+        </Link>
       </section>
 
       <section className="mt-10">

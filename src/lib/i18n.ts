@@ -125,7 +125,9 @@ const en = {
   // home visa alert
   "home.visaAlert.eyebrow": "Visa Status Update",
   "home.visaAlert.body":
-    "Your current residence permit expires in 180 days. Based on your updated employment profile, you may be eligible for an EU Blue Card. Review your options.",
+    "Your current residence permit expires in {days} days. Based on your updated profile, you may be eligible for long-term options such as F-2-7—review renewal and horizon steps.",
+  "home.visaAlert.bodyFallback":
+    "Add your visa expiry date in onboarding to see a live countdown and tailored renewal guidance.",
   "home.visaAlert.cta": "Open mock lock screen",
 
   // home life-in-korea moments
@@ -159,6 +161,18 @@ const en = {
   "visa.subtitle":
     "A dual-track view for immediate renewal prep and long-term F-2-7 readiness.",
   "visa.replayNotification": "Replay notification",
+  "visa.quickEdit.eyebrow": "Your profile",
+  "visa.quickEdit.title": "Visa type & expiry",
+  "visa.quickEdit.description":
+    "Same fields as onboarding. Your visa type feeds the dashboard copy; the expiry date drives home alerts and the renewal day count.",
+  "visa.quickEdit.save": "Save",
+  "visa.quickEdit.saved": "Saved. Reload the home page or notification mock to see updated copy.",
+  "visa.quickEdit.fullProfile": "Open full onboarding for city, TOPIK, and district →",
+  "visa.edit.back": "Back to Discover (Visa tab)",
+  "visa.edit.open": "Update visa details",
+  "visa.profileSummary.title": "Saved visa details",
+  "visa.profileSummary.description":
+    "Review what nabi uses for renewal countdowns and visa dashboard copy. Edit on the next screen.",
   "visa.horizonTrack": "Horizon track",
   "visa.fromTo": "{current} to {target}",
   "visa.horizonDescription":
@@ -167,12 +181,13 @@ const en = {
   "visa.estimatedUnlock": "Estimated unlock",
   "visa.daysShort": "{days} days",
   "visa.ofPoints": "of {target} pts",
-
-  // visa renew checklist
+  "visa.bridgeHeadline":
+    "Horizon view: you need {points} more points in the next {days} days—if you earn them, you can unlock full F-2-7 eligibility on your current academic track.",
   "visa.renewal.eyebrow": "Renewal track",
   "visa.renewal.title": "Keep your {current} status ready before the deadline.",
   "visa.renewal.description":
     "nabi turns your stored visa, district, and education profile into a practical immigration visit checklist.",
+  "visa.renewal.primaryCta": "Renew current visa status",
   "visa.renewal.steps.0":
     "Reserve a HiKorea visit before the renewal window fills.",
   "visa.renewal.steps.1":
@@ -204,7 +219,9 @@ const en = {
   "visa.notification.brand": "nabi Visa Horizon",
   "visa.notification.title": "Visa renewal window opens soon",
   "visa.notification.body":
-    "nabi prepared your renewal checklist and F-2-7 horizon options.",
+    "Visa status update: your current residence permit expires in {days} days. Review your renewal checklist and long-term residency track.",
+  "visa.notification.bodyFallback":
+    "Visa status update: add your expiry date to your profile to unlock the personalized countdown and next steps.",
   "visa.notification.timestamp": "now",
 
   // biometric
@@ -225,7 +242,21 @@ const en = {
   "health.monthlyRate": "Monthly public rate",
   "health.residentDiscount": "Resident discount: ARC required",
 
-  // facility list
+  "health.map.eyebrow": "Neighbourhood map",
+  "health.map.title": "Facilities across your area",
+  "health.map.subtitle":
+    "Numbered links open directions. With NEXT_PUBLIC_GOOGLE_MAPS_API_KEY we first load an interactive map (enable Maps JavaScript API + billing). If that fails we try a Static Map image (Maps Static API), then OpenStreetMap.",
+  "health.map.alt": "Map preview of recreation facilities around Seoul",
+  "health.map.aria": "Map of recreation facilities",
+  "health.map.iframeTitle": "OpenStreetMap preview of Seoul recreation facilities",
+  "health.map.staticMapFallbackNote":
+    "Google map image failed to load. In Google Cloud Console, enable “Maps Static API” for this API key (JavaScript API alone is not enough), ensure billing is on, and that HTTP referrer restrictions allow localhost. Showing OpenStreetMap instead.",
+  "health.map.jsFallbackNote":
+    "Interactive Google map did not load. Check that Maps JavaScript API is enabled for this key, billing is active, and referrer restrictions allow your site. Trying a static map image next.",
+
+  "health.facility.scale.municipal": "Municipal hub",
+  "health.facility.scale.boutique": "Boutique / neighborhood",
+
   "health.list.eyebrow": "Closest to your district",
   "health.list.sortedFrom": "Sorted from {district}",
   "health.list.updateDistrict": "Update district",
@@ -237,6 +268,14 @@ const en = {
     "Public sports center options for lap swimming, general weight lifting, and indoor fitness with resident pricing around ₩40,000-₩50,000 per month.",
   "health.detail.sports": "Sports available",
   "health.detail.pricing": "Monthly pricing",
+  "health.detail.showKoreanReception": "Show Korean to receptionist",
+  "health.detail.saveFacility": "Save to my profile",
+  "health.detail.savedFacility": "Saved to profile",
+
+  "health.indoorShoe.eyebrow": "Indoor-shoe rule",
+  "health.indoorShoe.title": "Street shoes stay off the gym floor",
+  "health.indoorShoe.body":
+    "Pack a separate, clean pair of training sneakers and change in the locker room. Street shoes are usually not allowed on workout surfaces.",
 
   // sports
   "health.sport.swimming": "Lap swimming",
@@ -624,6 +663,19 @@ const en = {
   "me.profile.empty": "Not set",
   "me.actions.editProfile": "Edit profile",
   "me.actions.signOut": "Sign out",
+  "me.profileEditor.close": "Close editor",
+  "me.profileEditor.openFullPage": "Open full-page onboarding",
+  "me.profileEditor.sectionTitle": "Edit stored profile",
+  "me.profileEditor.sectionDescription":
+    "Same fields as /onboarding: city, visa, TOPIK, KIIP, district, and more. Saves to this browser (local storage).",
+  "me.profileEditor.save": "Save profile",
+  "me.profileEditor.cancel": "Cancel",
+  "me.savedFacilities.eyebrow": "Saved places",
+  "me.savedFacilities.title": "Health & Recreation saves",
+  "me.savedFacilities.description":
+    "Facilities you bookmarked before visiting the front desk or signing up.",
+  "me.savedFacilities.empty": "No saved facilities yet. Save one from a facility detail page.",
+  "me.savedFacilities.cta": "Browse facilities",
   "me.notSignedIn.title": "Please sign in to see your page.",
   "me.notSignedIn.subtitle": "Log in or create an account to view your profile.",
   "me.notSignedIn.signIn": "Sign in",
@@ -867,7 +919,9 @@ const ko = {
   // 비자 알림
   "home.visaAlert.eyebrow": "비자 상태 업데이트",
   "home.visaAlert.body":
-    "현재 체류 자격이 180일 후 만료됩니다. 업데이트된 고용 정보를 기반으로 EU 블루카드 대상이 될 수 있어요. 옵션을 확인해보세요.",
+    "현재 체류 자격이 {days}일 후 만료됩니다. 프로필을 바탕으로 F-2-7 등 장기 자격 준비와 갱신 단계를 함께 확인하세요.",
+  "home.visaAlert.bodyFallback":
+    "온보딩에서 비자 만료일을 입력하면 실시간 카운트다운과 맞춤 갱신 안내를 볼 수 있어요.",
   "home.visaAlert.cta": "잠금화면 미리보기 열기",
 
   // Life in Korea 섹션
@@ -900,6 +954,18 @@ const ko = {
   "visa.subtitle":
     "당장의 갱신 준비와 장기적인 F-2-7 준비를 한 화면에서 보여드립니다.",
   "visa.replayNotification": "알림 다시 보기",
+  "visa.quickEdit.eyebrow": "내 프로필",
+  "visa.quickEdit.title": "비자 종류·만료일",
+  "visa.quickEdit.description":
+    "온보딩과 같은 항목입니다. 비자 종류는 대시보드 문구에, 만료일은 홈 알림·갱신 카드의 남은 일수에 반영됩니다.",
+  "visa.quickEdit.save": "저장",
+  "visa.quickEdit.saved": "저장했어요. 홈이나 잠금화면 미리보기를 새로 열면 문구가 갱신됩니다.",
+  "visa.quickEdit.fullProfile": "도시·TOPIK·구 등 전체 설정은 온보딩으로 →",
+  "visa.edit.back": "디스커버 비자 탭으로",
+  "visa.edit.open": "비자 정보 수정",
+  "visa.profileSummary.title": "저장된 비자 정보",
+  "visa.profileSummary.description":
+    "갱신 카운트다운·비자 대시보드 문구에 쓰이는 값이에요. 다음 화면에서 바꿀 수 있어요.",
   "visa.horizonTrack": "호라이즌 트랙",
   "visa.fromTo": "{current} → {target}",
   "visa.horizonDescription":
@@ -908,12 +974,15 @@ const ko = {
   "visa.estimatedUnlock": "예상 달성 시점",
   "visa.daysShort": "{days}일",
   "visa.ofPoints": "/ {target}점",
+  "visa.bridgeHeadline":
+    "호라이즌: 지금 학업 트랙으로는 앞으로 {days}일 안에 {points}점만 더 모으면 F-2-7 전체 요건에 도달할 수 있어요.",
 
   // 갱신 체크리스트
   "visa.renewal.eyebrow": "갱신 트랙",
   "visa.renewal.title": "마감 전에 {current} 자격을 안전하게 유지하세요.",
   "visa.renewal.description":
     "저장된 비자·구·학력 프로필을 바탕으로 실제 방문에 필요한 체크리스트를 만들어드립니다.",
+  "visa.renewal.primaryCta": "현재 비자 갱신 체크리스트로 이동",
   "visa.renewal.steps.0": "갱신 창구가 가득 차기 전에 HiKorea 예약을 잡으세요.",
   "visa.renewal.steps.1":
     "여권, 외국인등록증, 신청서, 주거 증빙, 수수료를 준비하세요.",
@@ -944,7 +1013,9 @@ const ko = {
   "visa.notification.brand": "nabi 비자 호라이즌",
   "visa.notification.title": "비자 갱신 창구가 곧 열립니다",
   "visa.notification.body":
-    "갱신 체크리스트와 F-2-7 호라이즌 옵션을 nabi가 준비해두었어요.",
+    "비자 상태 업데이트: 현재 체류 자격이 {days}일 후 만료됩니다. 갱신 체크리스트와 장기 체류 트랙을 확인하세요.",
+  "visa.notification.bodyFallback":
+    "비자 상태 업데이트: 프로필에 만료일을 입력하면 맞춤 카운트다운과 다음 단계를 열 수 있어요.",
   "visa.notification.timestamp": "지금",
 
   // 생체 인증
@@ -964,6 +1035,21 @@ const ko = {
   "health.monthlyRate": "공공 월 이용료",
   "health.residentDiscount": "거주자 할인: 외국인등록증 필요",
 
+  "health.map.eyebrow": "동네 지도",
+  "health.map.title": "시설이 모여 있는 위치",
+  "health.map.subtitle":
+    "번호를 누르면 길 찾기가 열려요. NEXT_PUBLIC_GOOGLE_MAPS_API_KEY가 있으면 먼저 인터랙티브 지도(Maps JavaScript API + 결제)를 띄우고, 실패 시 정적 이미지(Maps Static API), 그다음 OpenStreetMap 순으로 시도합니다.",
+  "health.map.alt": "서울 주변 레크리에이션 시설 지도 미리보기",
+  "health.map.aria": "레크리에이션 시설 지도",
+  "health.map.iframeTitle": "서울 시설 위치 OpenStreetMap 미리보기",
+  "health.map.staticMapFallbackNote":
+    "Google 지도 이미지를 불러오지 못했습니다. Google Cloud 콘솔에서 이 키에 ‘Maps Static API’를 활성화했는지(JavaScript API만 켜두면 Static 요청이 거절됩니다), 결제 연결·HTTP 리퍼러(로컬 허용)를 확인해 주세요. 대신 OpenStreetMap을 표시합니다.",
+  "health.map.jsFallbackNote":
+    "인터랙티브 Google 지도를 불러오지 못했습니다. Maps JavaScript API 활성화·결제·리퍼러(사이트 허용)를 확인해 주세요. 다음으로 정적 지도 이미지를 시도합니다.",
+
+  "health.facility.scale.municipal": "광역 시설",
+  "health.facility.scale.boutique": "근린·부티크형",
+
   // 시설 리스트
   "health.list.eyebrow": "내 구 기준 가까운 순",
   "health.list.sortedFrom": "{district} 기준 정렬",
@@ -976,6 +1062,14 @@ const ko = {
     "수영, 일반 웨이트, 실내 운동이 가능한 공공 체육센터로, 거주자 기준 월 약 4–5만원대 가격입니다.",
   "health.detail.sports": "운영 종목",
   "health.detail.pricing": "월별 이용료",
+  "health.detail.showKoreanReception": "리셉션에 보여줄 한국어",
+  "health.detail.saveFacility": "내 프로필에 저장",
+  "health.detail.savedFacility": "프로필에 저장됨",
+
+  "health.indoorShoe.eyebrow": "실내화 안내",
+  "health.indoorShoe.title": "운동장에는 실외화를 신고 들어가지 마세요",
+  "health.indoorShoe.body":
+    "락커룸에서 갈아 신을 깨끗한 실내 운동화를 따로 챙기세요. 일반적으로 운동 공간에는 길거리 신발이 허용되지 않아요.",
 
   // 종목
   "health.sport.swimming": "자유 수영",
@@ -1340,6 +1434,19 @@ const ko = {
   "me.profile.empty": "미설정",
   "me.actions.editProfile": "프로필 수정",
   "me.actions.signOut": "로그아웃",
+  "me.profileEditor.close": "편집 닫기",
+  "me.profileEditor.openFullPage": "온보딩 전체 페이지 열기",
+  "me.profileEditor.sectionTitle": "저장된 프로필 수정",
+  "me.profileEditor.sectionDescription":
+    "/onboarding 과 동일한 항목입니다. 도시, 비자, TOPIK, KIIP, 거주 구 등을 바꿀 수 있어요. 이 브라우저 localStorage에 저장됩니다.",
+  "me.profileEditor.save": "프로필 저장",
+  "me.profileEditor.cancel": "취소",
+  "me.savedFacilities.eyebrow": "저장한 장소",
+  "me.savedFacilities.title": "건강·여가 저장 목록",
+  "me.savedFacilities.description":
+    "방문 전 또는 회원 가입 전에 저장해 둔 시설이에요.",
+  "me.savedFacilities.empty": "아직 저장한 시설이 없어요. 시설 상세 화면에서 저장해 보세요.",
+  "me.savedFacilities.cta": "시설 둘러보기",
   "me.notSignedIn.title": "마이페이지를 보려면 로그인이 필요해요.",
   "me.notSignedIn.subtitle": "로그인하거나 계정을 만들어 프로필을 확인해 보세요.",
   "me.notSignedIn.signIn": "로그인",
@@ -1570,7 +1677,9 @@ const zh = {
   // 签证提醒
   "home.visaAlert.eyebrow": "签证状态更新",
   "home.visaAlert.body":
-    "您当前的居留许可将在 180 天后到期。根据更新后的就业信息，您可能符合欧盟蓝卡资格。点击查看可选项。",
+    "您的居留许可将在 {days} 天后到期。根据已保存的档案，您可以同时查看续签步骤与 F-2-7 等长期路径。",
+  "home.visaAlert.bodyFallback":
+    "在入门设置中填写签证到期日，即可看到实时倒计时与定制续签提示。",
   "home.visaAlert.cta": "打开锁屏样例",
 
   // 在韩生活
@@ -1601,6 +1710,18 @@ const zh = {
   "visa.title": "今天续签，规划下一步身份。",
   "visa.subtitle": "同一界面查看眼前的续签准备与长期 F-2-7 规划。",
   "visa.replayNotification": "重播通知",
+  "visa.quickEdit.eyebrow": "个人档案",
+  "visa.quickEdit.title": "签证类型与到期日",
+  "visa.quickEdit.description":
+    "与入门设置中的字段相同。签证类型用于仪表盘文案，到期日用于首页提醒与续签卡片的剩余天数。",
+  "visa.quickEdit.save": "保存",
+  "visa.quickEdit.saved": "已保存。重新打开首页或锁屏预览即可看到更新后的文案。",
+  "visa.quickEdit.fullProfile": "前往完整入门设置（城市、TOPIK、区等）→",
+  "visa.edit.back": "返回 Discover（签证标签）",
+  "visa.edit.open": "修改签证信息",
+  "visa.profileSummary.title": "已保存的签证信息",
+  "visa.profileSummary.description":
+    "这些信息用于续签倒计时与签证仪表盘文案。可在下一页编辑。",
   "visa.horizonTrack": "Horizon 轨道",
   "visa.fromTo": "{current} 到 {target}",
   "visa.horizonDescription":
@@ -1609,12 +1730,15 @@ const zh = {
   "visa.estimatedUnlock": "预计达成时间",
   "visa.daysShort": "{days} 天",
   "visa.ofPoints": "/ {target} 分",
+  "visa.bridgeHeadline":
+    "Horizon：按您当前的学业路径，若在未来 {days} 天内再获得 {points} 分，就有望达到 F-2-7 的完整资格线。",
 
   // 续签清单
   "visa.renewal.eyebrow": "续签轨道",
   "visa.renewal.title": "在期限前保持您的 {current} 身份。",
   "visa.renewal.description":
     "nabi 根据已保存的签证、地区、教育档案，生成实用的出入境访问清单。",
+  "visa.renewal.primaryCta": "前往当前签证续签清单",
   "visa.renewal.steps.0": "在续签窗口被订满之前，先到 HiKorea 预约。",
   "visa.renewal.steps.1": "准备护照、外国人登录证、申请表、住所证明与手续费。",
   "visa.renewal.steps.2": "携带与当前签证匹配的在学或在职证明。",
@@ -1642,7 +1766,10 @@ const zh = {
   "visa.notification.dateLabel": "5 月 16 日 星期六",
   "visa.notification.brand": "nabi Visa Horizon",
   "visa.notification.title": "签证续签窗口即将开放",
-  "visa.notification.body": "nabi 已为您准备续签清单与 F-2-7 Horizon 选项。",
+  "visa.notification.body":
+    "签证状态更新：您的居留许可将在 {days} 天后到期。请查看续签清单与长期居留规划。",
+  "visa.notification.bodyFallback":
+    "签证状态更新：请在档案中填写到期日以解锁个性化倒计时与后续步骤。",
   "visa.notification.timestamp": "刚刚",
 
   // 生物识别
@@ -1662,6 +1789,21 @@ const zh = {
   "health.monthlyRate": "公共月费",
   "health.residentDiscount": "居民优惠：需外国人登录证",
 
+  "health.map.eyebrow": "街区地图",
+  "health.map.title": "各设施所在区域",
+  "health.map.subtitle":
+    "点击编号可打开路线。若设置了 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY，将优先加载可交互地图（需启用 Maps JavaScript API 并开通结算）；失败则尝试静态图（Maps Static API），再退回 OpenStreetMap。",
+  "health.map.alt": "首尔周边运动休闲设施地图预览",
+  "health.map.aria": "休闲设施地图",
+  "health.map.iframeTitle": "首尔设施位置 OpenStreetMap 预览",
+  "health.map.staticMapFallbackNote":
+    "无法加载 Google 地图图片。请在 Google Cloud 控制台为该密钥启用“Maps Static API”（仅启用 JavaScript API 时静态图请求会被拒绝），并确认已关联结算、HTTP 来源限制允许 localhost。改为显示 OpenStreetMap。",
+  "health.map.jsFallbackNote":
+    "无法加载可交互 Google 地图。请确认已启用 Maps JavaScript API、已开通结算，且来源限制允许当前站点。将尝试静态地图图片。",
+
+  "health.facility.scale.municipal": "市级综合馆",
+  "health.facility.scale.boutique": "社区精品馆",
+
   // 设施列表
   "health.list.eyebrow": "按区距离排序",
   "health.list.sortedFrom": "以 {district} 为起点",
@@ -1674,6 +1816,14 @@ const zh = {
     "可进行自由泳、一般力量训练与室内健身的公共体育中心，本地居民月费约 4–5 万韩元。",
   "health.detail.sports": "可用项目",
   "health.detail.pricing": "月度费用",
+  "health.detail.showKoreanReception": "向前台出示韩语",
+  "health.detail.saveFacility": "保存到我的档案",
+  "health.detail.savedFacility": "已保存",
+
+  "health.indoorShoe.eyebrow": "室内鞋提示",
+  "health.indoorShoe.title": "运动区域禁止穿室外鞋进入",
+  "health.indoorShoe.body":
+    "请另备一双干净的运动鞋，在更衣室更换后再进入训练区。一般情况下室内外鞋需分开。",
 
   // 项目
   "health.sport.swimming": "自由泳",
@@ -2024,6 +2174,18 @@ const zh = {
   "me.profile.empty": "未设置",
   "me.actions.editProfile": "编辑资料",
   "me.actions.signOut": "退出登录",
+  "me.profileEditor.close": "关闭编辑",
+  "me.profileEditor.openFullPage": "打开完整入门设置页",
+  "me.profileEditor.sectionTitle": "编辑已保存资料",
+  "me.profileEditor.sectionDescription":
+    "与 /onboarding 相同：城市、签证、TOPIK、KIIP、居住区等。保存到本浏览器 localStorage。",
+  "me.profileEditor.save": "保存资料",
+  "me.profileEditor.cancel": "取消",
+  "me.savedFacilities.eyebrow": "已保存地点",
+  "me.savedFacilities.title": "健康与休闲收藏",
+  "me.savedFacilities.description": "在去前台或办卡前收藏的设施。",
+  "me.savedFacilities.empty": "尚无保存的设施。请在设施详情页点击保存。",
+  "me.savedFacilities.cta": "浏览设施",
   "me.notSignedIn.title": "请登录后查看您的页面。",
   "me.notSignedIn.subtitle": "登录或注册以查看您的资料。",
   "me.notSignedIn.signIn": "登录",

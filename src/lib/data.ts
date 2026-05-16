@@ -99,6 +99,8 @@ export type UserProfile = {
   kiipStage: KiipStage;
   currentVisaSubtype: VisaSubtype;
   district: SeoulDistrict | "";
+  /** Health & Recreation facility slugs saved to the local profile. */
+  savedFacilities: string[];
 };
 
 export type SupportProgram = {
@@ -147,6 +149,8 @@ export type VisaTrack = {
 
 export type FacilitySport = "swimming" | "weights" | "yoga" | "fitness" | "court";
 export type FacilityPayment = "local-card" | "cash" | "foreign-card";
+/** Larger municipal hubs sort before smaller boutique-style venues. */
+export type FacilityScale = "municipal" | "boutique";
 
 export type Facility = {
   id: string;
@@ -156,6 +160,9 @@ export type Facility = {
   address: string;
   mapQuery: string;
   coords: { lat: number; lng: number };
+  /** Hero image for cards and detail (remote URL or /public path). */
+  image: string;
+  scale: FacilityScale;
   hours: { open: string; close: string; note?: LocalizedText };
   sports: FacilitySport[];
   pricing: Array<{ tier: LocalizedText; monthly: number; residentDiscount?: boolean }>;
@@ -251,23 +258,27 @@ export const mockF27Track: VisaTrack = {
   ],
   strategies: [
     {
-      id: "language-upgrade",
-      label: lt("Option A: Language upgrade", "옵션 A: 언어 점수 업그레이드", "选项 A：语言提升"),
+      id: "topik-upgrade",
+      label: lt(
+        "Option A: TOPIK ladder upgrade",
+        "옵션 A: TOPIK 단계 상향",
+        "选项 A：TOPIK 等级提升",
+      ),
       points: 15,
       status: "available",
       action: lt(
-        "Advance from TOPIK Level 4 toward the KIIP completion bonus path.",
-        "TOPIK 4급에서 KIIP 이수 보너스 경로로 점수를 끌어올리세요.",
-        "从 TOPIK 4 级提升到 KIIP 完成加分路径。",
+        "Move from TOPIK Level 4 to Level 5 or 6 so language points reflect the higher band (KIIP Stage 5 is already on file).",
+        "KIIP 5단계는 이미 반영되어 있으니 TOPIK 4급에서 5·6급으로 올려 언어 구간 점수를 끌어올리세요.",
+        "KIIP 第 5 阶段已计入分数，请将 TOPIK 从 4 级提升到 5 或 6 级以获得更高语言档积分。",
       ),
       locality: {
         label: lt(
-          "Nearby KIIP cohort: Mapo-gu Multicultural Family Center. Next intake opens in July.",
-          "근처 KIIP 과정: 마포구 가족센터. 다음 접수는 7월에 열립니다.",
-          "附近 KIIP 班：麻浦区家庭中心。下一期预计 7 月开放报名。",
+          "Next national TOPIK round near Seoul plus a weekly study rhythm that avoids thesis crunch weeks.",
+          "서울 인근 국가 정기 시험 일정을 잡고, 논문 마감 주간을 피한 주간 학습 리듬을 세우세요.",
+          "锁定首尔附近的下一次全国考试，并安排避开论文截止周的每周学习节奏。",
         ),
-        nextIntake: "2026-07-08",
-        url: "https://www.socinet.go.kr",
+        nextIntake: "2026-06-15",
+        url: "https://www.topik.go.kr",
       },
     },
     {
@@ -319,6 +330,8 @@ export const mockFacilities: Facility[] = [
     address: "서울특별시 마포구 대흥로20길 28",
     mapQuery: "Mapo Art Center sports center Seoul",
     coords: { lat: 37.5497, lng: 126.9457 },
+    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80",
+    scale: "municipal",
     hours: {
       open: "09:00",
       close: "18:00",
@@ -332,7 +345,7 @@ export const mockFacilities: Facility[] = [
     pricing: [
       {
         tier: lt("Student/local resident gym tier", "학생·지역 주민 헬스장 요금", "学生/本地居民健身房价格"),
-        monthly: 45000,
+        monthly: 40000,
         residentDiscount: true,
       },
       {
@@ -355,6 +368,8 @@ export const mockFacilities: Facility[] = [
     address: "서울특별시 성동구 왕십리로 89",
     mapQuery: "Seongdong public sports center Seoul",
     coords: { lat: 37.5484, lng: 127.0443 },
+    image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&q=80",
+    scale: "municipal",
     hours: { open: "06:00", close: "22:00" },
     sports: ["swimming", "weights", "fitness", "court"],
     pricing: [
@@ -374,6 +389,8 @@ export const mockFacilities: Facility[] = [
     address: "서울특별시 용산구 녹사평대로 150",
     mapQuery: "Yongsan community swimming pool Seoul",
     coords: { lat: 37.532, lng: 126.9904 },
+    image: "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80",
+    scale: "municipal",
     hours: { open: "07:00", close: "21:00" },
     sports: ["swimming", "fitness"],
     pricing: [
@@ -393,6 +410,8 @@ export const mockFacilities: Facility[] = [
     address: "서울특별시 종로구 종로 38",
     mapQuery: "Jongno public fitness center Seoul",
     coords: { lat: 37.5701, lng: 126.982 },
+    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80",
+    scale: "boutique",
     hours: { open: "08:00", close: "20:00" },
     sports: ["weights", "yoga", "fitness"],
     pricing: [
@@ -412,6 +431,8 @@ export const mockFacilities: Facility[] = [
     address: "서울특별시 강남구 학동로 426",
     mapQuery: "Gangnam public gym Seoul",
     coords: { lat: 37.5172, lng: 127.0473 },
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+    scale: "municipal",
     hours: { open: "06:00", close: "22:00" },
     sports: ["weights", "fitness", "court"],
     pricing: [

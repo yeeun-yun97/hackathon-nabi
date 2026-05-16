@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
+import type { UserProfile } from "@/lib/data";
+import { defaultProfile, daysUntilVisaExpiry, readStoredProfile } from "@/lib/profile";
 
 type VisaNotificationCardProps = {
   href?: string;
@@ -10,8 +13,20 @@ type VisaNotificationCardProps = {
 
 export function VisaNotificationCard({ href = "/visa/biometric" }: VisaNotificationCardProps) {
   const { t } = useLanguage();
+  const [profile, setProfile] = useState<UserProfile>(defaultProfile);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      setProfile(readStoredProfile());
+    });
+  }, []);
+
+  const daysLeft = daysUntilVisaExpiry(profile.visaExpiryDate);
   const title = t("visa.notification.title");
-  const body = t("visa.notification.body");
+  const body =
+    daysLeft > 0
+      ? t("visa.notification.body", { days: daysLeft })
+      : t("visa.notification.bodyFallback");
 
   return (
     <Link

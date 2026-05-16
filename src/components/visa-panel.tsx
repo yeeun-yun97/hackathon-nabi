@@ -7,6 +7,7 @@ import { useLanguage } from "@/components/language-provider";
 import { HorizonProgressArc } from "@/components/visa/HorizonProgressArc";
 import { RenewVisaChecklistCard } from "@/components/visa/RenewVisaChecklistCard";
 import { StrategyOptions } from "@/components/visa/StrategyOptions";
+import { VisaProfileSummaryCard } from "@/components/visa/visa-profile-summary-card";
 import { mockF27Track, type UserProfile } from "@/lib/data";
 import { defaultProfile, readStoredProfile } from "@/lib/profile";
 
@@ -46,6 +47,7 @@ export function VisaPanel() {
       </div>
 
       <div className="grid gap-6">
+        <VisaProfileSummaryCard profile={profile} />
         <RenewVisaChecklistCard currentVisaLabel={currentVisaLabel} profile={profile} />
 
         <section className="rounded-3xl border border-black/[0.06] bg-white p-6 md:p-8">
@@ -88,6 +90,12 @@ export function VisaPanel() {
                   </div>
                 ))}
               </div>
+              <p className="mb-4 text-base font-bold leading-7 text-[#17211f]">
+                {t("visa.bridgeHeadline", {
+                  points: mockF27Track.targetPoints - mockF27Track.currentPoints,
+                  days: mockF27Track.unlockEtaDays,
+                })}
+              </p>
               <StrategyOptions locale={locale} strategies={mockF27Track.strategies} />
             </div>
           </div>
