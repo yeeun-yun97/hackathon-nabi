@@ -460,6 +460,13 @@ const en = {
   "discover.noMatchingHint":
     "Try fewer categories or update your city profile. More local services can be added through Supabase later.",
 
+  // discover tabs
+  "discover.tabs.aria": "Discover sections",
+  "discover.tabs.support": "Support",
+  "discover.tabs.visa": "Visa",
+  "discover.tabs.health": "Health",
+  "discover.tabs.checklists": "Checklists",
+
   // discover detail
   "discover.detail.back": "Back to discover",
   "discover.detail.whatToBring": "What to bring",
@@ -1032,6 +1039,12 @@ const ko = {
   "discover.noMatchingHint":
     "카테고리를 줄여 보거나 도시를 변경해 보세요. Supabase에 더 많은 지역 정보를 추가할 수 있습니다.",
 
+  "discover.tabs.aria": "찾기 섹션",
+  "discover.tabs.support": "지원 정보",
+  "discover.tabs.visa": "비자",
+  "discover.tabs.health": "건강 & 여가",
+  "discover.tabs.checklists": "체크리스트",
+
   "discover.detail.back": "지원 정보로 돌아가기",
   "discover.detail.whatToBring": "준비할 것",
   "discover.detail.details": "상세 정보",
@@ -1568,6 +1581,12 @@ const zh = {
   "discover.noMatchingTitle": "暂无符合条件的项目",
   "discover.noMatchingHint":
     "请尝试减少类别或更新您的城市。后续可通过 Supabase 添加更多本地服务。",
+
+  "discover.tabs.aria": "探索分区",
+  "discover.tabs.support": "支持信息",
+  "discover.tabs.visa": "签证",
+  "discover.tabs.health": "健康与休闲",
+  "discover.tabs.checklists": "清单",
 
   "discover.detail.back": "返回探索支持",
   "discover.detail.whatToBring": "需要携带",

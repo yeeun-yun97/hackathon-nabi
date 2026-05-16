@@ -250,7 +250,7 @@ export default function Home() {
             </div>
             <Link
               className="w-fit rounded-full bg-[#2B4FA5] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#23408a]"
-              href="/health"
+              href="/discover?tab=health"
             >
               {t("home.health.cta")}
             </Link>

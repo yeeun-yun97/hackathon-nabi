@@ -37,7 +37,7 @@ export function FacilityDetailPanel({ facility }: { facility: Facility }) {
 
   return (
     <section className="rounded-3xl border border-black/[0.06] bg-white p-8">
-      <Link className="text-sm font-semibold text-[#2B4FA5] hover:underline" href="/health">
+      <Link className="text-sm font-semibold text-[#2B4FA5] hover:underline" href="/discover?tab=health">
         {t("health.detail.back")}
       </Link>
       <div className="mt-8 flex flex-wrap gap-2">
